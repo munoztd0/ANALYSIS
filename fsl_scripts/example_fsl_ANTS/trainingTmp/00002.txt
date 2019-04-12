@@ -1,0 +1,181 @@
+/home/cisa/mountpoint/DATA/STUDY/DERIVED/ICA_ANTS/sub-control119/ses-second/func/task-hedonicreactivity.ica/filtered_func_data.ica
+1, Unclassified noise, True
+2, Unclassified noise, True
+3, Unclassified noise, True
+4, Unclassified noise, True
+5, Unclassified noise, True
+6, Unclassified noise, True
+7, Unclassified noise, True
+8, Unclassified noise, True
+9, Unclassified noise, True
+10, Unclassified noise, True
+11, Unclassified noise, True
+12, Unclassified noise, True
+13, Unclassified noise, True
+14, Unclassified noise, True
+15, Unclassified noise, True
+16, Unclassified noise, True
+17, Unclassified noise, True
+18, Unclassified noise, True
+19, Unclassified noise, True
+20, Unclassified noise, True
+21, Unclassified noise, True
+22, Unclassified noise, True
+23, Unclassified noise, True
+24, Unknown, False
+25, Unclassified noise, True
+26, Unclassified noise, True
+27, Unclassified noise, True
+28, Unclassified noise, True
+29, Unclassified noise, True
+30, Unclassified noise, True
+31, Unclassified noise, True
+32, Signal, False
+33, Unclassified noise, True
+34, Unclassified noise, True
+35, Unclassified noise, True
+36, Unclassified noise, True
+37, Unclassified noise, True
+38, Unclassified noise, True
+39, Unclassified noise, True
+40, Unclassified noise, True
+41, Unclassified noise, True
+42, Unclassified noise, True
+43, Unclassified noise, True
+44, Unclassified noise, True
+45, Unclassified noise, True
+46, Unclassified noise, True
+47, Unclassified noise, True
+48, Unclassified noise, True
+49, Signal, False
+50, Unclassified noise, True
+51, Unclassified noise, True
+52, Unknown, False
+53, Unclassified noise, True
+54, Unclassified noise, True
+55, Unknown, False
+56, Signal, False
+57, Signal, False
+58, Unknown, False
+59, Unclassified noise, True
+60, Unclassified noise, True
+61, Signal, False
+62, Unclassified noise, True
+63, Unclassified noise, True
+64, Unclassified noise, True
+65, Unclassified noise, True
+66, Unknown, False
+67, Unclassified noise, True
+68, Unclassified noise, True
+69, Unclassified noise, True
+70, Unclassified noise, True
+71, Unclassified noise, True
+72, Unknown, False
+73, Signal, False
+74, Unclassified noise, True
+75, Signal, False
+76, Unclassified noise, True
+77, Unclassified noise, True
+78, Unclassified noise, True
+79, Unknown, False
+80, Unclassified noise, True
+81, Signal, False
+82, Unclassified noise, True
+83, Unclassified noise, True
+84, Unclassified noise, True
+85, Unclassified noise, True
+86, Unclassified noise, True
+87, Signal, False
+88, Unclassified noise, True
+89, Unknown, False
+90, Unclassified noise, True
+91, Signal, False
+92, Unclassified noise, True
+93, Unclassified noise, True
+94, Unclassified noise, True
+95, Unclassified noise, True
+96, Unclassified noise, True
+97, Unclassified noise, True
+98, Unclassified noise, True
+99, Unclassified noise, True
+100, Unclassified noise, True
+101, Unknown, False
+102, Unclassified noise, True
+103, Unclassified noise, True
+104, Unknown, False
+105, Unknown, False
+106, Unclassified noise, True
+107, Unclassified noise, True
+108, Unclassified noise, True
+109, Unknown, False
+110, Unknown, False
+111, Unclassified noise, True
+112, Unclassified noise, True
+113, Unclassified noise, True
+114, Unclassified noise, True
+115, Unknown, False
+116, Signal, False
+117, Unknown, False
+118, Unclassified noise, True
+119, Unclassified noise, True
+120, Unclassified noise, True
+121, Unclassified noise, True
+122, Unknown, False
+123, Signal, False
+124, Unclassified noise, True
+125, Unclassified noise, True
+126, Unclassified noise, True
+127, Unclassified noise, True
+128, Unclassified noise, True
+129, Unclassified noise, True
+130, Unclassified noise, True
+131, Unclassified noise, True
+132, Unclassified noise, True
+133, Unclassified noise, True
+134, Unclassified noise, True
+135, Unclassified noise, True
+136, Unclassified noise, True
+137, Unclassified noise, True
+138, Unclassified noise, True
+139, Unclassified noise, True
+140, Unclassified noise, True
+141, Unclassified noise, True
+142, Unclassified noise, True
+143, Unclassified noise, True
+144, Unclassified noise, True
+145, Unclassified noise, True
+146, Unclassified noise, True
+147, Unclassified noise, True
+148, Unclassified noise, True
+149, Unclassified noise, True
+150, Unclassified noise, True
+151, Unclassified noise, True
+152, Unclassified noise, True
+153, Unclassified noise, True
+154, Unknown, False
+155, Unclassified noise, True
+156, Unclassified noise, True
+157, Unclassified noise, True
+158, Unclassified noise, True
+159, Unknown, False
+160, Unknown, False
+161, Unclassified noise, True
+162, Unclassified noise, True
+163, Unknown, False
+164, Unclassified noise, True
+165, Unknown, False
+166, Unclassified noise, True
+167, Unclassified noise, True
+168, Unclassified noise, True
+169, Unknown, False
+170, Unclassified noise, True
+171, Unclassified noise, True
+172, Unclassified noise, True
+173, Unclassified noise, True
+174, Unclassified noise, True
+175, Unclassified noise, True
+176, Unclassified noise, True
+177, Unknown, False
+178, Unclassified noise, True
+179, Unclassified noise, True
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 53, 54, 59, 60, 62, 63, 64, 65, 67, 68, 69, 70, 71, 74, 76, 77, 78, 80, 82, 83, 84, 85, 86, 88, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 102, 103, 106, 107, 108, 111, 112, 113, 114, 118, 119, 120, 121, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 155, 156, 157, 158, 161, 162, 164, 166, 167, 168, 170, 171, 172, 173, 174, 175, 176, 178, 179]
