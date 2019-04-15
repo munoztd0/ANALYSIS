@@ -11,11 +11,11 @@ function GLM_01_getOnsets()
 
 %homedir = '/home/OBIWAN/';
 %homedir = '/Users/evapool/mountpoint/';
-homedir = '/home/cisa/mountpoint/';
+homedir = '/home/cisa/CISA/REWOD';
 %homedir = '/home/cisa/mountpoint/OBIWAN/';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
-sourcefiles   = fullfile(homedir, '/DATA/STUDY/DERIVED/PIT_HEDONIC');
+sourcefiles   = fullfile(homedir, '/DATA/STUDY/RAW');
 addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
 ana_name      = 'GLM-01';
