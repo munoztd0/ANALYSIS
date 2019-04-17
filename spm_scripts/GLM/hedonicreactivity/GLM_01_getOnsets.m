@@ -1,5 +1,5 @@
-function GLM_01_getOnsets()
-
+%function GLM_01_getOnsets()
+%watchout
 % intended for REWOD hedonic reactivity run
 
 % get onsets for first control model (reward vs neutral)
@@ -14,22 +14,22 @@ function GLM_01_getOnsets()
 homedir = '/home/cisa/CISA/REWOD';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
-sourcefiles   = fullfile(homedir, '/DATA/STUDY/RAW');
+sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
 addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
 ana_name      = 'GLM-01';
 %session       = {'second'};
 task          = {'hedonic'};
-subj          = {'02'}; %'03';'04';'05';'06';'07';'08';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'19';'20';'21';'22';'23';'24';'25';'26'};
+subj          = {'01'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
 %group         = {'control'; 'control'}; % control or obsese
 
 %% create folder
 mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
 
 %% extract and save data
-for j = 1:length(task)
+%for j = 1:length(task)
 
-    taskX      = char(task(j));
+    taskX      = char(task(1));
     %sessionX  = char(session(j));
 
     for  i=1:length(subj)
@@ -41,9 +41,9 @@ for j = 1:length(task)
         subjdir=fullfile(mdldir, char(task), ana_name,  ['sub-' subjX],'timing');
         mkdir (subjdir)
 
-        cd (fullfile(sourcefiles,['sub-' subjX], 'ses-second', 'func')); 
+        cd (fullfile(sourcefiles,['sub-' subjX], 'func')); 
         behavfile = ['sub-' num2str(subjX) '_ses-second' '_task-' taskX '_run-01_events.mat'];
-        fprintf('participant number: %s task: %s \n', subj{i}, task{j})
+        fprintf('participant number: %s task: %s \n', subj{i}, task{1})
         disp(['file ' num2str(i) ' ' behavfile]);
         load (behavfile);
 
@@ -59,9 +59,9 @@ for j = 1:length(task)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets and durations for odor valveopen?
         %onsets.taste.reward      = ONSETS.liquid(strcmp ('MilkShake', CONDITIONS));
-        onsets.odor.reward      = ONSETS.ValveOpen(strcmp ('chocolate', CONDITIONS));
-        onsets.odor.neutral     = ONSETS.ValveOpen(strcmp ('neutral', CONDITIONS));
-        onsets.odor.control     = ONSETS.ValveOpen(strcmp ('empty', CONDITIONS));
+        onsets.odor.reward      = ONSETS.sniffSignalOnset(strcmp ('chocolate', CONDITIONS));
+        onsets.odor.neutral     = ONSETS.sniffSignalOnset(strcmp ('neutral', CONDITIONS));
+        onsets.odor.control     = ONSETS.sniffSignalOnset(strcmp ('empty', CONDITIONS));
 
         
         %??
@@ -69,8 +69,8 @@ for j = 1:length(task)
         durations.odor.neutral  = zeros (length(onsets.odor.neutral),1);
         durations.odor.control  = zeros (length(onsets.odor.control),1);
 
-        %durations.odor.reward   = DURATIONS.trialstart(strcmp ('chocolate', CONDITIONS)) + ONSETS.CommitISI(strcmp ('chocolate', CONDITIONS))
-        %durations.odor.reward   = ONSETS.ValveClose(strcmp ('chocolate', CONDITIONS))- ONSETS.ValveOpen(strcmp ('chocolate', CONDITIONS));
+        %durations1.odor.reward   = DURATIONS.trialstart(strcmp ('chocolate', CONDITIONS)) %+ ONSETS.CommitISI(strcmp ('chocolate', CONDITIONS))
+        %durations2.odor.reward   = ONSETS.ValveClose(strcmp ('chocolate', CONDITIONS))- ONSETS.ValveOpen(strcmp ('chocolate', CONDITIONS));
         
         
         %why not for intensity?
@@ -152,6 +152,6 @@ for j = 1:length(task)
 
     end
 
-end
+%end
 
-end
+%end
