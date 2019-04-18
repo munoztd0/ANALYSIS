@@ -22,7 +22,7 @@ save_Rdatabase = 1; % leave 1 when saving all subjects
 home = '/home/cisa/rewod';
 %home = '/Users/evapool/mountpoint';
 %home = '/Users/davidmunoz/mountpoint';
-out = '/home/cisa/CISA/REWOD';
+out = 
 
 
 analysis_dir = fullfile(home, '/ANALYSIS/build_databases');
@@ -31,9 +31,9 @@ R_dir        = fullfile(home,'/DATABASES');
 addpath (genpath(fullfile(home, '/ANALYSIS/my_tools')));
 
 %% DEFINE POPULATION
-subj    = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'};    % subject ID excluding 8 & 19
+subj    = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'19';'20';'21';'22';'23';'24';'25';'26'};    % subject ID excluding 8 & 1
 %group   = {'1'} % control or obsese
-session = {'two';'two';'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'};
+session = {'two';'two';'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'; 'two'};
 %ntrials = data.Trial(end) % ?
 
 
@@ -246,10 +246,7 @@ for i = 1:length(subj);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%% save mat file
     func_dir = fullfile (home, 'DATA/derivatives/', ['sub-' num2str(subjX)], 'ses-second', 'func');
-    out_dir = fullfile (out, 'DATA/STUDY/CLEAN/', ['sub-' num2str(subjX)], 'func');
-    %cd (func_dir)
-    cd (out_dir)
-    %matfile_name = ['sub-' num2str(subjX) '_ses-second' '_task-' task '_run-01_events.mat'];
+    cd (func_dir)
     matfile_name = ['sub-' num2str(subjX) '_ses-second' '_task-' task '_run-01_events.mat'];
     %cd (behavior_dir)
     save(matfile_name, 'ONSETS', 'DURATIONS',  'BEHAVIOR', 'CONDITIONS', 'REWARD', 'TRIAL', 'RIM', 'PE', 'PIT')
