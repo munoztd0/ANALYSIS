@@ -10,7 +10,7 @@
 
 %% What to do
 firstLevel    = 1;
-contrasts    = 1;
+constrasts    = 1;
 copycontrasts = 1;
 
 %% define task variable
@@ -120,12 +120,12 @@ for i = 1 %%:length(subj)
         load SPM
     end
     
-    %%%%%%%%%%%%%%%%%%%%%%%  DO contRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    if contrasts == 1
+    %%%%%%%%%%%%%%%%%%%%%%%  DO CONSTRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    if constrasts == 1
         doContrasts(subjoutdir,param, SPM);
     end
     
-    %%%%%%%%%%%%%%%%%%%%% COPY contRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%% COPY CONSTRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if copycontrasts == 1
         
         mkdir (groupdir); % make the group directory where contrasts will be copied
@@ -234,35 +234,35 @@ end
                                     nc = nc+1;
                                     mod_name = char(mod_names(nmod));
                                     
-                                    SPM.Sess(ses).U(c).P(nc).name  = mod_name;
-                                    SPM.Sess(ses).U(c).P(nc).P     = eval([param.modul{ses}{cc} '.' mod_name]);
-                                    SPM.Sess(ses).U(c).P(nc).h     = 1;
+                                    SPM.Sess(ses).U(C).P(nc).name  = mod_name;
+                                    SPM.Sess(ses).U(C).P(nc).P     = eval([param.modul{ses}{cc} '.' mod_name]);
+                                    SPM.Sess(ses).U(C).P(nc).h     = 1;
                                     
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).name       = {param.Cnam{ses}{cc}};
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).onset      = eval(param.Cnam{ses}{cc});
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).duration   = eval(param.duration{ses}{cc});
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).tmod       = 0;
+                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).name       = {param.Cnam{ses}{cc}};
+                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).onset      = eval(param.Cnam{ses}{cc});
+                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).duration   = eval(param.duration{ses}{cc});
+                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).tmod       = 0;
                                     
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).name  = mod_name;
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).param = eval([param.modul{ses}{cc} '.' mod_name]);
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).poly  = 1;
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).orth = 0;
+                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).name  = mod_name;
+                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).param = eval([param.modul{ses}{cc} '.' mod_name]);
+                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).poly  = 1;
+                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).orth = 0;
                                 end
                                 
                                 
                             else
                                 SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});
                                 SPM.Sess(ses).U(c).P(1).P     = eval(param.modul{ses}{cc});
-                                SPM.Sess(ses).U(c).P(1).h     = 1;
+                                SPM.Sess(ses).U(C).P(1).h     = 1;
                                 
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).name       = {param.Cnam{ses}{cc}};
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).onset      = eval(param.Cnam{ses}{cc});
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).duration   = eval(param.duration{ses}{cc});
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).tmod       = 0;
+                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).name       = {param.Cnam{ses}{cc}};
+                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).onset      = eval(param.Cnam{ses}{cc});
+                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).duration   = eval(param.duration{ses}{cc});
+                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).tmod       = 0;
                                 
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.name  = char(param.modulName{ses}{cc});
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.param = eval(param.modul{ses}{cc});
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.poly  = 1;
+                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.name  = char(param.modulName{ses}{cc});
+                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.param = eval(param.modul{ses}{cc});
+                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.poly  = 1;
                                 
                             end
                         end
@@ -367,7 +367,7 @@ end
         [files]=spm_select('List',path_ana,'SPM.mat');
         jobs{1}.stats{1}.con.spmmat = {fullfile(path_ana,files)};
         
-        % define  T contrasts in a human friendly readable way aha
+        % define  T constrasts in a human friendly readable way aha
         %------------------------------------------------------------------
         
         % | GET THE NAMES FROM THE ONSETS PARAMETERS OF THE SPM MODEL
@@ -383,7 +383,7 @@ end
         
         Ct = []; Ctnames = []; ntask = size(param.task,1);
         
-        % | contRASTS FOR T-TESTS
+        % | CONSTRASTS FOR T-TESTS
         
         % con1
         Ctnames{1} = 'reward-control';
@@ -407,7 +407,7 @@ end
         weightPos  = ismember(conditionName, {'run1.liking', 'run1.intensity', 'run1.familiarity'}) * 1;
         Ct(4,:)    = weightPos;
         
-        % define F contrasts
+        % define F constrasts
         %------------------------------------------------------------------
         Cf = []; Cfnames = [];
         
@@ -433,8 +433,8 @@ end
             jobs{1}.stats{1}.con.consess{icon}.tcon.convec = Ct(icon,:);
         end
         
-        % F contrats
-        for iconf = 1:1 % until the number of F contrast computed
+        % F constrats
+        for iconf = 1:1 % until the number of F constrast computed
             jobs{1}.stats{1}.con.consess{iconf+icon}.fcon.name = Cfnames{iconf};
             jobs{1}.stats{1}.con.consess{iconf+icon}.fcon.convec = Cf(iconf);
         end

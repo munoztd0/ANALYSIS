@@ -8,7 +8,7 @@ echo "Bash version ${BASH_VERSION}..."
 #PBS -m ae
 #PBS -M evapool@caltech.edu
 
-MATLAB=/usr/local/MATLAB/R2017a/bin/matlab
+MATLAB=//usr/local/MATLAB/R2018a/bin/matlab
 
 PBS_O_WORKDIR=$3
 
