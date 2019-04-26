@@ -1,4 +1,4 @@
-function GLM_01_stLevel(subID) %WHATCHOUT the comment
+%function GLM_01_stLevel(subID) %WHATCHOUT the comment
 
 % get onsets for first control model (reward vs neutral)
 % Stick functions
@@ -18,7 +18,8 @@ copycontrasts = 1;
 task = 'hedonicreactivity';
 %% define path
 
-homedir = '/home/REWOD';
+%homedir = '/home/REWOD';
+homedir = '/home/cisa/CISA/REWOD';
 %homedir = '/Users/evapool/mountpoint/';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
@@ -28,8 +29,8 @@ funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
 name_ana = 'GLM-01'; % output folder for this analysis
 %groupdir = fullfile (mdldir,name_ana, 'group/');
 
-addpath /usr/local/external_toolboxes/spm12/ ;
-%%  addpath /usr/local/MATLAB/R2018a/spm12 ;
+%addpath /usr/local/external_toolboxes/spm12/ ;
+addpath /usr/local/MATLAB/R2018a/spm12 ;
 %% specify fMRI parameters
 param.TR = 2.4;
 param.im_format = 'nii'; %'img' or 'nii';
@@ -374,7 +375,7 @@ end
     end
 
 % 
-  function [] = doContrasts(subjoutdir, param, SPM)
+    function [] = doContrasts(subjoutdir, param, SPM)
         
         % define the SPM.mat that contains the design of the first level analysis
         %------------------------------------------------------------------
@@ -407,11 +408,11 @@ end
         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
         Ct(1,:)    = weightPos+weightNeg;
         
-        % con2
-        Ctnames{2} = 'overallOdor';
-        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-        Ct(2,:)    = weightPos;
-        
+%         % con2 (equal to zero)?
+%         Ctnames{2} = 'overallOdor';
+%         weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
+%         Ct(2,:)    = weightPos;
+%         
         % con3
         Ctnames{3} = 'mod.reward-mod.control'; %??
         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1;
@@ -428,7 +429,7 @@ end
         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1;
         weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
         Ct(5,:)    = weightPos+weightNeg;
-%         
+        
 %         % con6
 %         Ctnames{6} = 'reward-control&neutral';
 %         weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2;
@@ -478,17 +479,17 @@ end
         %------------------------------------------------------------------
         
         % t contrasts
-%         for icon = 1:size(Ct,1)
-%             jobs{1}.stats{1}.con.consess{icon}.tcon.name = Ctnames{icon};
-%             jobs{1}.stats{1}.con.consess{icon}.tcon.convec = Ct(icon,:);
+        for icon = 1:size(Ct,1)
+            jobs{1}.stats{1}.con.consess{icon}.tcon.name = Ctnames{icon};
+            jobs{1}.stats{1}.con.consess{icon}.tcon.convec = Ct(icon,:);
+        end
+        
+%         % F contrats
+%         for iconf = 1:1 % until the number of F contrast computed
+%             jobs{1}.stats{1}.con.consess{iconf+icon}.fcon.name = Cfnames{iconf};
+%             jobs{1}.stats{1}.con.consess{iconf+icon}.fcon.convec = Cf(iconf);
 %         end
-         icon = 1:size(Ct,1)
-         % F contrats
-         for iconf = 1:1 % until the number of F contrast computed
-             jobs{1}.stats{1}.con.consess{iconf+icon}.fcon.name = Cfnames{iconf};
-             jobs{1}.stats{1}.con.consess{iconf+icon}.fcon.convec = Cf(iconf);
-         end
-         
+        
         
         % run the job
         spm_jobman('run',jobs)
@@ -497,5 +498,4 @@ end
     end
 
 
-
-end
+%end

@@ -6,7 +6,7 @@ echo "Bash version ${BASH_VERSION}..."
 #PBS -l nodes=1
 #PBS -l walltime=4:00:00
 #PBS -m ae
-#PBS -M evapool@caltech.edu
+#PBS -M david.munoz@etu.unige.ch
 
 MATLAB=/usr/local/MATLAB/R2017a/bin/matlab
 

@@ -414,8 +414,7 @@ end
             0 0 0 0 1 0 0 0 0 0 0 0 0   %5 US
             0 0 0 0 0 1 0 0 0 0 0 0 0    %6 reward presnece
             0 0 0 0 0 0 1 0 0 0 0 0 0];   %7 right modulator
-        
-        
+
         
         Cf = repmat(Frun1,1,nrun);
         
