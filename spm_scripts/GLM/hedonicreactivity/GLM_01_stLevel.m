@@ -26,7 +26,7 @@ funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
 %funcdir  = fullfile(homedir, '/DATA/STUDY/DERIVED/PIT_HEDONIC');% directory with  post processed functional scans
 %mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/', task);% mdl directory (timing and outputs of the analysis)
 name_ana = 'GLM-01'; % output folder for this analysis
-%groupdir = fullfile (mdldir,name_ana, 'group/');
+groupdir = fullfile (mdldir,name_ana, 'group/');
 
 addpath /usr/local/external_toolboxes/spm12/ ;
 %%  addpath /usr/local/MATLAB/R2018a/spm12 ;
@@ -38,7 +38,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01'}; %subID;
+subj       =  subID %{'01'}; %{'06'}; %,'02';'03';'04';'05';'06';'07';'09';'10';'11'}; %subID;
 param.task = {'hedonic'}; %check
 
 %% define experimental design parameters
@@ -149,11 +149,11 @@ for i = 1:length(subj)
         end
         
         % copy images F
-        Fimages = '06';% constrasts of interest (bf was 05)
+        Fimages = '10';% constrasts of interest (bf was 05) groupdir now 10
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
-        
+        %‘/home/REWOD/DATA/STUDY/MODELS/SPM/hedonic/GLM-01/sub-01/output/ess_0006.nii’
         display('contrasts copied!');
     end
     
@@ -361,6 +361,11 @@ end
         %==========================================================================
         SPM.swd = pwd;
         
+        % set threshold of mask!!
+        %==========================================================================
+        SPM.xM.gMT = -Inf;% set -inf if we want to use explicit masking 0.8 is the spm default
+
+        
         % Configure design matrix
         %==========================================================================
         SPM = spm_fmri_spm_ui(SPM);
@@ -391,7 +396,7 @@ end
         for j = 1:ncondition
             
             %taskN = SPM.xX.name{j} (4);
-            task  = ['odor.']; %taskN in the middle
+            task  = ['task-hed.']; %taskN in the middle
             conditionName{j} = strcat(task,SPM.xX.name{j} (7:end-6)); %this cuts off the useless parts of the names
             
         end
@@ -428,32 +433,32 @@ end
         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1;
         weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
         Ct(5,:)    = weightPos+weightNeg;
-%         
-%         % con6
-%         Ctnames{6} = 'reward-control&neutral';
-%         weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2;
-%         weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
-%         weightNeg1  = ismember(conditionName, {'task-hed.control'})* -1;
-%         Ct(6,:)    = weightPos+weightNeg+weightNeg1;
-%         
-%         % con7
-%         Ctnames{7} = 'neutral-control';
-%         weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
-%         Ct(7,:)    = weightPos+weightNeg;
-%         
-%         % con8
-%         Ctnames{8} = 'mod.reward-mod.neutral&control'; %??
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 2;
-%         weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
-%         weightNeg1  = ismember(conditionName, {'task-hed.controlxliking^1'})* -1;
-%         Ct(8,:)    = weightPos+weightNeg+weightNeg1;
-%         
-%         % con9
-%         Ctnames{9} = 'Odor-NoOdor';
-%         weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-%         weightPos  = ismember(conditionName, {'task-hed.control'}) * -2;
-%         Ct(9,:)    = weightPos;
+        
+        % con6
+        Ctnames{6} = 'reward-control+neutral';
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2;
+        weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
+        weightNeg1  = ismember(conditionName, {'task-hed.control'})* -1;
+        Ct(6,:)    = weightPos+weightNeg+weightNeg1;
+        
+        % con7
+        Ctnames{7} = 'neutral-control';
+        weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
+        Ct(7,:)    = weightPos+weightNeg;
+        
+        % con8
+        Ctnames{8} = 'mod.reward-mod.neutral+control'; %??
+        weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 2;
+        weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
+        weightNeg1  = ismember(conditionName, {'task-hed.controlxliking^1'})* -1;
+        Ct(8,:)    = weightPos+weightNeg+weightNeg1;
+        
+        % con9
+        Ctnames{9} = 'Odor-NoOdor';
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
+        weightPos  = ismember(conditionName, {'task-hed.control'}) * -2;
+        Ct(9,:)    = weightPos;
         
         % define F contrasts
         %------------------------------------------------------------------
@@ -478,11 +483,11 @@ end
         %------------------------------------------------------------------
         
         % t contrasts
-%         for icon = 1:size(Ct,1)
-%             jobs{1}.stats{1}.con.consess{icon}.tcon.name = Ctnames{icon};
-%             jobs{1}.stats{1}.con.consess{icon}.tcon.convec = Ct(icon,:);
-%         end
-         icon = 1:size(Ct,1)
+         for icon = 1:size(Ct,1)
+             jobs{1}.stats{1}.con.consess{icon}.tcon.name = Ctnames{icon};
+             jobs{1}.stats{1}.con.consess{icon}.tcon.convec = Ct(icon,:);
+         end
+         
          % F contrats
          for iconf = 1:1 % until the number of F contrast computed
              jobs{1}.stats{1}.con.consess{iconf+icon}.fcon.name = Cfnames{iconf};

@@ -39,7 +39,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'03'; '04'; '05'; '06'; '07'; '09'; '10'; '11'; '12'}; %02 03 04 05 06 07 09 10 11}; %subID;
+subj       =  {'03'}; %'24';'25';'26'}; %subID;
 param.task = {'hedonic'}; %check
 
 %% define experimental design parameters
@@ -150,7 +150,7 @@ for i = 1:length(subj)
         end
         
         % copy images F
-        Fimages = '07';% constrasts of interest (bf was 05)
+        Fimages = '10';% constrasts of interest (bf was 05)
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -361,12 +361,6 @@ end
         % specify SPM working dir for this sub
         %==========================================================================
         SPM.swd = pwd;
-        
-        % set threshold of mask!!
-        %==========================================================================
-        SPM.xM.gMT = -Inf;% set -inf if we want to use explicit masking 0.8 is the spm default
-
-        
         
         % Configure design matrix
         %==========================================================================
