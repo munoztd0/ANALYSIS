@@ -25,4 +25,4 @@ sbj=$1
 
 #PBS -N cluster_analysis_classic_preproc
 $MATLAB -nojvm -nodisplay -nosplash -r "${matlab_script}({'$sbj'}); exit"
-#MATLAB -nodisplay -nosplash -r "${matlab_script}({'$sbj'}); exit"
+# $MATLAB -nodisplay -nosplash -r "${matlab_script}({'$sbj'}); exit"
