@@ -6,7 +6,7 @@ function GLM_01_stLevel(subID)
 % Simplified model on ONSETs 7 3*CS with modulators 1*grips
 % last modified on APRIL 2019 by David MUNOZ
 
-%dbstop if error
+dbstop if error
 
 %% What to do
 firstLevel    = 1;
@@ -373,25 +373,25 @@ end
         
         % con1
         Ctnames{1} = 'CSp-CSm';
-        weightPos  = ismember(conditionName, {'task-PIT.CS.CSp'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.CS.CSm'}) * -1;
+        weightPos  = ismember(conditionName, {'task-PIT.CSplus'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSminus'}) * -1;
         Ct(1,:)    = weightPos+weightNeg;
 
         % con2
         Ctnames{2} = 'CSm-Baseline';
-        weightPos  = ismember(conditionName, {'task-PIT.CS.CSm'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.CS.Baseline'}) * -1;
+        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.Baseline'}) * -1;
         Ct(2,:)    = weightPos+weightNeg;
         
         % con3
         Ctnames{3} = 'grips';
-        weightPos  = ismember(conditionName, {'task-PIT.grips'}) * 1;
+        weightPos  = ismember(conditionName, {'task-PIT.Ngrips'}) * 1;
         Ct(3,:)    = weightPos;
         
         % con4
         Ctnames{4} = 'CSp-CSm&Baseline';
-        weightPos  = ismember(conditionName, {'task-PIT.CS.CSp'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.CS.CSm', 'task-PIT.CS.Baseline'}) * -1;
+        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSmnius', 'task-PIT.Baseline'}) * -1;
         Ct(4,:)    = weightPos+weightNeg;
         
         % con5

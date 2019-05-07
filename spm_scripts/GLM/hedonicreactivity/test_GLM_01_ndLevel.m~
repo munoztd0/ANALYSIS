@@ -1,4 +1,4 @@
-function GLM_MF_01_ndLevel()
+%function GLM_MF_01_ndLevel()
 
 %HEDONIC
 
@@ -8,17 +8,17 @@ removesub = 0; %'sub-14'; % which sub do we want to remove
 
 %% define path
 
-homedir = '/home/REWOD';
-%homedir = '/home/cisa/CISA/REWOD';
+%homedir = '/home/REWOD';
+homedir = '/home/cisa/CISA/REWOD';
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
-name_ana = 'GLM-01'; % output folder for this analysis WAS GLM-MF-01
+name_ana = 'GLM-MF-01'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
 %% specify spm param
-addpath /usr/local/external_toolboxes/spm12/ ;
-%addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
+%addpath /usr/local/external_toolboxes/spm12/ ;
+addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
 addpath ([homedir '/ANALYSIS/spm_scripts/GLM/dependencies']);
 spm('Defaults','fMRI');
 spm_jobman('initcfg');
@@ -108,4 +108,4 @@ end
 
 
 
-   end
+   %end

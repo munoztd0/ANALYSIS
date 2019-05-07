@@ -1,4 +1,4 @@
-function GLM_01_stLevel(subID) %whatcha
+%function GLM_01_stLevel(subID) %whatcha
 % HEDONIC
 % get onsets for first control model (reward vs neutral)
 % Stick functions
@@ -20,16 +20,18 @@ copycontrasts = 1;
 task = 'hedonicreactivity';
 %% define path
 
-homedir = '/home/REWOD';
-%homedir = '/home/cisa/CISA/REWOD'; %watcha
+%homedir = '/home/REWOD';
+homedir = '/home/cisa/CISA/REWOD'; %watcha
 
-mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
-funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');directory with  post processed functional scans
+mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
+funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
+%funcdir  = fullfile(homedir, '/DATA/STUDY/DERIVED/PIT_HEDONIC');% directory with  post processed functional scans
+%mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/', task);% mdl directory (timing and outputs of the analysis)
 name_ana = 'GLM-01'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
-addpath /usr/local/external_toolboxes/spm12/ ;
-%addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
+%addpath /usr/local/external_toolboxes/spm12/ ;
+addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
 %% specify fMRI parameters
 param.TR = 2.4;
 param.im_format = 'nii'; %'img' or 'nii';
@@ -38,7 +40,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  subID; %{'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  {'01'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'hedonic'}; %check
 
 %% define experimental design parameters
@@ -483,4 +485,4 @@ end
     end
 
 
-end
+%end
