@@ -60,22 +60,17 @@ for i = 1:length(subj);
     ONSETS.ValveOpen      = data.tValveOpen;
     ONSETS.ValveClose      = data.tValveClose;
     %ONSETS.break       = data.Onsets.Startjitter;
-    %ONSETS.liking      = data.likingOnset;
-    %ONSETS.intensity   = data.intensityOnset;
-    %ONSETS.familiarity = data.Onsets.Familiarity;
-    %ONSETS.rince       = data.Onsets.RinseStart; % start or stop?
     ONSETS.ITI         = data.sniffSignalOnset+data.duration.asterix1+data.duration.oCommitISI+ data.duration.asterix2+data.duration.jitter+data.duration.Liking+data.duration.IQCross+data.duration.Intensity;
     ONSETS.liking          = data.sniffSignalOnset+data.duration.asterix1+data.duration.oCommitISI+ data.duration.asterix2+data.duration.jitter;
     ONSETS.intensity       = data.sniffSignalOnset+data.duration.asterix1+data.duration.oCommitISI+ data.duration.asterix2+data.duration.jitter+data.duration.Liking+data.duration.IQCross;
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%  get durations
-    DURATIONS.trialstart  = data.duration.asterix1 + data.duration.asterix2; % what is asterix 3 and 4?
+    DURATIONS.trialstart  = data.duration.asterix1 + data.duration.asterix2;
     DURATIONS.break       = data.duration.jitter;
     DURATIONS.liking      = data.duration.Liking;
     DURATIONS.intensity   = data.duration.Intensity;
     DURATIONS.ITI         = data.duration.ITI;
-    %DURATIONS.rince       = data.Durations.asterix3; % start or stop?
     DURATIONS.SendTriggerStart         = data.duration.SendTriggerStart;
     DURATIONS.CommitOdor         = data.duration.oCommitOdor;
     DURATIONS.CommitISI         = data.duration.oCommitISI;
@@ -99,7 +94,6 @@ for i = 1:length(subj);
     %%% get the ratings
     BEHAVIOR.liking      = data.liking;
     BEHAVIOR.intensity   = data.intensity;
-    %BEHAVIOR.familiarity = data.familiarity;
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%% get the odor

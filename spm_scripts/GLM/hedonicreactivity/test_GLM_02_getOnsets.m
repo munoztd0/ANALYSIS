@@ -1,17 +1,17 @@
-function GLM_02_getOnsets() %watchout
-
-% intended for REWOD HEDONIC
+%function GLM_02_getOnsets()
+%watchout
+% intended for REWOD hedonic reactivity run
 
 % get onsets for first control model (reward vs neutral)
 % Stick functions
 % Simplified model on ONSETs 7 (STARTTRIAL, 2*odor with modulator (liking
 % ratings) 3*questions)
-% last modified on MAY 2018
+% last modified on MAY 2019
 
 %% define paths
 
-homedir = '/home/REWOD/';
-%homedir = '/home/cisa/CISA/REWOD';
+%homedir = '/home/REWOD/';
+homedir = '/home/cisa/CISA/REWOD';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
@@ -20,13 +20,13 @@ addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 ana_name      = 'GLM-02';
 %session       = {'second'};
 task          = {'hedonic'};
-subj          = 'subID'; %{'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
+subj          = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
 
 %% create folder
 mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
 
 %% extract and save data
-for j = 1:length(task) %useless in this case
+%for j = 1:length(task)
 
     taskX      = char(task(1));
     %sessionX  = char(session(j));
@@ -139,6 +139,6 @@ for j = 1:length(task) %useless in this case
 
     end
 
-end
+%end
 
-end
+%end

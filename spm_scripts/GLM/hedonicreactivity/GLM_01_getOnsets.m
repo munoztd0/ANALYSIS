@@ -20,8 +20,7 @@ addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 ana_name      = 'GLM-01';
 %session       = {'second'};
 task          = {'hedonic'};
-subj          = {'01'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
-%group         = {'control'; 'control'}; % control or obsese
+subj          = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
 
 %% create folder
 mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
@@ -64,16 +63,12 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
         onsets.odor.control     = ONSETS.sniffSignalOnset(strcmp ('empty', CONDITIONS));
 
         
-        %??
+        %get zero values for durations (stick functions)
         durations.odor.reward   = zeros (length(onsets.odor.reward),1);
         durations.odor.neutral  = zeros (length(onsets.odor.neutral),1);
         durations.odor.control  = zeros (length(onsets.odor.control),1);
 
-        %durations1.odor.reward   = DURATIONS.trialstart(strcmp ('chocolate', CONDITIONS)) %+ ONSETS.CommitISI(strcmp ('chocolate', CONDITIONS))
-        %durations2.odor.reward   = ONSETS.ValveClose(strcmp ('chocolate', CONDITIONS))- ONSETS.ValveOpen(strcmp ('chocolate', CONDITIONS));
-        
-        
-        %why not for intensity?
+       
         modulators.odor.reward  = BEHAVIOR.liking (strcmp ('chocolate', CONDITIONS));
         modulators.odor.neutral = BEHAVIOR.liking (strcmp ('neutral', CONDITIONS));
         modulators.odor.control = BEHAVIOR.liking (strcmp ('empty', CONDITIONS));
@@ -88,15 +83,7 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
         durations.intensity      = DURATIONS.intensity;
         modulators.intensity     = ones (length(onsets.intensity),1);
 
-        %onsets.familiarity       = ONSETS.familiarity;
-        %durations.familiarity    = DURATIONS.familiarity;
-        %modulators.familiarity   = ones (length(onsets.familiarity),1);
 
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % Get onsets and duration for rinse
-        %onsets.rinse             = ONSETS.rince;
-        %durations.rinse          = DURATIONS.rince;
-        %modulators.rinse         = ones (length(onsets.rinse),1);
 
         %% FOR FSL
 

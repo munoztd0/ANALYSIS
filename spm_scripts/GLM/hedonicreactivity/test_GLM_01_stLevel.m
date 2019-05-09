@@ -1,5 +1,7 @@
 %function GLM_01_stLevel(subID) %whatcha
+
 % HEDONIC
+
 % get onsets for first control model (reward vs neutral)
 % Stick functions
 % Simplified model on ONSETs 7 (STARTTRIAL, 2*odor with modulator (liking

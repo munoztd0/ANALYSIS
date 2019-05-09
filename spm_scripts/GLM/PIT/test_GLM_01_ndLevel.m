@@ -4,7 +4,9 @@
 
 %does t-test and full_factorial
 do_ttest = 1;
-removesub = 'sub-24'; %'sub-24'}; % which sub do we want to remove 0
+remove = 1;
+removesub = {'sub-10';'sub-24'} ;
+removedsub = '10-24';
 
 %% define path
 
@@ -52,8 +54,8 @@ if do_ttest
         conImageX = conImages{n};
         contrastX = contrastNames{n};
         
-        if removesub
-            contrastFolder = fullfile (groupdir, 'ttests', ['removing-' removesub], contrastX);
+        ;if remove
+           contrastFolder = fullfile (groupdir, 'ttests', ['removing-' removedsub], contrastX);
         else
             contrastFolder = fullfile (groupdir, 'ttests', 'all', contrastX);
         end
@@ -69,14 +71,15 @@ if do_ttest
             matlabbatch{1}.spm.stats.factorial_design.des.t1.scans{j,1} = [groupdir conAll(j,:) ',1'];
         end
         
-        if removesub % remove subject from analysis
-            
-            disp(['removing subject' removesub]);
+        if remove % remove subject from analysis
             allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans; % let's put this in a smaller variable
-            idx = (regexp(allsub,removesub)); % find string containing the sub id
-            idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
-            matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
-            
+            for i = 1:length(removesub)
+                    idx = (regexp(allsub,removesub{i})); % find string containing the sub id
+                    idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
+                    matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
+                    allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans;
+            end
+               
         end
         
         matlabbatch{1}.spm.stats.factorial_design.cov = struct('c', {}, 'cname', {}, 'iCFI', {}, 'iCC', {});

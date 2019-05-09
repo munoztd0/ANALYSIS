@@ -1,12 +1,16 @@
-%function GLM_01_stLevel(subID) %WHATCHOUT the comment
+%function GLM_02_stLevel(subID) %whatcha
+
+% HEDONIC
 
 % get onsets for first control model (reward vs neutral)
 % Stick functions
 % Simplified model on ONSETs 7 (STARTTRIAL, 2*odor with modulator (liking
 % ratings) 3*questions 1 RINSE)
-% last modified on MARCH 2018
+% last modified on APRIL 2019 by David MUNOZ
 
-%dbstop if error
+dbstop if error
+%to change the default stop pop-up fo existing file overwride 
+%-> go to spm_spm.m and comment out line 352-371
 
 %% What to do
 firstLevel    = 1;
@@ -19,18 +23,15 @@ task = 'hedonicreactivity';
 %% define path
 
 %homedir = '/home/REWOD';
-homedir = '/home/cisa/CISA/REWOD';
-%homedir = '/Users/evapool/mountpoint/';
+homedir = '/home/cisa/CISA/REWOD'; %watcha
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
-%funcdir  = fullfile(homedir, '/DATA/STUDY/DERIVED/PIT_HEDONIC');% directory with  post processed functional scans
-%mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/', task);% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-01'; % output folder for this analysis
+name_ana = 'GLM-02'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 %addpath /usr/local/external_toolboxes/spm12/ ;
-addpath /usr/local/MATLAB/R2018a/spm12 ;
+addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
 %% specify fMRI parameters
 param.TR = 2.4;
 param.im_format = 'nii'; %'img' or 'nii';
@@ -39,7 +40,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'03'; '04'; '05'; '06'; '07'; '09'; '10'; '11'; '12'}; %02 03 04 05 06 07 09 10 11}; %subID;
+subj       =  {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'hedonic'}; %check
 
 %% define experimental design parameters
@@ -58,8 +59,7 @@ for i = 1:length(param.task)
         'neutral',...%4?
         'liking',...%5 bf was 4
         'intensity'};%6
-        %'ONS.onsets.familiarity',...%6
-        %'ONS.onsets.rinse'};%7
+
         
      param.onset{i} = {'ONS.onsets.trialstart',... %1
         'ONS.onsets.odor.reward',...%2
@@ -67,8 +67,7 @@ for i = 1:length(param.task)
         'ONS.onsets.odor.neutral',...%4?
         'ONS.onsets.liking',...%5 bf was 4
         'ONS.onsets.intensity'};%6
-        %'ONS.onsets.familiarity',...%6
-        %'ONS.onsets.rinse'};%7
+
     
     % duration of the blocks (if events, put '0'). Specify it for each condition of each session
     % the values must be included in your onsets in seconds
@@ -78,10 +77,9 @@ for i = 1:length(param.task)
         'ONS.durations.odor.neutral',...  %?
         'ONS.durations.liking',...
         'ONS.durations.intensity'};
-        %'ONS.durations.familiarity',...
-        %'ONS.durations.rinse'};
+
     
-    % parametric modulation of your events or blocks (ex: linear time, or emotional value, or pupillary size, ...)
+    % parametric modulationmodul of your events or blocks (ex: linear time, or emotional value, or pupillary size, ...)
     % If you have a parametric modulation
     param.modulName{i} = {'none',...%1
         'liking',...%2
@@ -131,12 +129,12 @@ for i = 1:length(subj)
         load SPM
     end
     
-    %%%%%%%%%%%%%%%%%%%%%%%  DO contRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%  DO CONTRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if contrasts == 1
         doContrasts(subjoutdir,param, SPM);
     end
     
-    %%%%%%%%%%%%%%%%%%%%% COPY contRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%% COPY CONTRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if copycontrasts == 1
         
         mkdir (groupdir); % make the group directory where contrasts will be copied
@@ -144,13 +142,13 @@ for i = 1:length(subj)
         cd (fullfile(subjoutdir,'output'))
         
         % copy images T
-        Timages = ['01'; '02'; '03'; '04'; '05'];% constrasts of interest ((bf was 04)
+        Timages = ['01'; '02'; '03'; '04';]; % '05'];% constrasts of interest 
         for y =1:size(Timages,1)
             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
         end
         
         % copy images F
-        Fimages = '07';% constrasts of interest (bf was 05)
+        Fimages = '05';% constrasts of interest
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -161,7 +159,7 @@ for i = 1:length(subj)
 end
 
 %% function section
-    function [SPM] = doFirstLevel(subjoutdir,subjfuncdir, name_ana, param, subjX)
+    function [SPM] = doFirstLevel(subjoutdir,subjfuncdir, name_ana, param, ~)
         
         % variable initialization
         ntask = size(param.task,1);
@@ -212,13 +210,8 @@ end
             
             
             %%%%%%%%%%%%%%%%%%%%%% !!!!!!!!!!!!!!!! %%%%%%%%%%%%%%%%%%%%%%%
-            % ATTENTION HERE WE NEED TO INITALIZE c for every new session ?
-            % But we only have the one
-%
-%        SPM.Sess(s).C
-%
-%                C: - [kx1 double] of user specified regressors
-%             name: - {1xk} cellstr of regressor names
+            % ATTENTION HERE WE NEED TO INITALIZE c for every new session 
+
             
             c = 0; % we need a counter because we include only condition that are non empty
             
@@ -228,8 +221,7 @@ end
                
                     c = c+1; % update counter
                     
-                    %SPM.Sess(ses).C(c).C         = c;   % I added that
-                    %SPM.Sess(ses).C(c).name      = {param.onset{ses}{cc}} % I added that
+
                     SPM.Sess(ses).U(c).name      = {param.Cnam{ses}{cc}};
                     SPM.Sess(ses).U(c).ons       = eval(param.onset{ses}{cc});
                     SPM.Sess(ses).U(c).dur       = eval(param.duration{ses}{cc});
@@ -241,7 +233,6 @@ end
                         if ~ strcmp(param.modul{ses}{cc}, 'none')
                             
                             if isstruct (eval(param.modul{ses}{cc}))
-                                
                                 mod_names = fieldnames (eval(param.modul{ses}{cc}));
                                 nc = 0; % intialize the modulators count
                                 
@@ -254,32 +245,23 @@ end
                                     SPM.Sess(ses).U(c).P(nc).P     = eval([param.modul{ses}{cc} '.' mod_name]);
                                     SPM.Sess(ses).U(c).P(nc).h     = 1;
                                     
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).name       = {param.Cnam{ses}{cc}};
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).onset      = eval(param.onset{ses}{cc});
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).duration   = eval(param.duration{ses}{cc});
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).tmod       = 0;
-                                    
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).name  = mod_name;
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).param = eval([param.modul{ses}{cc} '.' mod_name]);
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).poly  = 1;
-                                    %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).orth = 0;
+
                                 end
                                 
                                 
                             else
-                                SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});
-                                SPM.Sess(ses).U(c).P(1).P     = eval(param.modul{ses}{cc});
-                                SPM.Sess(ses).U(c).P(1).h     = 1;
+                                if std(eval(param.modul{ses}{cc}))== 0  %if std deviation = 0 no variability so we have to take ou P or else it will ruin contrasts
+                                    SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});
+                                    SPM.Sess(ses).U(c).P(1).P     = [];
+                                    SPM.Sess(ses).U(c).P(1).h     = 1;   
+                                    
+                                else    
+                                    SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});
+                                    SPM.Sess(ses).U(c).P(1).P     = eval(param.modul{ses}{cc});
+                                    SPM.Sess(ses).U(c).P(1).h     = 1;
                                 
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).name       = {param.Cnam{ses}{cc}};
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).onset      = eval(param.onset{ses}{cc});
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).duration   = eval(param.duration{ses}{cc});
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).tmod       = 0;
-                                
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.name  = char(param.modulName{ses}{cc});
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.param = eval(param.modul{ses}{cc});
-                                %matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.poly  = 1;
-                                
+
+                                end
                             end
                         end
                     end
@@ -290,7 +272,7 @@ end
         %-----------------------------
         %multiple regressors for mvts parameters ( no movement regressor after ICA)
         
-        rnam = {'X','Y','Z','x','y','z'};
+        %rnam = {'X','Y','Z','x','y','z'};
         for ses=1:ntask
             
             SPM.Sess(ses).C.C = [];
@@ -365,8 +347,6 @@ end
         % set threshold of mask!!
         %==========================================================================
         SPM.xM.gMT = -Inf;% set -inf if we want to use explicit masking 0.8 is the spm default
-
-        
         
         % Configure design matrix
         %==========================================================================
@@ -408,63 +388,6 @@ end
         
         % | contrasts FOR T-TESTS
         
-%          
-%         % con1
-%         Ctnames{1} = 'reward-control';
-%         weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1; %
-%         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;%
-%         Ct(1,:)    = weightPos+weightNeg;
-%         
-%         % con2
-%         Ctnames{2} = 'overallOdor';
-%         weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-%         Ct(2,:)    = weightPos;
-%         
-%         % con3
-%         Ctnames{3} = 'mod.reward-mod.control'; %??
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.controlxliking^1'})* -1;
-%         Ct(3,:)    = weightPos+weightNeg;
-%         
-%         % con4 
-%         Ctnames{4} = 'question_presence'; %??
-%         weightPos  = ismember(conditionName, {'task-hed.liking', 'task-hed.intensity'}) * 1;
-%         Ct(4,:)    = weightPos;
-%         
-%         % con5
-%         Ctnames{5} = 'mod.reward-mod.neutral'; %??
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
-%         Ct(5,:)    = weightPos+weightNeg;
-%         
-%         % con6
-%         Ctnames{6} = 'reward-control+neutral';
-%         weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2;
-%         weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
-%         weightNeg1  = ismember(conditionName, {'task-hed.control'})* -1;
-%         Ct(6,:)    = weightPos+weightNeg+weightNeg1;
-%         
-%         % con7
-%         Ctnames{7} = 'neutral-control';
-%         weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
-%         Ct(7,:)    = weightPos+weightNeg;
-%         
-%         % con8
-%         Ctnames{8} = 'mod.reward-mod.neutral+control'; %??
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 2;
-%         weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
-%         weightNeg1  = ismember(conditionName, {'task-hed.controlxliking^1'})* -1;
-%         Ct(8,:)    = weightPos+weightNeg+weightNeg1;
-%         
-%         % con9
-%         Ctnames{9} = 'Odor-NoOdor';
-%         weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-%         weightPos  = ismember(conditionName, {'task-hed.control'}) * -2;
-%         Ct(9,:)    = weightPos;
-%         
-        
-         
         % con1
         Ctnames{1} = 'reward-control';
         weightPos  = ismember(conditionName, {'task-hed.reward'}) * -1; %
@@ -477,35 +400,48 @@ end
         Ct(2,:)    = weightPos;
         
         % con3
-       % Ctnames{3} = 'mod.reward-mod.control'; %??
-        %weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 0; %
-        %weightNeg  = ismember(conditionName, {'task-hed.controlxliking^1'})* 0;
-        %Ct(3,:)    = weightPos+weightNeg;
+        Ctnames{3} = 'Odor-NoOdor';
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
+        Ct(3,:)    = weightPos+weightNeg;
         
-        % con4 
-        Ctnames{3} = 'question_presence'; %??
-        weightPos  = ismember(conditionName, {'task-hed.liking', 'task-hed.intensity'}) * 1;
-        Ct(3,:)    = weightPos;
-        
-        % con5
-        Ctnames{4} = 'mod.reward-mod.neutral'; %??
-        weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
+        % con4
+        Ctnames{4} = 'reward-neutral';
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
         Ct(4,:)    = weightPos+weightNeg;
         
+        % con3
+%         Ctnames{3} = 'mod.reward-mod.control'; %??
+%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1; %
+%         weightNeg  = ismember(conditionName, {'task-hed.controlxliking^1'})* -1;
+%         Ct(3,:)    = weightPos+weightNeg;
+%         
+        % con4 
+        %Ctnames{3} = 'question_presence'; %?? for motor cortex control but
+        %we dont have
+        %weightPos  = ismember(conditionName, {'task-hed.liking', 'task-hed.intensity'}) * 1;
+        %Ct(3,:)    = weightPos;
+        
+%         % con5
+%         Ctnames{4} = 'mod.reward-mod.neutral'; %??
+%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1;
+%         weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
+%         Ct(4,:)    = weightPos+weightNeg;
+%         
         % con6
         %Ctnames{6} = 'reward-control+neutral';
-        %weightPos  = ismember(conditionName, {'task-hed.reward'}) * 0; %
-        %weightNeg  = ismember(conditionName, {'task-hed.neutral'})* 0;%
-        %weightNeg1  = ismember(conditionName, {'task-hed.control'})* 0;%
+        %weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2; %
+        %weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;%
+        %weightNeg1  = ismember(conditionName, {'task-hed.control'})* -1;%
        % Ct(6,:)    = weightPos+weightNeg+weightNeg1;
         
-        % con7
-        Ctnames{5} = 'neutral-control';
-        weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
-        Ct(5,:)    = weightPos+weightNeg;
-        
+%         % con7
+%         Ctnames{5} = 'neutral-control';
+%         weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
+%         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
+%         Ct(5,:)    = weightPos+weightNeg;
+%         
         % con8
         %Ctnames{8} = 'mod.reward-mod.neutral+control'; %??
         %weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 0;
@@ -513,29 +449,18 @@ end
         %weightNeg1  = ismember(conditionName, {'task-hed.controlxliking^1'})* 0;
         %Ct(8,:)    = weightPos+weightNeg+weightNeg1;
         
-        % con9
-        Ctnames{6} = 'Odor-NoOdor';
-        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-        weightPos  = ismember(conditionName, {'task-hed.control'}) * -2;
-        Ct(6,:)    = weightPos;
-        
+
         % define F contrasts
         %------------------------------------------------------------------
         Cf = []; Cfnames = [];
         
         Cfnames{end+1} = 'F_HED';
         
-        %create a contrast matrix (ncontratsXncondition) here X10 !!
-        Fhedonic = [1 0 0 0 0 0 0 0 0 0 %0 0 0    %1 CS.plus  %%recheck
-                    0 1 0 0 0 0 0 0 0 0 %0 0 0    %2 CS.minus
-                    0 0 1 0 0 0 0 0 0 0 %0 0 0    %3 ANT.plus
-                    0 0 0 1 0 0 0 0 0 0 %0 0 0    %4 ANT.minus
-                    0 0 0 0 1 0 0 0 0 0 %0 0 0   %5 US
-                    0 0 0 0 0 1 0 0 0 0]; %0 0 0 0];    %6 reward presnece
-            %0 0 0 0 0 0 1 0 0 0 0 0 0];   %7 right modulator
+        %create a identidy matrix (nconditionXncondition) 
+        F_hedonic = eye(ncondition);
+  
         
-        
-        Cf = repmat(Fhedonic,1,ntask);
+        Cf = repmat(F_hedonic,1,ntask);
         
         % put the contrast matrix
         %------------------------------------------------------------------
