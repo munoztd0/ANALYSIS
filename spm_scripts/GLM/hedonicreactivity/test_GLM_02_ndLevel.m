@@ -1,20 +1,20 @@
-%function GLM_01_ndLevel()
+%function GLM_02_ndLevel()
 
-%PIT
+%HEDONIC
 
 %does t-test and full_factorial
 do_ttest = 1;
-remove = 1;
-removesub = {'sub-10';'sub-24'} ;
-removedsub = '10-24';
+remove = 1; %watcha
+removesub = {'sub-10';'sub-24'} ; 
+removedsub = '10-24'; 
 
 %% define path
 
 %homedir = '/home/REWOD';
 homedir = '/home/cisa/CISA/REWOD';
-mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
+mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
-name_ana = 'GLM-01'; % output folder for this analysis WAS GLM-MF-01
+name_ana = 'GLM-02'; % output folder for this analysis WAS GLM-MF-01
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
@@ -33,10 +33,10 @@ spm_jobman('initcfg');
 if do_ttest
     
     % These contrast names become folders
-    contrastNames = {'CSp-CSm'%1
-        'CSm-Baseline'%2
-        'grips'%3
-        'CSp-CSm&Baseline'};%4
+    contrastNames = {'reward-control'%1
+        'overallOdor'%2
+        'Odor-NoOdor'%3
+        'reward-neutral'};%24
    
     
     conImages = {'con-0001'
@@ -54,8 +54,8 @@ if do_ttest
         conImageX = conImages{n};
         contrastX = contrastNames{n};
         
-        ;if remove
-           contrastFolder = fullfile (groupdir, 'ttests', ['removing-' removedsub], contrastX);
+        if remove
+            contrastFolder = fullfile (groupdir, 'ttests', ['removing-' removedsub], contrastX);
         else
             contrastFolder = fullfile (groupdir, 'ttests', 'all', contrastX);
         end
@@ -66,7 +66,8 @@ if do_ttest
         matlabbatch{1}.spm.stats.factorial_design.dir = {contrastFolder}; % directory
         
         %  FORMAT [dirs] = spm_select('List',direc,'dir',filt)
-        conAll     = spm_select('List',groupdir,['^'  '.*' conImageX '.nii']); % select constrasts ?WHat is LIST?
+        conAll     = spm_select('List',groupdir,['^'  '.*' conImageX '.nii']); % select constrasts 
+     
         for j =1:length(conAll)
             matlabbatch{1}.spm.stats.factorial_design.des.t1.scans{j,1} = [groupdir conAll(j,:) ',1'];
         end

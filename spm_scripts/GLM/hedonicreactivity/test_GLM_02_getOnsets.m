@@ -1,6 +1,6 @@
 %function GLM_02_getOnsets()
 %watchout
-% intended for REWOD hedonic reactivity run
+% intended for REWOD HEDONIC reactivity run
 
 % get onsets for first control model (reward vs neutral)
 % Stick functions

@@ -1,4 +1,4 @@
-function GLM_MF_01_ndLevel()
+function GLM_01_ndLevel()
 
 %HEDONIC
 

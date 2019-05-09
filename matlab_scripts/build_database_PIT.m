@@ -41,8 +41,7 @@ for i = 1:length(subj);
         
     subjX=subj(i,1);
     subjX=char(subjX);
-    %conditionX=char(group(i,1))
-    sessionX  =char(session(i,1));   
+    sessionX=char(session(i,1));   
     
     disp (['****** PARTICIPANT: ' subjX ' *******']);
    

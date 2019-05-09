@@ -1,4 +1,4 @@
-function GLM_01_getOnsets()
+%function GLM_02_getOnsets()
 
 % intended for REWOD PIT run
 
@@ -9,17 +9,18 @@ function GLM_01_getOnsets()
 
 %% define paths
 
-homedir = '/home/REWOD/';
-%homedir = '/home/cisa/CISA/REWOD';
+%homedir = '/home/REWOD/';
+homedir = '/home/cisa/CISA/REWOD';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
 addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
-ana_name      = 'GLM-01';
+
+ana_name      = 'GLM-02';
 %session       = {'second'};
 task          = {'PIT'};
-subj          = 'subID' %{'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
+subj          = {'01'};%'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
 
 
 %% create folder  
@@ -131,6 +132,7 @@ for j = 1:length(task)
                     fid = fopen ([ana_name '_task-' taskX '_' nameX '_' substrX '.txt'],'wt');
                     formatSpec = '%d   %d   %d\n';
                     [nrows,~] = size(database.(nameXX));
+                 
                     for row = 1:nrows
                         fprintf(fid,formatSpec,database.(nameXX){row,:});
                     end
@@ -142,7 +144,7 @@ for j = 1:length(task)
                 database.(nameX) = [num2cell(onsets.(nameX)), num2cell(durations.(nameX)), num2cell(modulators.(nameX))];
                 % save the database in a txt file
                 fid = fopen ([ana_name '_task-' taskX '_' nameX '.txt'],'wt');
-                formatSpec = '%d   %d   %d\n';
+                formatSpec = '%f   %f   %d\n';
                 [nrows,~] = size(database.(nameX));
                 for row = 1:nrows
                     fprintf(fid,formatSpec,database.(nameX){row,:});
@@ -161,4 +163,4 @@ for j = 1:length(task)
     
 end
 
-end
+%end
