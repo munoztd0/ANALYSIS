@@ -109,7 +109,7 @@ for j = 1:length(task) %useless in this case
                     database.(nameXX) = [num2cell(onsets.(nameX).(substrX)), num2cell(durations.(nameX).(substrX)), num2cell(modulators.(nameX).(substrX))];
                     % save the database in a txt file
                     fid = fopen ([ana_name '_task-' taskX '_' nameX '_' substrX '.txt'],'wt');
-                    formatSpec = '%d   %d   %d\n';
+                    formatSpec = '%f\t%f\t%d\n';
                     [nrows,~] = size(database.(nameXX));
                     for row = 1:nrows
                         fprintf(fid,formatSpec,database.(nameXX){row,:});
@@ -122,7 +122,7 @@ for j = 1:length(task) %useless in this case
                 database.(nameX) = [num2cell(onsets.(nameX)), num2cell(durations.(nameX)), num2cell(modulators.(nameX))];
                 % save the database in a txt file
                 fid = fopen ([ana_name '_task-' taskX '_' nameX '.txt'],'wt');
-                formatSpec = '%d   %d   %d\n';
+                formatSpec = '%f\t%f\t%d\n';
                 [nrows,~] = size(database.(nameX));
                 for row = 1:nrows
                     fprintf(fid,formatSpec,database.(nameX){row,:});

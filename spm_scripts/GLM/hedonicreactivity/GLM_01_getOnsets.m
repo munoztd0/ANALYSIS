@@ -100,7 +100,7 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
             nameX = char(name(ii));
 
             if strcmp (nameX, 'odor')  % for structure that contains substuctures
-                substr = {'reward'; 'control'; 'neutral'};% specify the substructures names ?neutral?
+                substr = {'reward'; 'control'; 'neutral'};% specify the substructures names
 
                 for iii = 1:length(substr)
                     substrX = char(substr(iii));
@@ -109,7 +109,7 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
                     database.(nameXX) = [num2cell(onsets.(nameX).(substrX)), num2cell(durations.(nameX).(substrX)), num2cell(modulators.(nameX).(substrX))];
                     % save the database in a txt file
                     fid = fopen ([ana_name '_task-' taskX '_' nameX '_' substrX '.txt'],'wt');
-                    formatSpec = '%d   %d   %d\n';
+                    formatSpec = '%f\t%f\t%d\n';
                     [nrows,~] = size(database.(nameXX));
                     for row = 1:nrows
                         fprintf(fid,formatSpec,database.(nameXX){row,:});
@@ -122,7 +122,7 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
                 database.(nameX) = [num2cell(onsets.(nameX)), num2cell(durations.(nameX)), num2cell(modulators.(nameX))];
                 % save the database in a txt file
                 fid = fopen ([ana_name '_task-' taskX '_' nameX '.txt'],'wt');
-                formatSpec = '%d   %d   %d\n';
+                formatSpec = '%f\t%f\t%d\n';
                 [nrows,~] = size(database.(nameX));
                 for row = 1:nrows
                     fprintf(fid,formatSpec,database.(nameX){row,:});
