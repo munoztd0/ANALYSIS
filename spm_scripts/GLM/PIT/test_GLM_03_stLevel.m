@@ -1,6 +1,6 @@
 %function GLM_03_stLevel(subID)
 
-% intended for REWOD PIT
+% intended for REWOD PIT (Zscored)
 % get onsets for first control model (CSp vs CSm vs Baseline)
 % Stick functions
 % Simplified model on ONSETs 7 3*CS with modulators 1*grips
@@ -36,7 +36,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01'};%'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'PIT'};
 
 %% define experimental design parameters
@@ -92,7 +92,7 @@ for i = 1:length(param.task)
         'none'};%8
     
     param.modul{i} = {'ONS.modulators.Reminder.trial',...%1
-        'ONS.PartialExtinction.modulators.mob_effort',...%2
+        'ONS.modulators.PartialExtinction.trial',...%2
         'ONS.modulators.CS.CSp',...%3
         'ONS.modulators.CS.CSm',... %4
         'ONS.modulators.CS.Baseline',... %5

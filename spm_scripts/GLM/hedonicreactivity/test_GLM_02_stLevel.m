@@ -8,7 +8,7 @@
 % ratings) 3*questions 1 RINSE)
 % last modified on APRIL 2019 by David MUNOZ
 
-dbstop if error
+%dbstop if error
 %to change the default stop pop-up fo existing file overwride 
 %-> go to spm_spm.m and comment out line 352-371
 
@@ -40,7 +40,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  {'01'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'hedonic'}; %check
 
 %% define experimental design parameters

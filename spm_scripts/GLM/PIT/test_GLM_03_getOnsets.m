@@ -187,15 +187,15 @@ for j = 1:length(task)
             end
             
         end
-        
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % save data
+        mat_name = [ana_name '_task-' taskX '_onsets'];
+        save (mat_name, 'onsets', 'durations', 'modulators')
   
         end
                
         
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % save data
-        mat_name = [ana_name '_task-' taskX '_onsets'];
-        save (mat_name, 'onsets', 'durations', 'modulators')
+
         
     end
     

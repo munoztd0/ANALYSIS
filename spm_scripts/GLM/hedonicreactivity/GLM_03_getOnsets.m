@@ -209,12 +209,12 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
 %                 end
 %                 fclose(fid);
              end
-
-        end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % save data
         mat_name = [ana_name '_task-' taskX '_onsets'];
         save (mat_name, 'onsets', 'durations', 'modulators')
+
+        end
 
 
     end
