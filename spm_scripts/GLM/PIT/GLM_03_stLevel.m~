@@ -92,7 +92,7 @@ for i = 1:length(param.task)
         'none'};%8
     
     param.modul{i} = {'ONS.modulators.Reminder.trial',...%1
-        'ONS.modulators.PartialExtinction.trial',...%2
+        'ONS.PartialExtinction.modulators.mob_effort',...%2
         'ONS.modulators.CS.CSp',...%3
         'ONS.modulators.CS.CSm',... %4
         'ONS.modulators.CS.Baseline',... %5

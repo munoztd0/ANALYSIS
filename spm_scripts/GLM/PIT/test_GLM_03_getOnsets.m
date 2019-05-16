@@ -1,4 +1,4 @@
-function GLM_03_getOnsets()
+%function GLM_03_getOnsets()
 
 % intended for REWOD PIT run
 
@@ -9,8 +9,8 @@ function GLM_03_getOnsets()
 
 %% define paths
 
-homedir = '/home/REWOD/';
-%homedir = '/home/cisa/CISA/REWOD';
+%homedir = '/home/REWOD/';
+homedir = '/home/cisa/CISA/REWOD';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
@@ -19,7 +19,7 @@ addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 ana_name      = 'GLM-03';
 %session       = {'second'};
 task          = {'PIT'};
-subj          = 'subID'; %{'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
+subj          = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
 
 
 %% create folder  
@@ -199,4 +199,4 @@ for j = 1:length(task)
         
     end
     
-end
+%end
