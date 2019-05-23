@@ -52,5 +52,6 @@ for i in s:
             effort_data.to_csv(GLM + '_' + taskP + '.txt', sep='\t', index=False, header=None)
         else:
             effort_data[2] = zscore(effort_data[2])
+            efort_data = effort_data.round(5)
             os.chdir(effortpath)
             effort_data.to_csv(GLM + '_' + taskP + '.txt', sep='\t', index=False, header=None)

@@ -35,5 +35,6 @@ for i in s:
             mod_data.to_csv(GLM + '_' + task + '_odor_' + cond + '.txt', sep='\t', index=False, header=None)
         else:
             mod_data[2] = zscore(mod_data[2])
+            mod_data = mod_data.round(5)
             os.chdir(modpath)
             mod_data.to_csv(GLM + '_' + task + '_odor_' + cond + '.txt', sep='\t', index=False, header=None)
