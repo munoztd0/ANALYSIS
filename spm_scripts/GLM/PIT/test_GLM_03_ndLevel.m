@@ -1,27 +1,27 @@
-function GLM_02_ndLevel()
+%function GLM_03_ndLevel()
 
 %PIT
 
 %does t-test and full_factorial
 do_ttest = 1;
 remove = 1;
-removesub = {'sub-10';'sub-24'} ;%'sub-10';
-removedsub = '10-24'; %10-
+removesub = {'sub-10';'sub-24'} ; %
+removedsub = '10-24';
 
 %% define path
 
-homedir = '/home/REWOD';
-%homedir = '/home/cisa/CISA/REWOD';
+%homedir = '/home/REWOD';
+homedir = '/home/cisa/CISA/REWOD';
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
-name_ana = 'GLM-02'; % output folder for this analysis 
+name_ana = 'GLM-03'; % output folder for this analysis 
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
 %% specify spm param
-%addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
-addpath /usr/local/external_toolboxes/spm12/ ;
 
+%addpath /usr/local/external_toolboxes/spm12/ ;
+addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
 addpath ([homedir '/ANALYSIS/spm_scripts/GLM/dependencies']);
 spm('Defaults','fMRI');
 spm_jobman('initcfg');
@@ -37,13 +37,17 @@ if do_ttest
     contrastNames = {'CSp-CSm'%1
         'CSm-Baseline'%2
         'grips'%3
-        'CSp-CSm&Baseline'};%4
+        'CSp-CSm&Baseline'%4
+        'CSpEffort_CSmEffor'%5
+        'CSpEffort_CSmEffort&BaselineEffort'};%6
    
     
     conImages = {'con-0001'
         'con-0002'
         'con-0003'
-        'con-0004'};
+        'con-0004'
+        'con-0005'
+        'con-0006'};
     
     
     %% prepare batch for each contrasts
@@ -55,7 +59,7 @@ if do_ttest
         conImageX = conImages{n};
         contrastX = contrastNames{n};
         
-        ;if remove
+        if remove
            contrastFolder = fullfile (groupdir, 'ttests', ['removing-' removedsub], contrastX);
         else
             contrastFolder = fullfile (groupdir, 'ttests', 'all', contrastX);
@@ -111,4 +115,5 @@ if do_ttest
 end
 
 
-end
+
+%end

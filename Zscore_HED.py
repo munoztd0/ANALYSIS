@@ -14,7 +14,7 @@ from  statistics import stdev
 
 
 #declare variables
-GLM = ("GLM-03")
+GLM = ("GLM-04")
 s = ("01", "02", "03", "04", "05", "06", "07", "09", "10", "11", "12", "13","14", "15", "16", "17","18", "20", "21", "22","23", "24","25", "26")
 c = ("control_lik", "neutral_lik", "reward_lik", "control_int", "neutral_int", "reward_int")
 task = 'task-hedonic'
