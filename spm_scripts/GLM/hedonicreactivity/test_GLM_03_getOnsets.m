@@ -93,8 +93,6 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
         
 
 
-
-
         %% FOR FSL
 
         % go in the directory where data will be saved

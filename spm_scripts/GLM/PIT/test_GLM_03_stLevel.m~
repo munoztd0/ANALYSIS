@@ -36,7 +36,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  {'01'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'PIT'};
 
 %% define experimental design parameters
@@ -420,22 +420,28 @@ end
         Ct(3,:)    = weightPos;
         
         % con4
-        Ctnames{4} = 'CSp-CSm&Baseline'; %sum to 1 right?
-        weightPos  = ismember(conditionName, {'task-PIT.CSplus'}) * 2;
-        weightNeg  = ismember(conditionName, {'task-PIT.CSminus', 'task-PIT.Baseline'}) * -1;
+        Ctnames{4} = 'CSp-CSm&Baseline';
+        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSmnius', 'task-PIT.Baseline'}) * -1;
         Ct(4,:)    = weightPos+weightNeg;
         
         
+%                 % con3
+%         Ctnames{3} = 'Odor-NoOdor';
+%         weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
+%         weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
+%         Ct(3,:)    = weightPos+weightNeg;
+        
         % con5
         Ctnames{5} = 'CSpEffort_CSmEffort';
-        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1'}) * -1;
+        weightPos  = ismember(conditionName, {'task-PIT.CS.CSpxeffort^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.CS.CSmxeffort^1'}) * -1;
         Ct(5,:)    = weightPos+weightNeg;
         
         % con6 
-        Ctnames{6} = 'CSpEffort_CSmEffort&BaselineEffort'; %sum to 1 right?
-        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 2;
-        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1', 'task-PIT.Baselinexeffort^1'}) * -1;
+        Ctnames{6} = 'CSpEffort_CSmEffort&BaselineEffort';
+        weightPos  = ismember(conditionName, {'task-PIT.CS.CSpxeffort^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.CS.CSmxeffort^1', 'task-PIT.CS.Baselinexeffort^1'}) * -1;
         Ct(6,:)    = weightPos+weightNeg;
         
         % define F constrasts

@@ -1,4 +1,4 @@
-%function GLM_03_stLevel(subID)
+function GLM_03_stLevel(subID)
 
 % intended for REWOD PIT (Zscored)
 % get onsets for first control model (CSp vs CSm vs Baseline)
@@ -18,16 +18,16 @@ copycontrasts = 1;
 task = 'PIT';
 %% define path
 
-homedir = '/home/cisa/CISA/REWOD';
-%homedir = '/home/REWOD';
+%homedir = '/home/cisa/CISA/REWOD';
+homedir = '/home/REWOD';
 
 mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
 name_ana = 'GLM-03'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
-%addpath('/usr/local/external_toolboxes/spm12/');
-addpath /usr/local/MATLAB/R2018a/spm12 ;
+addpath('/usr/local/external_toolboxes/spm12/');
+%addpath /usr/local/MATLAB/R2018a/spm12 ;
 %% specify fMRI parameters
 param.TR = 2.4;
 param.im_format = 'nii'; %'img' or 'nii';
@@ -36,7 +36,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01'};%'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  subID; %{'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'PIT'};
 
 %% define experimental design parameters
@@ -49,36 +49,35 @@ for i = 1:length(param.task)
     % Specify each conditions of your desing matrix separately for each session. The sessions
     % represent a line in Cnam, and the conditions correspond to a item in the line
     % these names must correspond identically to the names from your ONS*mat.
-    param.Cnam{i} = {'Reminder',...%1
-        'PartialExtin',...%2
-        'CSplus',...%3
-        'CSminus',...%4
-        'Baseline',...%5
-        'NgripsREM',...%6
-        'NgripsPE',...%7
-        'NgripsPIT'};%8
+    param.Cnam{i} = {'CSplus',...%1
+        'CSminus',...%2
+        'Baseline',...%3
+        'CS_REM',...%4
+        'CS_PE',...%5
+        'NgripsPIT',...%6
+        'NgripsREM',...%7
+        'NgripsPE'};%8
     
-    param.onset{i} = {'ONS.onsets.Reminder.trial',...%1
-        'ONS.onsets.PartialExtinction.trial',...%2
-        'ONS.onsets.CS.CSp',...%3
-        'ONS.onsets.CS.CSm',...%4
-        'ONS.onsets.CS.Baseline',...%5
-        'ONS.onsets.Reminder.grips',...%6
-        'ONS.onsets.PartialExtinction.grips',...%7
-        'ONS.onsets.grips'};%8
+    param.onset{i} = {'ONS.onsets.CS.CSp',...%1
+        'ONS.onsets.CS.CSm',...%2
+        'ONS.onsets.CS.Baseline',...%3
+        'ONS.onsets.CS.REM',...%4
+        'ONS.onsets.CS.PE',...%5
+        'ONS.onsets.grips.PIT',...%6
+        'ONS.onsets.grips.REM',...%7
+        'ONS.onsets.grips.PE'};%8
 
-    
-    
+
     % duration of the blocks (if events, put '0'). Specify it for each condition of each session
     % the values must be included in your onsets in seconds
-    param.duration{i} = {'ONS.durations.Reminder.trial',...
-        'ONS.durations.PartialExtinction.trial',...
-        'ONS.durations.CS.CSp',...
+    param.duration{i} = {'ONS.durations.CS.CSp',...
         'ONS.durations.CS.CSm',...
         'ONS.durations.CS.Baseline',...
-        'ONS.durations.Reminder.grips',...
-        'ONS.durations.PartialExtinction.grips',...
-        'ONS.durations.grips'};
+        'ONS.durations.CS.REM',...
+        'ONS.durations.CS.PE',...
+        'ONS.durations.grips.PIT',...
+        'ONS.durations.grips.REM',...
+        'ONS.durations.grips.PE'};
     
     % parametric modulation of your events or blocks (ex: linear time, or emotional value, or pupillary size, ...)
     % If you have a parametric modulation
@@ -91,11 +90,11 @@ for i = 1:length(param.task)
         'none',...%7
         'none'};%8
     
-    param.modul{i} = {'ONS.modulators.Reminder.trial',...%1
-        'ONS.modulators.PartialExtinction.trial',...%2
-        'ONS.modulators.CS.CSp',...%3
-        'ONS.modulators.CS.CSm',... %4
-        'ONS.modulators.CS.Baseline',... %5
+    param.modul{i} = {'ONS.modulators.CS.CSp',...%1
+        'ONS.modulators.CS.CSm',... %2
+        'ONS.modulators.CS.Baseline',... %3
+        'ONS.modulators.CS.REM',...%4
+        'ONS.modulators.CS.PE',...%5
         'none',... %6
         'none',... %7
         'none'}; %8
@@ -148,13 +147,13 @@ for i = 1:length(subj)
         cd (fullfile(subjoutdir,'output'))
         
         % copy images T
-        Timages = ['01'; '02'; '03'; '04'];% constrasts of interest 
+        Timages = ['01'; '02'; '03'; '04'; '05'; '06'];% constrasts of interest 
         for y =1:size(Timages,1)
             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
         end
         
         % copy images F
-        Fimages = '05';% constrasts of interest
+        Fimages = '07';% constrasts of interest
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -222,7 +221,7 @@ end
             
             for cc=1:nconds
                 
-                if ~ isempty(~ isempty(eval(param.onset{ses}{cc}))) % only if the onsets are not all 0
+                if ~ std(eval(param.onset{ses}{cc}))== 0 % only if the onsets are not all 0
                
                     c = c+1; % update counter
                     
@@ -230,6 +229,7 @@ end
                     SPM.Sess(ses).U(c).ons       = eval(param.onset{ses}{cc});
                     SPM.Sess(ses).U(c).dur       = eval(param.duration{ses}{cc});
                     
+                    SPM.Sess(ses).U(c).orth = 0; %no ortho
                     SPM.Sess(ses).U(c).P(1).name = 'none';
                     
                     if isfield (param, 'modul') % this parameters are specified only if modulators are defined in the design
@@ -245,11 +245,18 @@ end
                                     
                                     nc = nc+1;
                                     mod_name = char(mod_names(nmod));
+                                    if  ~ round(std(eval([param.modul{ses}{cc} '.' mod_name])),10)== 0
+                                      
                                     
-                                    SPM.Sess(ses).U(c).P(nc).name  = mod_name;
-                                    SPM.Sess(ses).U(c).P(nc).P     = eval([param.modul{ses}{cc} '.' mod_name]);
-                                    SPM.Sess(ses).U(c).P(nc).h     = 1;
-                                    
+                                        SPM.Sess(ses).U(c).P(nc).name  = mod_name;
+                                        SPM.Sess(ses).U(c).P(nc).P     = eval([param.modul{ses}{cc} '.' mod_name]);
+                                        SPM.Sess(ses).U(c).P(nc).h     = 1;
+                                    else
+
+                                       SPM.Sess(ses).U(c).P(1).name  = mod_name;
+                                       SPM.Sess(ses).U(c).P(1).P     = [];
+                                       SPM.Sess(ses).U(c).P(1).h     = 1; 
+                                    end
 
                                 end
                                 
@@ -413,22 +420,23 @@ end
         Ct(3,:)    = weightPos;
         
         % con4
-        Ctnames{4} = 'CSp-CSm&Baseline';
-        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.CSmnius', 'task-PIT.Baseline'}) * -1;
+        Ctnames{4} = 'CSp-CSm&Baseline'; %sum to 1 right?
+        weightPos  = ismember(conditionName, {'task-PIT.CSplus'}) * 2;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSminus', 'task-PIT.Baseline'}) * -1;
         Ct(4,:)    = weightPos+weightNeg;
         
+        
         % con5
-        %Ctnames{5} = 'CSpEffort_CSmEffort';
-        %weightPos  = ismember(conditionName, {'task-PIT.CS.CSpxeffort^1'}) * 1;
-        %weightNeg  = ismember(conditionName, {'task-PIT.CS.CSmxeffort^1'})* -1;
-        %Ct(5,:)    = weightPos+weightNeg;
+        Ctnames{5} = 'CSpEffort_CSmEffort';
+        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1'}) * -1;
+        Ct(5,:)    = weightPos+weightNeg;
         
         % con6 
-        %Ctnames{6} = 'CSpEffort_CSmEffort&BaselineEffort';
-        %weightPos  = ismember(conditionName, {'task-PIT.CS.CSpxeffort^1'}) * 1;
-        %weightNeg  = ismember(conditionName, {'task-PIT.CS.CSmxeffort^1', 'task-PIT.CS.Baselinexeffort^1'})* -1;
-        %Ct(6,:)    = weightPos+weightNeg;
+        Ctnames{6} = 'CSpEffort_CSmEffort&BaselineEffort'; %sum to 1 right?
+        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 2;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1', 'task-PIT.Baselinexeffort^1'}) * -1;
+        Ct(6,:)    = weightPos+weightNeg;
         
         % define F constrasts
         %------------------------------------------------------------------
@@ -465,4 +473,4 @@ end
     end
 
 
-%end
+end
