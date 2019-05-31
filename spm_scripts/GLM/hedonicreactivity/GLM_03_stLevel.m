@@ -40,7 +40,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       = subID %{'01'; '02';'03'; '04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       = {'03'}; %'02';'03'; '04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'hedonic'}; 
 
 %% define experimental design parameters
@@ -270,13 +270,13 @@ end
                                        SPM.Sess(ses).U(c).P(nc).h     = 1;
                                        
                                    else
-                                       SPM.Sess(ses).U(c).P(1).name  = mod_name;
+                                       SPM.Sess(ses).U(c).P(1).name  = [];  %cancel the ones without variance (but watchout in contrsts!)
                                        SPM.Sess(ses).U(c).P(1).P     = [];
-                                       SPM.Sess(ses).U(c).P(1).h     = 1;   
+                                       SPM.Sess(ses).U(c).P(1).h     = [];   
 
                                     end
-                                end
-
+                               end
+                   
 
                             else
                                 SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});

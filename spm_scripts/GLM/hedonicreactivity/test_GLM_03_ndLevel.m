@@ -108,12 +108,13 @@ if do_ttest
         end
         
         if remove % remove subject from analysis
+            disp(['removing subject: ' removedsub]);
             allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans; % let's put this in a smaller variable
             for i = 1:length(removesub)
-                    idx = (regexp(allsub,removesub{i})); % find string containing the sub id
-                    idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
-                    matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
-                    allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans;
+                idx = (regexp(allsub,removesub{i})); % find string containing the sub id
+                idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
+                matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
+                allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans;
             end
                
         end

@@ -6,7 +6,7 @@
 % Simplified model on ONSETs 7 3*CS with modulators 1*grips
 % last modified on APRIL 2019 by David MUNOZ
 
-dbstop if error
+%dbstop if error
 
 %% What to do
 firstLevel    = 1;
@@ -36,7 +36,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  {'03'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'PIT'};
 
 %% define experimental design parameters
@@ -263,9 +263,9 @@ end
                                 
                              else
                                 if std(eval(param.modul{ses}{cc}))== 0  %if std deviation = 0 no variability so we have to take ou P or else it will ruin contrasts
-                                    SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});
+                                    SPM.Sess(ses).U(c).P(1).name  = [];
                                     SPM.Sess(ses).U(c).P(1).P     = [];
-                                    SPM.Sess(ses).U(c).P(1).h     = 1;   
+                                    SPM.Sess(ses).U(c).P(1).h     = [];   
                                     
                                 else    
                                     SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});
@@ -424,7 +424,6 @@ end
         weightPos  = ismember(conditionName, {'task-PIT.CSplus'}) * 2;
         weightNeg  = ismember(conditionName, {'task-PIT.CSminus', 'task-PIT.Baseline'}) * -1;
         Ct(4,:)    = weightPos+weightNeg;
-        
         
         % con5
         Ctnames{5} = 'CSpEffort_CSmEffort';

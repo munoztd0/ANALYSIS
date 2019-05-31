@@ -256,9 +256,9 @@ end
                                 
                              else
                                 if std(eval(param.modul{ses}{cc}))== 0  %if std deviation = 0 no variability so we have to take ou P or else it will ruin contrasts
-                                    SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});
+                                    SPM.Sess(ses).U(c).P(1).name  = [];
                                     SPM.Sess(ses).U(c).P(1).P     = [];
-                                    SPM.Sess(ses).U(c).P(1).h     = 1;   
+                                    SPM.Sess(ses).U(c).P(1).h     = [];   
                                     
                                 else    
                                     SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});

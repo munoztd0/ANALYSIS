@@ -6,7 +6,10 @@
 % does t-test and full_factorial
 do_ttest = 1;
 do_covariate = 1;
-removesub = 0; %{'sub-24'} ; % % which sub do we want to remove
+remove = 1; %watcha
+removesub = {'sub-24'}; %'sub-10';
+removedsub = '24'; 
+%removesub = 'sub-24'; % % which sub do we want to remove
 
 %% define path
 
@@ -70,13 +73,25 @@ if do_covariate
         
         cov.ID   = C.data(:,1);
         cov.data = C.data(:,2);
-       
-        if removesub
-            idx            = str2double(removesub(5:end));
-            torm           = find(cov.ID==idx);
-            
-            cov.ID(torm)   = [];
-            cov.data(torm) = [];
+        
+%        if remove
+% 
+%           idx            = str2double(removesub(5:end));
+%           torm           = find(cov.ID==idx);
+% 
+%           cov.ID(torm)   = [];
+%           cov.data(torm) = [];
+%        end
+   
+
+        if remove
+            for i = 1:length(removesub)
+                idx            = str2double(removesub{i}(5:end));
+                torm           = find(cov.ID==idx);
+
+                cov.ID(torm)   = [];
+                cov.data(torm) = [];
+            end
         end
         
         for n = 1:length(contrastNames)
@@ -86,8 +101,8 @@ if do_covariate
             conImageX = conImages{n};
             contrastX = contrastNames{n};
             
-            if removesub %
-                contrastFolder = fullfile (groupdir, 'covariate', covariateX, removesub, contrastX);
+            if remove 
+                contrastFolder = fullfile (groupdir, 'covariate', covariateX, ['removing-' removedsub], contrastX);
             else
                 contrastFolder = fullfile (groupdir, 'covariate', covariateX, 'all', contrastX);
             end
@@ -109,14 +124,15 @@ if do_covariate
                 matlabbatch{1}.spm.stats.factorial_design.des.t1.scans{j,1} = [groupdir conAll(j,:) ',1'];
             end
             
-            if removesub % remove subject from analysis
-                
-                disp(['removing subject: ' removesub]);
+            if remove % remove subject from analysis
+                disp(['removing subject: ' removedsub]);
                 allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans; % let's put this in a smaller variable
-                idx = (regexp(allsub,removesub)); % find string containing the sub id
-                idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
-                matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
-                
+                for ii = 1:length(removesub)
+                    idx = (regexp(allsub,removesub{ii})); % find string containing the sub id
+                    idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
+                    matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
+                    allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans;
+                end
             end
             
             matlabbatch{1}.spm.stats.factorial_design.cov.c      = cov.data;
