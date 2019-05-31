@@ -32,7 +32,7 @@ spm_jobman('initcfg');
 % DO TESTS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% define constrasts and constrasts names
+nnb%% define constrasts and constrasts names
 if do_covariate
     
     % covariate of interest name become folder 
