@@ -9,13 +9,12 @@
 % last modified on APRIL 2019 by David MUNOZ
 
 %dbstop if error
-%to change the default stop pop-up fo existing file overwride 
-%-> go to spm_spm.m and comment out line 352-371
+
 
 %% What to do
 firstLevel    = 1;
 contrasts    = 1;
-copycontrasts = 0;
+copycontrasts = 1;
 
 %% define task variable
 %sessionX = 'second';
@@ -40,7 +39,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       = {'03'}; %'02';'03'; '04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       = {'01';'02';'03'; '04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'hedonic'}; 
 
 %% define experimental design parameters
@@ -156,24 +155,42 @@ for i = 1:length(subj)
     if copycontrasts == 1
         
         mkdir (groupdir); % make the group directory where contrasts will be copied
-        
         cd (fullfile(subjoutdir,'output'))
         
-        % copy images T
-        Timages = ['01'; '02'; '03'; '04'; '05'; '06'; '07'; '08']; % '05'];% constrasts of interest 
-        for y =1:size(Timages,1)
-            copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
+        list_dir = dir(fullfile(subjoutdir,'output', 'con*'));
+        list_files = '';
+        for ii = 1:length(list_dir)
+            copyfile(list_dir(ii).name, [groupdir, 'sub-' subjX '_' list_dir(ii).name])
         end
         
-        % copy images F
-        Fimages = '09';% constrasts of interest
-        for y =1:size(Fimages,1)
-            copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
-        end
         
-        display('contrasts copied!');
+        list_dir = dir(fullfile(subjoutdir,'output', 'ess*'));
+        list_files = '';
+        for iii = 1:length(list_dir)
+            copyfile(list_dir(iii).name, [groupdir, 'sub-' subjX '_' list_dir(iii).name])
+        end
     end
-    
+        
+%         mkdir (groupdir); % make the group directory where contrasts will be copied
+%         
+%         cd (fullfile(subjoutdir,'output'))
+%         
+%         % copy images T
+% %         Timages = ['01'; '02'; '03'; '04'; '05'; '06'; '07'; '08'; '09']; % '05'];% constrasts of interest 
+% %         for y =1:size(Timages,1)
+% %             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
+% %         end
+%         copyfile('con_00*.nii',groupdir)
+%         % copy images F
+% %         Fimages = '10';% constrasts of interest
+% %         for y =1:size(Fimages,1)
+% %             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
+% %         end
+%         copyfile('ess_00*.nii',groupdir)
+%         
+%         display('contrasts copied!');
+%     end
+%     
 end
 
 %% function section
@@ -412,55 +429,51 @@ end
         Ct(1,:)    = weightPos+weightNeg;
         
         % con2
-        Ctnames{2} = 'overallOdor';
-        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-        Ct(2,:)    = weightPos;
-        
-        % con3
-        Ctnames{3} = 'Odor-NoOdor';
+        Ctnames{2} = 'Odor-NoOdor';
         weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
         weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
-        Ct(3,:)    = weightPos+weightNeg;
+        Ct(2,:)    = weightPos+weightNeg;
         
-        % con4
-        Ctnames{4} = 'reward-neutral';
+        % con3
+        Ctnames{3} = 'reward-neutral';
         weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
         weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
-        Ct(4,:)    = weightPos+weightNeg;
+        Ct(3,:)    = weightPos+weightNeg;
         
-        % con5 //  check for no variance
-        Ctnames{5} = 'mod.reward_lik-mod.neutral_lik'; %??
+        % con4 //  check for no variance
+        Ctnames{4} = 'mod.reward_lik-mod.neutral_lik'; %??
         weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1; %
         weightNeg  = ismember(conditionName, {'task-hed.neutral_likxlik^1'})* -1;
-        Ct(5,:)    = weightPos+weightNeg;
+        Ct(4,:)    = weightPos+weightNeg;
         
-        % con6 // cant do control BC no variance
-        Ctnames{6} = 'mod.reward_int-mod.neutral_int'; %??
+        % con5 // cant do control BC no variance
+        Ctnames{5} = 'mod.reward_int-mod.neutral_int'; %??
         weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1; %
         weightNeg  = ismember(conditionName, {'task-hed.neutralxint^1'})* -1;
-        Ct(6,:)    = weightPos+weightNeg;
+        Ct(5,:)    = weightPos+weightNeg;
        
-        % con4 
-        %Ctnames{3} = 'question_presence'; %?? for motor cortex control butwe dont have
-        %weightPos  = ismember(conditionName, {'task-hed.liking', 'task-hed.intensity'}) * 1;
-        %Ct(3,:)    = weightPos;
+
+    
+        if  length(conditionName) == 13
+            % con6
+            Ctnames{6} = 'mod.reward_lik-mod.control_lik'; %??
+            weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
+            weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;
+            Ct(6,:)    = weightPos+weightNeg;
+
+            % con7
+            Ctnames{7} = 'mod.reward_int-mod.control_int'; %??
+            weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
+            weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
+            Ct(7,:)    = weightPos+weightNeg;
+        end
         
-        % con7
-        Ctnames{7} = 'mod.reward_lik-mod.neutral_lik'; %??
-        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-hed.neutralxlik^1'})* -1;
-        Ct(7,:)    = weightPos+weightNeg;
-       
-        % con8
-        Ctnames{8} = 'mod.reward_int-mod.neutral_int'; %??
-        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-hed.neutralxint^1'})* -1;
-        Ct(8,:)    = weightPos+weightNeg;
+        
         % con6
         %Ctnames{6} = 'reward-control+neutral';
         %weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2; %
         %weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;%
-        %weightNeg1  = ismember(conditionName, {'task-hed.control'})* -1;%
+        %weightNeg = ismember(conditionName, {'task-hed.control'})* -1;%
        % Ct(6,:)    = weightPos+weightNeg+weightNeg1;
         
 %         % con7

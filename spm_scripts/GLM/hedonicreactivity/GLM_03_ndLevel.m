@@ -4,7 +4,7 @@ function GLM_03_ndLevel()
 
 %does t-test and full_factorial
 do_ttest = 1;
-remove = 1; %watcha
+remove = 0; %watcha
 removesub = {'sub-10'; 'sub-24'} ; %'sub-10';
 removedsub = '10-24'; 
 
