@@ -1,4 +1,4 @@
-%function GLM_04_stLevel(subID) %whatcha
+function GLM_04_stLevel(subID) %whatcha
 
 % HEDONIC
 
@@ -9,8 +9,7 @@
 % last modified on APRIL 2019 by David MUNOZ
 
 %dbstop if error
-%to change the default stop pop-up fo existing file overwride 
-%-> go to spm_spm.m and comment out line 352-371
+
 
 %% What to do
 firstLevel    = 1;
@@ -22,16 +21,16 @@ copycontrasts = 1;
 task = 'hedonicreactivity';
 %% define path
 
-%homedir = '/home/REWOD';
-homedir = '/home/cisa/CISA/REWOD'; %watcha
+homedir = '/home/REWOD';
+%homedir = '/home/cisa/CISA/REWOD'; %watcha
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
 name_ana = 'GLM-04'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
-%addpath /usr/local/external_toolboxes/spm12/ ;
-addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
+addpath /usr/local/external_toolboxes/spm12/ ;
+%addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
 %% specify fMRI parameters
 param.TR = 2.4;
 param.im_format = 'nii'; %'img' or 'nii';
@@ -149,13 +148,13 @@ for i = 1:length(subj)
         cd (fullfile(subjoutdir,'output'))
         
         % copy images T
-        Timages = ['01'; '02'; '03'; '04']; % '05'];% constrasts of interest 
+        Timages = ['01'; '02'; '03']; % '05'];% constrasts of interest 
         for y =1:size(Timages,1)
             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
         end
         
         % copy images F
-        Fimages = '05';% constrasts of interest
+        Fimages = '04';% constrasts of interest
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -417,11 +416,11 @@ end
         weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
         Ct(3,:)    = weightPos+weightNeg;
         
-        % con4 //  check for no variance
-        Ctnames{4} = 'neutral-control';
-        weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-hed.reward'})* -1;
-        Ct(4,:)    = weightPos+weightNeg;
+%         % con4 //  check for no variance
+%         Ctnames{4} = 'neutral-control';
+%         weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
+%         weightNeg  = ismember(conditionName, {'task-hed.reward'})* -1;
+%         Ct(4,:)    = weightPos+weightNeg;
 %         
 %         % con6 // cant do control BC no variance
 %         Ctnames{6} = 'mod.reward_int-mod.neutral_int'; %??
@@ -510,4 +509,4 @@ end
     end
 
 
-%end
+end

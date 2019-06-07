@@ -4,9 +4,9 @@
 
 # data analysis and wrangling
 import pandas as pd
+import numpy as np
 import os
 
-# %%
 
 #declare variables
 GLM = ("GLM-04")
@@ -14,10 +14,17 @@ s = ("01", "02", "03", "04", "05", "06", "07", "09", "10", "11", "12", "13","14"
 c = ("int") #, "int")
 taskDIR = ("hedonic")
 
-df1 = pd.DataFrame()
-df2 = pd.DataFrame()
-df3 = pd.DataFrame()
-df4 = pd.DataFrame()
+df1 = []
+df2 = []
+df3 = []
+df4 = []
+dfsubj = []
+dfcontrol = []
+df01 = pd.DataFrame()
+df02 = pd.DataFrame()
+df03 = pd.DataFrame()
+df04 = pd.DataFrame()
+
 
 for i in s:
     subj = 'sub-' + i
@@ -26,35 +33,33 @@ for i in s:
     cov_reward = pd.read_table(covpath + GLM + '_task-hedonic_odor_reward_' + cond + '.txt',sep='\t', header=None)
     cov_control = pd.read_table(covpath + GLM + '_task-hedonic_odor_control_' + cond + '.txt',sep='\t', header=None)
     cov_neutral = pd.read_table(covpath + GLM + '_task-hedonic_odor_neutral_' + cond + '.txt',sep='\t', header=None)
-    
-    reward_neutral = pd.DataFrame(cov_reward[2] - cov_neutral[2])
-    reward_neutral.insert(0, column='subj',value=i)
-    reward_neutral.columns = ['subj', cond]  
-    df1 = df1.append(reward_neutral)
 
-    reward_control = pd.DataFrame(cov_reward[2] - cov_control[2])
-    reward_control.insert(0, column='subj',value=i)
-    reward_control.columns = ['subj', cond]
-    df2 = df2.append(reward_control)
-    
-    neutral_control = pd.DataFrame(cov_reward[2] - cov_neutral[2])
-    neutral_control.insert(0, column='subj',value=i)
-    neutral_control.columns = ['subj', cond]
-    df3 = df3.append(neutral_control)
-    
-    odor_noodor = pd.DataFrame((cov_reward[2] + cov_neutral[2])/2 - cov_control[2])
-    odor_noodor.insert(0, column='subj',value=i)
-    odor_noodor.columns = ['subj', cond]
-    df4 = df4.append(odor_noodor,)
-    
+    dfsubj = np.append(dfsubj, i)
+
+    reward_neutral = cov_reward[2] - cov_neutral[2]
+    df1 = np.append(df1, round(reward_neutral.mean(), 5))
+
+
+    reward_control = cov_reward[2] - cov_control[2]
+    df2 = np.append(df2, round(reward_control.mean() ,5))
+
+    odor_noodor = (cov_reward[2] + cov_neutral[2])/2 - cov_control[2]
+    df3 = np.append(df3, round(odor_noodor.mean() , 5))
+
+
+df01[0] = dfsubj
+df02[0] = dfsubj
+df03[0] = dfsubj
+df01[1] = df1
+df02[1] = df2
+df03[1] = df3
+
+df01.columns = ['subj', cond]
+df02.columns = ['subj', cond]
+df03.columns = ['subj', cond]
 
 
 os.chdir('/home/cisa/CISA/REWOD/DATA/STUDY/MODELS/SPM/hedonic/GLM-04/group_covariates')
-df1.to_csv('reward-neutral_' + cond + '.txt',sep='\t', index=False)
-df2.to_csv('reward-control_' + cond + '.txt',sep='\t', index=False)
-df3.to_csv('neutral-control_' + cond + '.txt',sep='\t', index=False)
-df4.to_csv('odor-noodor_' + cond + '.txt',sep='\t', index=False)
-        
-        
-        
-        
+df01.to_csv('reward-neutral_' + cond + '.txt',sep='\t', index=False)
+df02.to_csv('reward-control_' + cond + '.txt',sep='\t', index=False)
+df03.to_csv('odor-noodor_' + cond + '.txt',sep='\t', index=False)

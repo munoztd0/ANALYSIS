@@ -7,8 +7,8 @@
 do_ttest = 1;
 do_covariate = 1;
 remove = 0; %watcha
-removesub = {'sub-10'; 'sub-24'}; %'sub-10';
-removedsub = '10-24'; 
+removesub = {'sub-24'}; %'sub-10';
+removedsub = '24'; 
 %removesub = 'sub-24'; % % which sub do we want to remove
 
 %% define path
@@ -41,10 +41,10 @@ if do_covariate
     % covariate of interest name become folder 
     covariateNames = {'reward-neutral_lik' %1
         'reward-control_lik' %2
-        'odor-noodor_lik' %3
-        'reward-neutral_int' %4
-        'reward-control_int' %5
-        'odor-noodor_int'}; %6
+        'odor-noodor_lik' %4
+        'reward-neutral_int' %5
+        'reward-control_int' %6
+        'odor-noodor_int'}; %8
 
     % These contrast names become sub-folders
     contrastNames = {'reward-control' %1

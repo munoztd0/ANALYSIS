@@ -1,4 +1,4 @@
-%function GLM_04_getOnsets()
+9%function GLM_04_getOnsets()
 %watchout
 % intended for REWOD HEDONIC reactivity run
 

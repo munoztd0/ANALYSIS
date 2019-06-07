@@ -9,12 +9,11 @@
 % last modified on APRIL 2019 by David MUNOZ
 
 %dbstop if error
-%to change the default stop pop-up fo existing file overwride 
-%-> go to spm_spm.m and comment out line 352-371
+
 
 %% What to do
-firstLevel    = 1;
-contrasts    = 1;
+firstLevel    = 0;
+contrasts    = 0;
 copycontrasts = 1;
 
 %% define task variable
@@ -149,13 +148,13 @@ for i = 1:length(subj)
         cd (fullfile(subjoutdir,'output'))
         
         % copy images T
-        Timages = ['01'; '02'; '03'; '04']; % '05'];% constrasts of interest 
+        Timages = ['01'; '02'; '03']; % '05'];% constrasts of interest 
         for y =1:size(Timages,1)
             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
         end
         
         % copy images F
-        Fimages = '05';% constrasts of interest
+        Fimages = '04';% constrasts of interest
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -417,11 +416,11 @@ end
         weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
         Ct(3,:)    = weightPos+weightNeg;
         
-        % con4 //  check for no variance
-        Ctnames{4} = 'neutral-control';
-        weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-hed.reward'})* -1;
-        Ct(4,:)    = weightPos+weightNeg;
+%         % con4 //  check for no variance
+%         Ctnames{4} = 'neutral-control';
+%         weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
+%         weightNeg  = ismember(conditionName, {'task-hed.reward'})* -1;
+%         Ct(4,:)    = weightPos+weightNeg;
 %         
 %         % con6 // cant do control BC no variance
 %         Ctnames{6} = 'mod.reward_int-mod.neutral_int'; %??
@@ -510,4 +509,4 @@ end
     end
 
 
-%end
+%end9

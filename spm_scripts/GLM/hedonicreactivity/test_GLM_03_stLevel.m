@@ -169,6 +169,8 @@ for i = 1:length(subj)
         for iii = 1:length(list_dir)
             copyfile(list_dir(iii).name, [groupdir, 'sub-' subjX '_' list_dir(iii).name])
         end
+        
+        display('contrasts copied!');
     end
         
 %         mkdir (groupdir); % make the group directory where contrasts will be copied
@@ -452,20 +454,30 @@ end
         weightNeg  = ismember(conditionName, {'task-hed.neutralxint^1'})* -1;
         Ct(5,:)    = weightPos+weightNeg;
        
-
-    
+        % con6
+        Ctnames{6} = 'mod.reward_lik-control'; %??
+        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
+        Ct(6,:)    = weightPos+weightNeg;
+        
+        % con6
+        Ctnames{6} = 'mod.reward_int-control'; %??
+        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
+        Ct(6,:)    = weightPos+weightNeg;
+        
         if  length(conditionName) == 13
-            % con6
-            Ctnames{6} = 'mod.reward_lik-mod.control_lik'; %??
+            %con7
+            Ctnames{7} = 'mod.reward_lik-mod.control_lik'; %??
             weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
             weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;
-            Ct(6,:)    = weightPos+weightNeg;
-
-            % con7
-            Ctnames{7} = 'mod.reward_int-mod.control_int'; %??
+            Ct(7,:)    = weightPos+weightNeg;
+            
+            %con8
+            Ctnames{8} = 'mod.reward_int-mod.control_int'; %??
             weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
             weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
-            Ct(7,:)    = weightPos+weightNeg;
+            Ct(8,:)    = weightPos+weightNeg;
         end
         
         

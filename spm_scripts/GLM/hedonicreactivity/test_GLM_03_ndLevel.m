@@ -4,9 +4,9 @@
 
 %does t-test and full_factorial
 do_ttest = 1;
-remove = 0; %watcha
-removesub = {'sub-10'; 'sub-24'} ; %'sub-10';
-removedsub = '10-24'; 
+remove = 1; %watcha
+removesub = { 'sub-24'} ; %'sub-10';
+removedsub = '24'; 
 
 %% define path
 
@@ -40,17 +40,21 @@ if do_ttest
         'reward-neutral'%3
         'mod.reward_lik-mod.neutral_lik'%4
         'mod.reward_int-mod.neutral_int'%5
-        'mod.reward_lik-mod.control_lik'%6
-        'mod.reward_int-mod.control_int'};%7
+        'mod.reward_lik-control'%6
+        'mod.reward_int-control'%7
+        'mod.reward_lik-mod.control_lik'%8
+        'mod.reward_int-mod.control_int'};%9
    
     
-    conImages = {'con-0001'
-        'con-0002'
-        'con-0003'
-        'con-0004'
-        'con-0005'
-        'con-0006'
-        'con-0007'};
+    conImages = {'con_0001'
+        'con_0002'
+        'con_0003'
+        'con_0004'
+        'con_0005'
+        'con_0006'
+        'con_0007'
+        'con_0008'
+        'con_0009'
     
     
     %% prepare batch for each contrasts

@@ -36,7 +36,7 @@ if do_ttest
     contrastNames = {'reward-control'%1
         'overallOdor'%2
         'Odor-NoOdor'%3
-        'reward-neutral'};%24
+        'reward-neutral'};%4
    
     
     conImages = {'con-0001'
