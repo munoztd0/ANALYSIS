@@ -1,12 +1,12 @@
 %function GLM_04_ndLevel
 % with covariate()
 % BY THE END THIS SCRIPT NEEDS TO BE COMBINED IN A SINGLE SCRIPT
-
+% PIT
 
 % does t-test and full_factorial
 do_ttest = 1;
 do_covariate = 1;
-remove = 0; %watcha
+remove = 1; %watcha
 removesub = {'sub-24'}; %'sub-10';
 removedsub = '24'; 
 %removesub = 'sub-24'; % % which sub do we want to remove
@@ -16,9 +16,9 @@ removedsub = '24';
 %homedir = '/home/REWOD';
 homedir = '/home/cisa/CISA/REWOD';
 
-mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
+mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
-covdir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic/GLM-04/group_covariates'); % director with the extracted second level covariates
+covdir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT/GLM-04/group_covariates'); % director with the extracted second level covariates
 
 name_ana = 'GLM-04'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
@@ -39,22 +39,21 @@ spm_jobman('initcfg');
 if do_covariate
     
     % covariate of interest name become folder 
-    covariateNames = {'reward-neutral_lik' %1
-        'reward-control_lik' %2
-        'odor-noodor_lik' %4
-        'reward-neutral_int' %5
-        'reward-control_int' %6
-        'odor-noodor_int'}; %8
+    covariateNames = {'CSp-CSm_effort' %1
+        'CSp-Baseline_effort' %2
+        'CSp-CSm&Baseline_effort'}; %3
 
     % These contrast names become sub-folders
-    contrastNames = {'reward-control' %1
-        'Odor-NoOdor'% 2
-        'reward-neutral'}; %3
+    contrastNames = {'CSp-CSm' %1
+        'CSp-Baseline'% 2
+        'grips'%3
+        'CSp-CSm&Baseline'}; %4
     
     conImages = {
         'con-0001'
         'con-0002'
-        'con-0003'};
+        'con-0003'
+        'con-0004'};
     
     %% prepare batch for each contrasts
     
@@ -165,6 +164,7 @@ if do_covariate
     end
 end
 
+clear all
 
 
 %end

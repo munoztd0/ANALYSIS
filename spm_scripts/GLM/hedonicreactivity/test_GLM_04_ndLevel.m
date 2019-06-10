@@ -1,14 +1,14 @@
 %function GLM_04_ndLevel
 % with covariate()
 % BY THE END THIS SCRIPT NEEDS TO BE COMBINED IN A SINGLE SCRIPT
-
+% HEDONIC
 
 % does t-test and full_factorial
 do_ttest = 1;
 do_covariate = 1;
-remove = 0; %watcha
-removesub = {'sub-10'; 'sub-24'}; %'sub-10';
-removedsub = '10-24'; 
+remove = 1; %watcha
+removesub = { 'sub-24'}; %'sub-10';
+removedsub = '24'; 
 %removesub = 'sub-24'; % % which sub do we want to remove
 
 %% define path
@@ -165,6 +165,7 @@ if do_covariate
     end
 end
 
+clear all
 
 
 %end

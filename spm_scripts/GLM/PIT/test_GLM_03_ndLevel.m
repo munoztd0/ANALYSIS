@@ -5,8 +5,8 @@
 %does t-test and full_factorial
 do_ttest = 1;
 remove = 1;
-removesub = {'sub-10';'sub-24'} ; %
-removedsub = '10-24';
+removesub = {'sub-24'} ; %
+removedsub = '24';
 
 %% define path
 
@@ -38,7 +38,7 @@ if do_ttest
         'CSm-Baseline'%2
         'grips'%3
         'CSp-CSm&Baseline'%4
-        'CSpEffort_CSmEffor'%5
+        'CSpEffort_CSmEffort'%5
         'CSpEffort_CSmEffort&BaselineEffort'};%6
    
     
@@ -114,6 +114,6 @@ if do_ttest
     end
 end
 
-
+clear all
 
 %end

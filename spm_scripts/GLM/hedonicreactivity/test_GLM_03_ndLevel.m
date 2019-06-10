@@ -5,7 +5,7 @@
 %does t-test and full_factorial
 do_ttest = 1;
 remove = 1; %watcha
-removesub = { 'sub-24'} ; %'sub-10';
+removesub = {'sub-24'} ; %'sub-10';
 removedsub = '24'; 
 
 %% define path
@@ -54,7 +54,7 @@ if do_ttest
         'con_0006'
         'con_0007'
         'con_0008'
-        'con_0009'
+        'con_0009'};
     
     
     %% prepare batch for each contrasts

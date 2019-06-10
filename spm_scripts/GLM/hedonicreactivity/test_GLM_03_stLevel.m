@@ -461,23 +461,23 @@ end
         Ct(6,:)    = weightPos+weightNeg;
         
         % con6
-        Ctnames{6} = 'mod.reward_int-control'; %??
+        Ctnames{7} = 'mod.reward_int-control'; %??
         weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
-        Ct(6,:)    = weightPos+weightNeg;
+        Ct(7,:)    = weightPos+weightNeg;
         
         if  length(conditionName) == 13
             %con7
-            Ctnames{7} = 'mod.reward_lik-mod.control_lik'; %??
+            Ctnames{8} = 'mod.reward_lik-mod.control_lik'; %??
             weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
             weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;
-            Ct(7,:)    = weightPos+weightNeg;
+            Ct(8,:)    = weightPos+weightNeg;
             
             %con8
-            Ctnames{8} = 'mod.reward_int-mod.control_int'; %??
+            Ctnames{9} = 'mod.reward_int-mod.control_int'; %??
             weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
             weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
-            Ct(8,:)    = weightPos+weightNeg;
+            Ct(9,:)    = weightPos+weightNeg;
         end
         
         

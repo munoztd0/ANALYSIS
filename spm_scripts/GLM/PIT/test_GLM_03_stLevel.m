@@ -2,7 +2,6 @@
 
 % intended for REWOD PIT (Zscored)
 % get onsets for first control model (CSp vs CSm vs Baseline)
-% Stick functions
 % Simplified model on ONSETs 7 3*CS with modulators 1*grips
 % last modified on APRIL 2019 by David MUNOZ
 
@@ -36,7 +35,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'03'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'PIT'};
 
 %% define experimental design parameters
@@ -147,13 +146,13 @@ for i = 1:length(subj)
         cd (fullfile(subjoutdir,'output'))
         
         % copy images T
-        Timages = ['01'; '02'; '03'; '04'; '05'; '06'];% constrasts of interest 
+        Timages = ['01'; '02'; '03'; '04'; '05'; '06'; '07'];% constrasts of interest 
         for y =1:size(Timages,1)
             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
         end
         
         % copy images F
-        Fimages = '07';% constrasts of interest
+        Fimages = '08';% constrasts of interest
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -431,11 +430,17 @@ end
         weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1'}) * -1;
         Ct(5,:)    = weightPos+weightNeg;
         
-        % con6 
-        Ctnames{6} = 'CSpEffort_CSmEffort&BaselineEffort'; %sum to 1 right?
+        % con6
+        Ctnames{6} = 'CSpEffort_BaselineEffort';
+        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.Baselinexeffort^1'}) * -1;
+        Ct(6,:)    = weightPos+weightNeg;
+        
+        % con7 
+        Ctnames{7} = 'CSpEffort_CSmEffort&BaselineEffort'; %sum to 1 right?
         weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 2;
         weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1', 'task-PIT.Baselinexeffort^1'}) * -1;
-        Ct(6,:)    = weightPos+weightNeg;
+        Ct(7,:)    = weightPos+weightNeg;
         
         % define F constrasts
         %------------------------------------------------------------------
