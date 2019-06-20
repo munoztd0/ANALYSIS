@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Jun 20 16:37:39 2019
-
-@author: David Munoz
-"""
-
 #!/usr/bin/env python
 # coding: utf-8
 
@@ -41,26 +33,26 @@ df04 = pd.DataFrame()
 for i in s:
     subj = 'sub-' + i
     covpath = '/home/cisa/CISA/REWOD/DATA/STUDY/MODELS/SPM/' + taskDIR + '/' + GLM + '/' + subj + '/timing/'
-    cov_Base = pd.read_table(covpath + GLM + '_task-PIT_CS_Baseline.txt',sep='\t', header=None)
-    cov_minus = pd.read_table(covpath + GLM + '_task-PIT_CS_CSm.txt',sep='\t', header=None)
-    cov_plus = pd.read_table(covpath + GLM + '_task-PIT_CS_CSp.txt',sep='\t', header=None)
+    cov_Base = pd.read_table(covpath + GLM + '_task-PIT_CS_Baseline_meancent.txt',sep='\t', header=None)
+    cov_minus = pd.read_table(covpath + GLM + '_task-PIT_CS_CSm_meancent.txt',sep='\t', header=None)
+    cov_plus = pd.read_table(covpath + GLM + '_task-PIT_CS_CSp_meancent.txt',sep='\t', header=None)
 
     dfsubj = np.append(dfsubj, i)
 
     CSp_CSm = cov_plus[2] - cov_minus[2]
-    df1 = np.append(df1, '{:.5f}'.format(CSp_CSm.mean()))
+    df1 = np.append(df1, '{:.10f}'.format(CSp_CSm.mean()))
 
 
     CSp_Baseline = cov_plus[2] - cov_Base[2]
-    df2 = np.append(df2, '{:.5f}'.format(CSp_Baseline.mean()))
+    df2 = np.append(df2, '{:.10f}'.format(CSp_Baseline.mean()))
 
 
     CSp_CSmandBaseline = cov_plus[2] - (cov_minus[2] + cov_Base[2])/2
-    df3 = np.append(df3, '{:.5f}'.format(CSp_CSmandBaseline.mean()))
+    df3 = np.append(df3, '{:.10f}'.format(CSp_CSmandBaseline.mean()))
 
 
     CSm_Baseline = cov_minus[2] - cov_Base[2]
-    df4 = np.append(df2, '{:.5f}'.format(CSm_Baseline.mean()))
+    df4 = np.append(df2, '{:.10f}'.format(CSm_Baseline.mean()))
 
 df01[0] = dfsubj
 df02[0] = dfsubj
@@ -78,7 +70,7 @@ df04.columns = ['subj', cond]
 
 
 os.chdir('/home/cisa/CISA/REWOD/DATA/STUDY/MODELS/SPM/PIT/GLM-04/group_covariates')
-df01.to_csv('CSp-CSm_' + cond + '.txt',sep='\t', index=False)
-df02.to_csv('CSp-Baseline_' + cond + '.txt',sep='\t', index=False)
-df03.to_csv('CSp-CSm&Baseline_' + cond + '.txt',sep='\t', index=False)
-df04.to_csv('CSm-Baseline_' + cond + '.txt',sep='\t', index=False)
+df01.to_csv('CSp-CSm_' + cond + '_meancent.txt',sep='\t', index=False)
+df02.to_csv('CSp-Baseline_' + cond + '_meancent.txt',sep='\t', index=False)
+df03.to_csv('CSp-CSm&Baseline_' + cond + '_meancent.txt',sep='\t', index=False)
+df04.to_csv('CSm-Baseline_' + cond + '_meancent.txt',sep='\t', index=False)

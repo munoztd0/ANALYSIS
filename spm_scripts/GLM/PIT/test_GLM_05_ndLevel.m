@@ -1,5 +1,5 @@
-%function GLM_04_ndLevel
-% with covariate not zscored
+%function GLM_05_ndLevel
+% with covariate zscored (before check for folder group covariate)
 % PIT
 
 % does t-test and full_factorial
@@ -17,9 +17,9 @@ homedir = '/home/cisa/CISA/REWOD';
 
 mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
-covdir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT/GLM-04/group_covariates'); % director with the extracted second level covariates
-
-name_ana = 'GLM-04'; % output folder for this analysis
+covdir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT/GLM-05/group_covariates'); % director with the extracted second level covariates
+%%
+name_ana = 'GLM-05'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
@@ -38,10 +38,10 @@ spm_jobman('initcfg');
 if do_covariate
     
     % covariate of interest name become folder 
-    covariateNames = {'CSp-CSm_effort' %1
-        'CSp-Baseline_effort' %2
-        'CSp-CSm_effort'%3
-        'CSp-CSm&Baseline_effort'}; %4
+    covariateNames = {'CSp-CSm_effort_zscored' %1
+        'CSp-Baseline_effort_zscored' %2
+        'CSp-CSm_effort_zscored'%3
+        'CSp-CSm&Baseline_effort_zscored'}; %4
 
     % These contrast names become sub-folders
     contrastNames = {'CSp-CSm' %1

@@ -1,11 +1,12 @@
 %function GLM_04_getOnsets()
 
-% intended for REWOD PIT run
+% intended for REWOD PIT
 
-% get onsets for first control model (reward vs neutral)
-% durations
-% Simplified model on ONSETs 3*CS with modulator and grips as control
-% last modified on APRIL 2019
+% get onsets for 4th model (Csp-Csm)
+% Durations =1 (except grips)
+% 3*CS with modulator and grips as control
+% last modified on June 2019
+
 
 %% define paths
 
@@ -23,7 +24,7 @@ subj          = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14
 
 
 %% create folder  
-mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
+%mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
 
 %% extract and save data
 for j = 1:length(task)

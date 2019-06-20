@@ -1,12 +1,12 @@
 %function GLM_03_ndLevel()
 
 %PIT
-
+%no modulators at second level
 %does t-test and full_factorial
 do_ttest = 1;
 remove = 1;
-removesub = {'sub-24'} ; %
-removedsub = '24';
+removesub = {'sub-10'; 'sub-24'} ; %
+removedsub = '10-24';
 
 %% define path
 
@@ -36,10 +36,12 @@ if do_ttest
     % These contrast names become folders
     contrastNames = {'CSp-CSm'%1
         'CSm-Baseline'%2
-        'grips'%3
         'CSp-CSm&Baseline'%4
+        'grips'%3
         'CSpEffort_CSmEffort'%5
-        'CSpEffort_CSmEffort&BaselineEffort'};%6
+        'CSpEffort_BaselineEffort'%6
+        'CSpEffort_CSmEffort&BaselineEffort'%7
+        'CSm-Baseline'};%8
    
     
     conImages = {'con-0001'
@@ -47,7 +49,9 @@ if do_ttest
         'con-0003'
         'con-0004'
         'con-0005'
-        'con-0006'};
+        'con-0006'
+        'con-0007'
+        'con-0008'};
     
     
     %% prepare batch for each contrasts
@@ -114,6 +118,6 @@ if do_ttest
     end
 end
 
-clear all
+%clear all
 
 %end

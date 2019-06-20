@@ -5,8 +5,9 @@
 %does t-test and full_factorial
 do_ttest = 1;
 remove = 1;
-removesub = {'sub-10';'sub-24'} ;
-removedsub = '10-24';
+removesub = {'sub-24'} ;%'sub-10';
+removedsub = '24'; %10-
+
 
 %% define path
 
@@ -35,8 +36,8 @@ if do_ttest
     % These contrast names become folders
     contrastNames = {'CSp-CSm'%1
         'CSm-Baseline'%2
-        'grips'%3
-        'CSp-CSm&Baseline'};%4
+        'CSp-CSm&Baseline'%3
+        'grips'};%4
    
     
     conImages = {'con-0001'
@@ -54,7 +55,7 @@ if do_ttest
         conImageX = conImages{n};
         contrastX = contrastNames{n};
         
-        ;if remove
+        if remove
            contrastFolder = fullfile (groupdir, 'ttests', ['removing-' removedsub], contrastX);
         else
             contrastFolder = fullfile (groupdir, 'ttests', 'all', contrastX);

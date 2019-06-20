@@ -1,23 +1,23 @@
-%function GLM_01_getOnsets()
+%function GLM_05_getOnsets()
 
 % intended for REWOD PIT
 
-% get onsets for first control model (Csp-Csm)
-% stick functions
-% Simplified model on ONSETs 3*CS with modulator and grips as control
-% last modified on APRIL 2019
+% get onsets for 4th model (Csp-Csm)
+% Durations =1 (except grips)
+% 3*CS with modulator and grips as control
+% last modified on June 2019
+
 
 %% define paths
 
 %homedir = '/home/REWOD/';
 homedir = '/home/cisa/CISA/REWOD';
-%homedir = '/Users/davidmunoz/CISA/REWOD';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
 %addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
-ana_name      = 'GLM-01';
+ana_name      = 'GLM-05';
 %session       = {'second'};
 task          = {'PIT'};
 subj          = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
@@ -39,7 +39,7 @@ for j = 1:length(task)
         subjX=[char(subj(i))];
 
         subjdir=fullfile(mdldir, char(task), ana_name,  ['sub-' subjX],'timing');
-        %mkdir (subjdir)
+        mkdir (subjdir)
 
         cd (fullfile(sourcefiles,['sub-' subjX], 'func')); 
         behavfile = ['sub-' num2str(subjX) '_ses-second' '_task-' taskX '_run-01_events.mat'];
@@ -53,21 +53,27 @@ for j = 1:length(task)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets and durations for CS FOR RIM 
         onsets.CS.REM         = RIM.ONSETS.trialstart;
-        durations.CS.REM      = zeros (length(onsets.CS.REM),1);
+        durations.CS.REM      = RIM.DURATIONS.trialstart;
+
+        %replaced grip_frq by mob_effort
         modulators.CS.REM     = RIM.BEHAVIOR.mobilized_effort;
  
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets grips %%
         onsets.grips.REM          = RIM.ONSETS.grips;
-        durations.grips.REM      = zeros(length(onsets.grips.REM),1);
-        modulators.grips.REM     = ones(length(onsets.grips.REM),1);
+        durations.grips.REM      = zeros (length(onsets.grips.REM),1);
+        modulators.grips.REM     = ones  (length(onsets.grips.REM),1);
         
+              
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets and durations for CS FOR PE
         onsets.CS.PE          = PE.ONSETS.trialstart;
-        durations.CS.PE       = zeros(length(onsets.CS.PE),1);
+        durations.CS.PE       = PE.DURATIONS.trialstart;
+
+        %replaced grip_frq by mob_effort
         modulators.CS.PE      = PE.BEHAVIOR.mobilized_effort;
 
+ 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets grips %%
         onsets.grips.PE           = PE.ONSETS.grips;
@@ -81,9 +87,9 @@ for j = 1:length(task)
         onsets.CS.CSm          = PIT.ONSETS.trialstart(strcmp ('CSminus', PIT.CONDITIONS));
         onsets.CS.Baseline     = PIT.ONSETS.trialstart(strcmp ('Baseline', PIT.CONDITIONS));
         
-        durations.CS.CSp       = zeros (length(onsets.CS.CSp),1);
-        durations.CS.CSm       = zeros (length(onsets.CS.CSm),1);
-        durations.CS.Baseline  = zeros (length(onsets.CS.Baseline),1);
+        durations.CS.CSp       = PIT.DURATIONS.trialstart(strcmp ('CSplus', PIT.CONDITIONS));
+        durations.CS.CSm       = PIT.DURATIONS.trialstart(strcmp ('CSminus', PIT.CONDITIONS));
+        durations.CS.Baseline  = PIT.DURATIONS.trialstart(strcmp ('Baseline', PIT.CONDITIONS));
         
         %replaced grip_frq by mob_effort
         modulators.CS.CSp      = BEHAVIOR.mobilized_effort(strcmp ('CSplus', PIT.CONDITIONS));

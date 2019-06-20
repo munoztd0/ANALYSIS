@@ -1,9 +1,9 @@
 %function GLM_02_getOnsets()
 
-% intended for REWOD PIT run
+% intended for REWOD PIT
 
-% get onsets for first control model (reward vs neutral)
-% durations
+% get onsets for 2nd control model (Csp-Csm)
+% Durations =1 (except grips)
 % Simplified model on ONSETs 3*CS with modulator and grips as control
 % last modified on APRIL 2019
 
@@ -11,10 +11,11 @@
 
 %homedir = '/home/REWOD/';
 homedir = '/home/cisa/CISA/REWOD';
+%homedir = '/Users/davidmunoz/CISA/REWOD';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
-addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
+%addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
 ana_name      = 'GLM-02';
 %session       = {'second'};
@@ -23,7 +24,7 @@ subj          = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14
 
 
 %% create folder  
-mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
+%mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
 
 %% extract and save data
 for j = 1:length(task)
@@ -38,7 +39,7 @@ for j = 1:length(task)
         subjX=[char(subj(i))];
 
         subjdir=fullfile(mdldir, char(task), ana_name,  ['sub-' subjX],'timing');
-        mkdir (subjdir)
+        %mkdir (subjdir)
 
         cd (fullfile(sourcefiles,['sub-' subjX], 'func')); 
         behavfile = ['sub-' num2str(subjX) '_ses-second' '_task-' taskX '_run-01_events.mat'];
@@ -50,34 +51,28 @@ for j = 1:length(task)
         
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        % Get onsets and durations for CS FOR RIM
-        Reminder.onsets.trial          = RIM.ONSETS.trialstart;
-        Reminder.durations.trial       = RIM.DURATIONS.trialstart;
-
-        %replaced grip_frq by mob_effort
-        Reminder.modulators.mob_effort      = RIM.BEHAVIOR.mobilized_effort;
+        % Get onsets and durations for CS FOR RIM 
+        onsets.CS.REM         = RIM.ONSETS.trialstart;
+        durations.CS.REM      = RIM.DURATIONS.trialstart;
+        modulators.CS.REM     = RIM.BEHAVIOR.mobilized_effort;
  
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets grips %%
-        Reminder.onsets.grips           = RIM.ONSETS.grips;
-        Reminder.durations.grips       = zeros (length(Reminder.onsets.grips),1);
-        Reminder.modulators.grips      = ones  (length(Reminder.onsets.grips),1);
+        onsets.grips.REM          = RIM.ONSETS.grips;
+        durations.grips.REM      = zeros(length(onsets.grips.REM),1);
+        modulators.grips.REM     = ones(length(onsets.grips.REM),1);
         
-              
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets and durations for CS FOR PE
-        PartialExtinction.onsets.trial          = PE.ONSETS.trialstart;
-        PartialExtinction.durations.trial       = PE.DURATIONS.trialstart;
+        onsets.CS.PE          = PE.ONSETS.trialstart;
+        durations.CS.PE       = PE.DURATIONS.trialstart;
+        modulators.CS.PE      = PE.BEHAVIOR.mobilized_effort;
 
-        %replaced grip_frq by mob_effort
-        PartialExtinction.modulators.mob_effort      = PE.BEHAVIOR.mobilized_effort;
-
- 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets grips %%
-        PartialExtinction.onsets.grips           = PE.ONSETS.grips;
-        PartialExtinction.durations.grips       = zeros (length(PartialExtinction.onsets.grips),1);
-        PartialExtinction.modulators.grips      = ones  (length(PartialExtinction.onsets.grips),1);
+        onsets.grips.PE           = PE.ONSETS.grips;
+        durations.grips.PE       = zeros (length(onsets.grips.PE),1);
+        modulators.grips.PE      = ones  (length(onsets.grips.PE),1);
 
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -97,19 +92,20 @@ for j = 1:length(task)
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets grips %%?
-        onsets.grips           = PIT.ONSETS.grips;
-        durations.grips       = zeros (length(onsets.grips),1);
-        modulators.grips      = ones  (length(onsets.grips),1);
+        onsets.grips.PIT           = PIT.ONSETS.grips;
+        durations.grips.PIT       = zeros (length(onsets.grips.PIT),1);
+        modulators.grips.PIT      = ones  (length(onsets.grips.PIT),1);
 
        
         %% FOR FSL
+
         
         % go in the directory where data will be saved
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%1
         cd (subjdir) %save all info in the participant directory
         
-        % create text file with 3 colons: onsets, durations, paretric modulators
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % create text file with 3 colons: onsets, durations, parametric modulators
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         name = {'CS'; 'grips'};
         
         for ii = 1:length(name)
@@ -117,7 +113,7 @@ for j = 1:length(task)
             nameX = char(name(ii));
             
             if strcmp (nameX, 'CS')  % for structure that contains substuctures
-                substr = {'CSp'; 'CSm'; 'Baseline'};% specify the substructures names
+                substr = {'CSp'; 'CSm'; 'Baseline'; 'REM'; 'PE'};% specify the substructures names
                 
                 for iii = 1:length(substr)
                     substrX = char(substr(iii));
@@ -126,6 +122,24 @@ for j = 1:length(task)
                     database.(nameXX) = [num2cell(onsets.(nameX).(substrX)), num2cell(durations.(nameX).(substrX)), num2cell(modulators.(nameX).(substrX))];
                     % save the database in a txt file
                     fid = fopen ([ana_name '_task-' taskX '_' nameX '_' substrX '.txt'],'wt');
+                    formatSpec = '%f\t%f\t%f\n';
+                    [nrows,~] = size(database.(nameXX));
+                    for row = 1:nrows
+                        fprintf(fid,formatSpec,database.(nameXX){row,:});
+                    end
+                    fclose(fid);
+                end
+                
+            elseif strcmp (nameX, 'grips')  % for structure that contains substuctures
+                     substr = {'PIT'; 'PE'; 'REM'};% specify the substructures names
+
+                for iii = 1:length(substr)
+                    substrX = char(substr(iii));
+                    nameXX  = [nameX '_' substrX]; % name that combines the structure and the substructures
+                    % database with three rows of interest
+                    database.(nameXX) = [num2cell(onsets.(nameX).(substrX)), num2cell(durations.(nameX).(substrX)), num2cell(modulators.(nameX).(substrX))];
+                    % save the database in a txt file
+                    fid = fopen ([ana_name '_task-' taskX '_'  nameX '_' substrX '.txt'],'wt');
                     formatSpec = '%f\t%f\t%f\n';
                     [nrows,~] = size(database.(nameXX));
                     for row = 1:nrows
@@ -148,14 +162,16 @@ for j = 1:length(task)
             end
             
         end
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % save data
         mat_name = [ana_name '_task-' taskX '_onsets'];
-        save (mat_name, 'onsets', 'durations', 'modulators', 'PartialExtinction', 'Reminder')
-        
+        save (mat_name, 'onsets', 'durations', 'modulators')
+  
     end
-    
-end
+               
+        
 
+        
+end
+    
 %end
