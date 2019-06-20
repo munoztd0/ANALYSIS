@@ -2,8 +2,8 @@
 
 % intended for REWOD PIT (Zscored)
 % model 1st level modulators
-% 4 basics + CSp*eff-CSm*eff + CSp*eff-Base*eff + CSp*eff-CSm*eff\&Base*eff
-% +1 Csm-Baseline
+% 5 basic + CSp*eff-CSm*eff + CSp*eff-Base*eff + CSp*eff-CSm*eff\&Base*eff + CSm*eff-Base*eff
+% 9 contrasts
 % last modified on June 2019 by David MUNOZ
 
 %dbstop if error
@@ -148,13 +148,13 @@ for i = 1:length(subj)
         cd (fullfile(subjoutdir,'output'))
         
         % copy images T
-        Timages = ['01'; '02'; '03'; '04'; '05'; '06'; '07'; '08'];% constrasts of interest 
+        Timages = ['01'; '02'; '03'; '04'; '05'; '06'; '07'; '08';'09'];% constrasts of interest 
         for y =1:size(Timages,1)
             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
         end
         
         % copy images F
-        Fimages = '09';% constrasts of interest
+        Fimages = '10';% constrasts of interest
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -426,29 +426,37 @@ end
         weightPos  = ismember(conditionName, {'task-PIT.gripsREM', 'task-PIT.gripsPE','task-PIT.gripsPIT'}) * 1;
         Ct(4,:)    = weightPos;
         
-        % con5
-        Ctnames{5} = 'CSpEffort_CSmEffort';
-        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1'}) * -1;
+        %con5
+        Ctnames{5} = 'CSm-Baseline';
+        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.Baseline'}) * -1;
         Ct(5,:)    = weightPos+weightNeg;
         
         % con6
-        Ctnames{6} = 'CSpEffort_BaselineEffort';
+        Ctnames{6} = 'CSpEffort_CSmEffort';
         weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.Baselinexeffort^1'}) * -1;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1'}) * -1;
         Ct(6,:)    = weightPos+weightNeg;
         
-        % con7 
-        Ctnames{7} = 'CSpEffort_CSmEffort&BaselineEffort'; 
-        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 2;
-        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1', 'task-PIT.Baselinexeffort^1'}) * -1;
+        % con7
+        Ctnames{7} = 'CSpEffort_BaselineEffort';
+        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.Baselinexeffort^1'}) * -1;
         Ct(7,:)    = weightPos+weightNeg;
         
-        %con8
-        Ctnames{8} = 'CSm-Baseline';
-        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.Baseline'}) * -1;
+        % con8 
+        Ctnames{8} = 'CSpEffort_CSmEffort&BaselineEffort'; 
+        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 2;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1', 'task-PIT.Baselinexeffort^1'}) * -1;
         Ct(8,:)    = weightPos+weightNeg;
+        
+        % con9
+        Ctnames{9} = 'CSmEffort_BaselineEffort';
+        weightPos  = ismember(conditionName, {'task-PIT.CSminusxeffort^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.Baselinexeffort^1'}) * -1;
+        Ct(9,:)    = weightPos+weightNeg;
+        
+
         
         % define F constrasts
         %------------------------------------------------------------------

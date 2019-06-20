@@ -6,8 +6,8 @@
 do_ttest = 1;
 do_covariate = 1;
 remove = 1; %watcha
-removesub = {'sub-10';'sub-24'}; %'sub-10';
-removedsub = '10-24'; 
+removesub = {'sub-24'}; %'sub-10';
+removedsub = '24'; 
 %removesub = 'sub-24'; % % which sub do we want to remove
 
 %% define path
@@ -40,7 +40,7 @@ if do_covariate
     % covariate of interest name become folder 
     covariateNames = {'CSp-CSm_effort' %1
         'CSp-Baseline_effort' %2
-        'CSp-CSm_effort'%3
+        'CSm-Baseline_effort'%3
         'CSp-CSm&Baseline_effort'}; %4
 
     % These contrast names become sub-folders

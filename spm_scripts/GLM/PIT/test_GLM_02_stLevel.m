@@ -4,7 +4,7 @@
 % get onsets for first control model (CSp vs CSm vs Baseline)
 % Duration = 1
 % Simplified model no modulators
-% 4 basic contrasts (CSp-CSm, CSp-Base,  CSp-CSm&Base, grips)
+% 5 basic contrasts (CSp-CSm, CSp-Base,  CSp-CSm&Base, grips, CSm-Base)
 % last modified on June 2019 by David MUNOZ
 
 %dbstop if error
@@ -149,13 +149,13 @@ for i = 1:length(subj)
         cd (fullfile(subjoutdir,'output'))
         
         % copy images T
-        Timages = ['01'; '02'; '03'; '04'];% constrasts of interest 
+        Timages = ['01'; '02'; '03'; '04'; '05'];% constrasts of interest 
         for y =1:size(Timages,1)
             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
         end
         
         % copy images F
-        Fimages = '05';% constrasts of interest
+        Fimages = '06';% constrasts of interest
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -404,21 +404,27 @@ end
         Ct(1,:)    = weightPos+weightNeg;
 
         % con2
-        Ctnames{2} = 'CSm-Baseline';
-        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
+        Ctnames{2} = 'CSp-Baseline';
+        weightPos  = ismember(conditionName, {'task-PIT.CSplus'}) * 1;
         weightNeg  = ismember(conditionName, {'task-PIT.Baseline'}) * -1;
         Ct(2,:)    = weightPos+weightNeg;
         
         % con3
         Ctnames{3} = 'CSp-CSm&Baseline';
-        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.CSmnius', 'task-PIT.Baseline'}) * -1;
+        weightPos  = ismember(conditionName, {'task-PIT.CSplus'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSminus', 'task-PIT.Baseline'}) * -1;
         Ct(3,:)    = weightPos+weightNeg;
         
         % con4
         Ctnames{4} = 'grips';
         weightPos  = ismember(conditionName, {'task-PIT.gripsREM', 'task-PIT.gripsPE','task-PIT.gripsPIT'}) * 1;
         Ct(4,:)    = weightPos;
+        
+        % con5
+        Ctnames{5} = 'CSm-Baseline';
+        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.Baseline'}) * -1;
+        Ct(5,:)    = weightPos+weightNeg;
         
         % con5
         %Ctnames{5} = 'CSpEffort_CSmEffort';

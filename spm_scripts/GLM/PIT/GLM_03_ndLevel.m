@@ -35,11 +35,14 @@ if do_ttest
     
     % These contrast names become folders
     contrastNames = {'CSp-CSm'%1
-        'CSm-Baseline'%2
-        'grips'%3
-        'CSp-CSm&Baseline'%4
-        'CSpEffort_CSmEffor'%5
-        'CSpEffort_CSmEffort&BaselineEffort'};%6
+        'CSp-Baseline'%2
+        'CSp-CSm&Baseline'%3
+        'grips'%4
+        'CSm-Baseline'%5
+        'CSpEffort_CSmEffort'%6
+        'CSpEffort_BaselineEffort'%7
+        'CSpEffort_CSmEffort&BaselineEffort'%8
+        'CSmEffort_BaselineEffort'};%9
    
     
     conImages = {'con-0001'
