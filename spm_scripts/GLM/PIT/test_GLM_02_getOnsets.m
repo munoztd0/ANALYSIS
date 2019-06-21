@@ -24,7 +24,7 @@ subj          = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14
 
 
 %% create folder  
-%mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
+mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
 
 %% extract and save data
 for j = 1:length(task)
@@ -39,7 +39,7 @@ for j = 1:length(task)
         subjX=[char(subj(i))];
 
         subjdir=fullfile(mdldir, char(task), ana_name,  ['sub-' subjX],'timing');
-        %mkdir (subjdir)
+        mkdir (subjdir)
 
         cd (fullfile(sourcefiles,['sub-' subjX], 'func')); 
         behavfile = ['sub-' num2str(subjX) '_ses-second' '_task-' taskX '_run-01_events.mat'];

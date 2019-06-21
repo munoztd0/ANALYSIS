@@ -24,7 +24,7 @@ subj          = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14
 
 
 %% create folder  
-%mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
+mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have one run per task
 
 %% extract and save data
 for j = 1:length(task)

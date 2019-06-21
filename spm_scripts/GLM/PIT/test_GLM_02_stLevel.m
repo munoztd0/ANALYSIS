@@ -37,7 +37,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  {'01'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'PIT'};
 
 %% define experimental design parameters
@@ -223,8 +223,8 @@ end
             
             for cc=1:nconds
                 
-                if ~ isempty(~ isempty(eval(param.onset{ses}{cc}))) % only if the onsets are not all 0
-               
+                if ~ std(eval(param.onset{ses}{cc}))== 0 % only if the onsets are not all 0
+                    
                     c = c+1; % update counter
                     
                     SPM.Sess(ses).U(c).name      = {param.Cnam{ses}{cc}};
@@ -232,7 +232,7 @@ end
                     SPM.Sess(ses).U(c).dur       = eval(param.duration{ses}{cc});
                     
                     SPM.Sess(ses).U(c).P(1).name = 'none';
-                    %SPM.Sess(ses).U(c).orth = 0; %no ortho!!
+                    SPM.Sess(ses).U(c).orth = 0; %no ortho!!
                     
                     if isfield (param, 'modul') % this parameters are specified only if modulators are defined in the design
                         

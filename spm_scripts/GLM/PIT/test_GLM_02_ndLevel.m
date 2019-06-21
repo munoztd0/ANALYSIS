@@ -3,16 +3,18 @@
 %PIT
 
 %does t-test and full_factorial
+% -> 5 contrasts
+
 do_ttest = 1;
 remove = 1;
-removesub = {'sub-24'} ;%'sub-10';
-removedsub = '24'; %10-
+removesub = {'sub-10'; 'sub-24'} ;%'sub-10';
+removedsub = '10-24'; %10-
 
 %% define path
 
 %homedir = '/home/REWOD';
-homedir = '/home/cisa/CISA/REWOD';
-mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
+homedir  = '/home/cisa/CISA/REWOD';
+mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
 name_ana = 'GLM-02'; % output folder for this analysis 
 groupdir = fullfile (mdldir,name_ana, 'group/');
@@ -35,15 +37,17 @@ if do_ttest
     
     % These contrast names become folders
     contrastNames = {'CSp-CSm'%1
-        'CSm-Baseline'%2
-        'grips'%3
-        'CSp-CSm&Baseline'};%4
+        'CSp-Baseline'%2
+        'CSp-CSm&Baseline'%3
+        'grips'%4
+        'CSm-Baseline'};%5
    
     
     conImages = {'con-0001'
         'con-0002'
         'con-0003'
-        'con-0004'};
+        'con-0004'
+        'con-0005'};
     
     
     %% prepare batch for each contrasts
