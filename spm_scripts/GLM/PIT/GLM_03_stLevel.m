@@ -1,12 +1,12 @@
 function GLM_03_stLevel(subID)
 
 % intended for REWOD PIT (Zscored)
-% get onsets for first control model (CSp vs CSm vs Baseline)
-% Stick functions
-% Simplified model on ONSETs 7 3*CS with modulators 1*grips
-% last modified on APRIL 2019 by David MUNOZ
+% model 1st level modulators
+% 5 basic + CSp*eff-CSm*eff + CSp*eff-Base*eff + CSp*eff-CSm*eff\&Base*eff + CSm*eff-Base*eff
+% 9 contrasts
+% last modified on June 2019 by David MUNOZ
 
-dbstop if error
+%dbstop if error
 
 %% What to do
 firstLevel    = 1;
@@ -49,35 +49,36 @@ for i = 1:length(param.task)
     % Specify each conditions of your desing matrix separately for each session. The sessions
     % represent a line in Cnam, and the conditions correspond to a item in the line
     % these names must correspond identically to the names from your ONS*mat.
-    param.Cnam{i} = {'CSplus',...%1
-        'CSminus',...%2
-        'Baseline',...%3
-        'CS_REM',...%4
-        'CS_PE',...%5
-        'NgripsPIT',...%6
-        'NgripsREM',...%7
-        'NgripsPE'};%8
+    param.Cnam{i} = {'REM',...%1
+        'PE',...%2
+        'CSplus',...%3
+        'CSminus',...%4
+        'Baseline',...%5
+        'gripsREM',...%6
+        'gripsPE',...%7
+        'gripsPIT'};%8
     
-    param.onset{i} = {'ONS.onsets.CS.CSp',...%1
-        'ONS.onsets.CS.CSm',...%2
-        'ONS.onsets.CS.Baseline',...%3
-        'ONS.onsets.CS.REM',...%4
-        'ONS.onsets.CS.PE',...%5
-        'ONS.onsets.grips.PIT',...%6
-        'ONS.onsets.grips.REM',...%7
-        'ONS.onsets.grips.PE'};%8
+    param.onset{i} = {'ONS.onsets.CS.REM',...%1
+        'ONS.onsets.CS.PE',...%2
+        'ONS.onsets.CS.CSp',...%3
+        'ONS.onsets.CS.CSm',...%4
+        'ONS.onsets.CS.Baseline',...%5
+        'ONS.onsets.grips.REM',...%6
+        'ONS.onsets.grips.PE',...%7
+        'ONS.onsets.grips.PIT'};%8
 
-
-    % duration of the blocks (if events, put '0'). Specify it for each condition of each session
+    
+    
     % the values must be included in your onsets in seconds
-    param.duration{i} = {'ONS.durations.CS.CSp',...
+    param.duration{i} = {'ONS.durations.CS.REM',...
+        'ONS.durations.CS.PE',...
+        'ONS.durations.CS.CSp',...
         'ONS.durations.CS.CSm',...
         'ONS.durations.CS.Baseline',...
-        'ONS.durations.CS.REM',...
-        'ONS.durations.CS.PE',...
-        'ONS.durations.grips.PIT',...
         'ONS.durations.grips.REM',...
-        'ONS.durations.grips.PE'};
+        'ONS.durations.grips.PE',...
+        'ONS.durations.grips.PIT'};
+    
     
     % parametric modulation of your events or blocks (ex: linear time, or emotional value, or pupillary size, ...)
     % If you have a parametric modulation
@@ -90,11 +91,11 @@ for i = 1:length(param.task)
         'none',...%7
         'none'};%8
     
-    param.modul{i} = {'ONS.modulators.CS.CSp',...%1
-        'ONS.modulators.CS.CSm',... %2
-        'ONS.modulators.CS.Baseline',... %3
-        'ONS.modulators.CS.REM',...%4
-        'ONS.modulators.CS.PE',...%5
+    param.modul{i} = {'ONS.modulators.CS.REM',...%1
+        'ONS.modulators.CS.PE',...%2
+        'ONS.modulators.CS.CSp',...%3
+        'ONS.modulators.CS.CSm',... %4
+        'ONS.modulators.CS.Baseline',... %5
         'none',... %6
         'none',... %7
         'none'}; %8
@@ -122,7 +123,7 @@ for i = 1:length(subj)
     fprintf('participant number: %s \n', subj{i});
     cd (subjoutdir)
     
-    if ~exist('output','dir');
+    if ~exist('output','dir')
         mkdir ('output');
     end
     
@@ -147,13 +148,13 @@ for i = 1:length(subj)
         cd (fullfile(subjoutdir,'output'))
         
         % copy images T
-        Timages = ['01'; '02'; '03'; '04'; '05'; '06'];% constrasts of interest 
+        Timages = ['01'; '02'; '03'; '04'; '05'; '06'; '07'; '08';'09'];% constrasts of interest 
         for y =1:size(Timages,1)
             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
         end
         
         % copy images F
-        Fimages = '07';% constrasts of interest
+        Fimages = '10';% constrasts of interest
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -359,7 +360,7 @@ end
         
         % set threshold of mask!!
         %==========================================================================
-        SPM.xM.gMT = -Inf;% set -inf if we want to use explicit masking 0.8 is the spm default
+        SPM.xM.gMT = -Inf;% !!set -inf if we want to use explicit masking 0.8 is the spm default
         
         % Configure design matrix
         %==========================================================================
@@ -409,34 +410,53 @@ end
         Ct(1,:)    = weightPos+weightNeg;
 
         % con2
-        Ctnames{2} = 'CSm-Baseline';
-        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
+        Ctnames{2} = 'CSp-Baseline';
+        weightPos  = ismember(conditionName, {'task-PIT.CSplus'}) * 1;
         weightNeg  = ismember(conditionName, {'task-PIT.Baseline'}) * -1;
         Ct(2,:)    = weightPos+weightNeg;
-        
+
         % con3
-        Ctnames{3} = 'grips';
-        weightPos  = ismember(conditionName, {'task-PIT.NgripsREM', 'task-PIT.NgripsPE','task-PIT.NgripsPIT'}) * 1;
-        Ct(3,:)    = weightPos;
-        
-        % con4
-        Ctnames{4} = 'CSp-CSm&Baseline'; %sum to 1 right?
+        Ctnames{3} = 'CSp-CSm&Baseline';
         weightPos  = ismember(conditionName, {'task-PIT.CSplus'}) * 2;
         weightNeg  = ismember(conditionName, {'task-PIT.CSminus', 'task-PIT.Baseline'}) * -1;
-        Ct(4,:)    = weightPos+weightNeg;
+        Ct(3,:)    = weightPos+weightNeg;
         
+        % con4
+        Ctnames{4} = 'grips';
+        weightPos  = ismember(conditionName, {'task-PIT.gripsREM', 'task-PIT.gripsPE','task-PIT.gripsPIT'}) * 1;
+        Ct(4,:)    = weightPos;
         
-        % con5
-        Ctnames{5} = 'CSpEffort_CSmEffort';
-        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1'}) * -1;
+        %con5
+        Ctnames{5} = 'CSm-Baseline';
+        weightPos  = ismember(conditionName, {'task-PIT.CSminus'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.Baseline'}) * -1;
         Ct(5,:)    = weightPos+weightNeg;
         
-        % con6 
-        Ctnames{6} = 'CSpEffort_CSmEffort&BaselineEffort'; %sum to 1 right?
+        % con6
+        Ctnames{6} = 'CSpEffort_CSmEffort';
+        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1'}) * -1;
+        Ct(6,:)    = weightPos+weightNeg;
+        
+        % con7
+        Ctnames{7} = 'CSpEffort_BaselineEffort';
+        weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.Baselinexeffort^1'}) * -1;
+        Ct(7,:)    = weightPos+weightNeg;
+        
+        % con8 
+        Ctnames{8} = 'CSpEffort_CSmEffort&BaselineEffort'; 
         weightPos  = ismember(conditionName, {'task-PIT.CSplusxeffort^1'}) * 2;
         weightNeg  = ismember(conditionName, {'task-PIT.CSminusxeffort^1', 'task-PIT.Baselinexeffort^1'}) * -1;
-        Ct(6,:)    = weightPos+weightNeg;
+        Ct(8,:)    = weightPos+weightNeg;
+        
+        % con9
+        Ctnames{9} = 'CSmEffort_BaselineEffort';
+        weightPos  = ismember(conditionName, {'task-PIT.CSminusxeffort^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-PIT.Baselinexeffort^1'}) * -1;
+        Ct(9,:)    = weightPos+weightNeg;
+        
+
         
         % define F constrasts
         %------------------------------------------------------------------

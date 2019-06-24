@@ -32,6 +32,6 @@ for i in s:
         effort_data = pd.read_table(effortpath + GLM + '_' + task + '_CS_' + cond + '.txt',sep='\t', header=None)
 
         effort_data[2] = effort_data[2]-effort_data[2].mean()
-        effort_data = round(effort_data, 5)
+        effort_data = round(effort_data, 10)
         os.chdir(effortpath)
         effort_data.to_csv(GLM + '_' + task + '_CS_' + cond + '_meancent.txt', sep='\t', index=False, header=None)

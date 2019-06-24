@@ -1,13 +1,13 @@
-%function GLM_05_ndLevel
-% with covariate zscored (before check for folder group covariate)
+%function GLM_04_ndLevel
+% with covariate NOT zscored
 % PIT
 
 % does t-test and full_factorial
 do_ttest = 1;
 do_covariate = 1;
-remove = 1; %watcha
-removesub = {'sub-24'}; %'sub-10';
-removedsub = '24'; 
+remove = 0; %watcha
+removesub = {'sub-10';'sub-24'}; %'sub-10';
+removedsub = '10-24'; 
 %removesub = 'sub-24'; % % which sub do we want to remove
 
 %% define path
@@ -17,9 +17,9 @@ homedir = '/home/cisa/CISA/REWOD';
 
 mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
-covdir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT/GLM-05/group_covariates'); % director with the extracted second level covariates
-%%
-name_ana = 'GLM-05'; % output folder for this analysis
+covdir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT/GLM-04/group_covariates'); % director with the extracted second level covariates
+
+name_ana = 'GLM-04a'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
@@ -38,10 +38,10 @@ spm_jobman('initcfg');
 if do_covariate
     
     % covariate of interest name become folder 
-    covariateNames = {'CSp-CSm_effort_zscored' %1
-        'CSp-Baseline_effort_zscored' %2
-        'CSp-CSm_effort_zscored'%3
-        'CSp-CSm&Baseline_effort_zscored'}; %4
+    covariateNames = {'CSp-CSm_effort' %1
+        'CSp-Baseline_effort' %2
+        'CSm-Baseline_effort'%3
+        'CSp-CSm&Baseline_effort'}; %4
 
     % These contrast names become sub-folders
     contrastNames = {'CSp-CSm' %1

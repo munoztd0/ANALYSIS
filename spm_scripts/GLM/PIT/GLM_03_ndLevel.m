@@ -1,12 +1,14 @@
 function GLM_03_ndLevel()
 
 %PIT
-
+%no modulators at second level
 %does t-test and full_factorial
+% -> 9 contrasts
+
 do_ttest = 1;
 remove = 1;
-removesub = {'sub-10';'sub-24'} ; %
-removedsub = '10-24';
+removesub = {'sub-24'} ; %
+removedsub = '24';
 
 %% define path
 
@@ -50,7 +52,10 @@ if do_ttest
         'con-0003'
         'con-0004'
         'con-0005'
-        'con-0006'};
+        'con-0006'
+        'con-0007'
+        'con-0008'
+        'con-0009'};
     
     
     %% prepare batch for each contrasts
@@ -117,6 +122,6 @@ if do_ttest
     end
 end
 
-
+%clear all
 
 end

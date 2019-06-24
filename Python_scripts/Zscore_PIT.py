@@ -14,7 +14,7 @@ from  statistics import stdev
 
 
 #declare variables
-GLM = ("GLM-05")
+GLM = ("GLM-04")
 s = ("01", "02", "03", "04", "05", "06", "07", "09", "10", "11", "12", "13","14", "15", "16", "17","18", "20", "21", "22","23", "24","25", "26")
 #c = ("CS", "grips")
 t = ("Baseline", "CSp", "CSm", "PE", "REM")
@@ -36,6 +36,6 @@ for i in s:
             effort_data.to_csv(GLM + '_' + task + '_CS_' + cond + '_zscored.txt', sep='\t', index=False, header=None)
         else:
             effort_data[2] = zscore(effort_data[2])
-            effort_data = round(effort_data, 5)
+            effort_data = round(effort_data, 10)
             os.chdir(effortpath)
             effort_data.to_csv(GLM + '_' + task + '_CS_' + cond + '_zscored.txt', sep='\t', index=False, header=None)

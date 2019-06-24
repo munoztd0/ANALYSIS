@@ -1,10 +1,9 @@
-%function GLM_05_stLevel(subID)
+function GLM_04_stLevel(subID)
 
-% intended for REWOD PIT (Zscored)
+% intended for REWOD PIT 
 % model 2nd level covariate
 % 4 basics 1st level +1 CSm-Baseline
 % last modified on June 2019 by David MUNOZ
-
 %dbstop if error
 
 %% What to do
@@ -17,17 +16,17 @@ copycontrasts = 1;
 task = 'PIT';
 %% define path
 
-homedir = '/home/cisa/CISA/REWOD';
-%homedir = '/home/REWOD';
+%homedir = '/home/cisa/CISA/REWOD';
+homedir = '/home/REWOD';
 
 mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
-name_ana = 'GLM-05'; % output folder for this analysis
+name_ana = 'GLM-04'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 covariatedir = fullfile (mdldir,name_ana, 'group_covariates/');
 
-%addpath('/usr/local/external_toolboxes/spm12/');
-addpath /usr/local/MATLAB/R2018a/spm12 ;
+addpath('/usr/local/external_toolboxes/spm12/');
+%addpath /usr/local/MATLAB/R2018a/spm12 ;
 %% specify fMRI parameters
 param.TR = 2.4;
 param.im_format = 'nii'; %'img' or 'nii';
@@ -36,7 +35,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01'; '02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID; 
+subj       =  subID; %{'01'; '02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID; 
 param.task = {'PIT'};
 
 %% define experimental design parameters
@@ -482,4 +481,4 @@ end
     end
 
 
-%end
+end

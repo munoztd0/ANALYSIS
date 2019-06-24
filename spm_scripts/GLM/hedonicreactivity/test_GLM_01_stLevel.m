@@ -1,16 +1,14 @@
-%function GLM_01_stLevel(subID) %whatcha
+%function GLM_01_stLevel(subID) 
 
 % HEDONIC
 
-% get onsets for first control model (reward vs neutral)
 % Stick functions
-% Simplified model on ONSETs 7 (STARTTRIAL, 2*odor with modulator (liking
-% ratings) 3*questions 1 RINSE)
-% last modified on APRIL 2019 by David MUNOZ
+% Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
+% 4 basic contrasts Reward-Control, Reward-Neutral, Odor-NoOdor, odor_presence
+% last modified on MARCH 2019 by David Munoz
 
-dbstop if error
-%to change the default stop pop-up fo existing file overwride 
-%-> go to spm_spm.m and comment out line 352-371
+%dbstop if error
+
 
 %% What to do
 firstLevel    = 1;
@@ -27,8 +25,6 @@ homedir = '/home/cisa/CISA/REWOD'; %watcha
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
-%funcdir  = fullfile(homedir, '/DATA/STUDY/DERIVED/PIT_HEDONIC');% directory with  post processed functional scans
-%mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/', task);% mdl directory (timing and outputs of the analysis)
 name_ana = 'GLM-01'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
@@ -42,8 +38,8 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
-param.task = {'hedonic'}; %check
+subj       =  {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+param.task = {'hedonic'}; 
 
 %% define experimental design parameters
 param.Cnam     = cell (length(param.task), 1);
@@ -397,9 +393,10 @@ end
         Ct(1,:)    = weightPos+weightNeg;
         
         % con2
-        Ctnames{2} = 'overallOdor';
-        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-        Ct(2,:)    = weightPos;
+        Ctnames{2} = 'reward-neutral';
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
+        Ct(2,:)    = weightPos+weightNeg;  
         
         % con3
         Ctnames{3} = 'Odor-NoOdor';
@@ -407,11 +404,11 @@ end
         weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
         Ct(3,:)    = weightPos+weightNeg;
         
-        % con4
-        Ctnames{4} = 'reward-neutral';
-        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
-        Ct(4,:)    = weightPos+weightNeg;
+        
+        % con4 
+        Ctnames{4} = 'odor_presence';
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1;
+        Ct(4,:)    = weightPos;
         
         % con3
 %         Ctnames{3} = 'mod.reward-mod.control'; %??

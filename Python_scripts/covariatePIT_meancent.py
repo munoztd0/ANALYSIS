@@ -40,19 +40,19 @@ for i in s:
     dfsubj = np.append(dfsubj, i)
 
     CSp_CSm = cov_plus[2] - cov_minus[2]
-    df1 = np.append(df1, '{:.10f}'.format(CSp_CSm.mean()))
+    df1 = np.append(df1, CSp_CSm.mean())
 
 
     CSp_Baseline = cov_plus[2] - cov_Base[2]
-    df2 = np.append(df2, '{:.10f}'.format(CSp_Baseline.mean()))
+    df2 = np.append(df2, CSp_Baseline.mean())
 
 
     CSp_CSmandBaseline = cov_plus[2] - (cov_minus[2] + cov_Base[2])/2
-    df3 = np.append(df3, '{:.10f}'.format(CSp_CSmandBaseline.mean()))
+    df3 = np.append(df3, CSp_CSmandBaseline.mean())
 
 
     CSm_Baseline = cov_minus[2] - cov_Base[2]
-    df4 = np.append(df2, '{:.10f}'.format(CSm_Baseline.mean()))
+    df4 = np.append(df2, CSm_Baseline.mean())
 
 df01[0] = dfsubj
 df02[0] = dfsubj

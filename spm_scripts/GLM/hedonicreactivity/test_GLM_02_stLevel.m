@@ -2,15 +2,13 @@
 
 % HEDONIC
 
-% get onsets for first control model (reward vs neutral)
-% Stick functions
-% Simplified model on ONSETs 7 (STARTTRIAL, 2*odor with modulator (liking
-% ratings) 3*questions 1 RINSE)
-% last modified on APRIL 2019 by David MUNOZ
+% durations =1
+% Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
+% 4 basic contrasts Reward-Control, Reward-Neutral, Odor-NoOdor, odor_presence
+% last modified on MARCH 2019 by David Munoz
 
 %dbstop if error
-%to change the default stop pop-up fo existing file overwride 
-%-> go to spm_spm.m and comment out line 352-371
+
 
 %% What to do
 firstLevel    = 1;
@@ -395,9 +393,10 @@ end
         Ct(1,:)    = weightPos+weightNeg;
         
         % con2
-        Ctnames{2} = 'overallOdor';
-        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-        Ct(2,:)    = weightPos;
+        Ctnames{2} = 'reward-neutral';
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
+        Ct(2,:)    = weightPos+weightNeg;  
         
         % con3
         Ctnames{3} = 'Odor-NoOdor';
@@ -405,11 +404,11 @@ end
         weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
         Ct(3,:)    = weightPos+weightNeg;
         
-        % con4
-        Ctnames{4} = 'reward-neutral';
-        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
-        Ct(4,:)    = weightPos+weightNeg;
+        
+        % con4 
+        Ctnames{4} = 'odor_presence';
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1;
+        Ct(4,:)    = weightPos;
         
         % con3
 %         Ctnames{3} = 'mod.reward-mod.control'; %??

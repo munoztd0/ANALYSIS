@@ -13,7 +13,7 @@ import os
 
 
 #declare variables
-GLM = ("GLM-05")
+GLM = ("GLM-04")
 s = ("01", "02", "03", "04", "05", "06", "07", "09", "10", "11", "12", "13","14", "15", "16", "17","18", "20", "21", "22","23", "24","25", "26")
 cond = ("effort")
 taskDIR = ("PIT")
@@ -40,19 +40,19 @@ for i in s:
     dfsubj = np.append(dfsubj, i)
 
     CSp_CSm = cov_plus[2] - cov_minus[2]
-    df1 = np.append(df1, '{:.10f}'.format(CSp_CSm.mean()))
+    df1 = np.append(df1, CSp_CSm.mean())
 
 
     CSp_Baseline = cov_plus[2] - cov_Base[2]
-    df2 = np.append(df2, '{:.10f}'.format(CSp_Baseline.mean()))
+    df2 = np.append(df2, CSp_Baseline.mean())
 
 
     CSp_CSmandBaseline = cov_plus[2] - (cov_minus[2] + cov_Base[2])/2
-    df3 = np.append(df3, '{:.10f}'.format(CSp_CSmandBaseline.mean()))
+    df3 = np.append(df3, CSp_CSmandBaseline.mean())
 
 
     CSm_Baseline = cov_minus[2] - cov_Base[2]
-    df4 = np.append(df2, '{:.10f}'.format(CSm_Baseline.mean()))
+    df4 = np.append(df2, CSm_Baseline.mean())
 
 df01[0] = dfsubj
 df02[0] = dfsubj
@@ -69,7 +69,7 @@ df03.columns = ['subj', cond]
 df04.columns = ['subj', cond]
 
 
-os.chdir('/home/cisa/CISA/REWOD/DATA/STUDY/MODELS/SPM/PIT/GLM-05/group_covariates')
+os.chdir('/home/cisa/CISA/REWOD/DATA/STUDY/MODELS/SPM/PIT/GLM-04/group_covariates')
 df01.to_csv('CSp-CSm_' + cond + '_zscored.txt',sep='\t', index=False)
 df02.to_csv('CSp-Baseline_' + cond + '_zscored.txt',sep='\t', index=False)
 df03.to_csv('CSp-CSm&Baseline_' + cond + '_zscored.txt',sep='\t', index=False)

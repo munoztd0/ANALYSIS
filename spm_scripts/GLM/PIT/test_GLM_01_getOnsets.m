@@ -11,6 +11,7 @@
 
 %homedir = '/home/REWOD/';
 homedir = '/home/cisa/CISA/REWOD';
+%homedir = '/home/david/CISA/REWOD';
 %homedir = '/Users/davidmunoz/CISA/REWOD';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');

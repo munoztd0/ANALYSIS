@@ -1,12 +1,10 @@
 %function GLM_02_getOnsets()
-%watchout
-% intended for REWOD HEDONIC reactivity run
+% intended for REWOD hedonic reactivity run
 
 % get onsets for first control model (reward vs neutral)
-% Stick functions
-% Simplified model on ONSETs 7 (STARTTRIAL, 2*odor with modulator (liking
-% ratings) 3*questions)
-% last modified on MAY 2019
+% Duration =1
+% Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
+% last modified on MARCH 2019 by David Munoz
 
 %% define paths
 
