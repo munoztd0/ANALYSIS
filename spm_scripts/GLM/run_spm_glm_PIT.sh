@@ -1,7 +1,7 @@
 #!/bin/bash
 
 codeDir="/home/REWOD/ANALYSIS/spm_scripts/GLM/PIT"
-matlab_script="GLM_02_stLevel"
+matlab_script="GLM_01_stLevel"
 matlabSubmit="/home/REWOD/ANALYSIS/spm_scripts/matlab_oneSubj.sh"
 
 

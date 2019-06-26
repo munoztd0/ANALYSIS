@@ -1,15 +1,21 @@
 %function GLM_04_ndLevel
 % with covariate()
-% BY THE END THIS SCRIPT NEEDS TO BE COMBINED IN A SINGLE SCRIPT
 % HEDONIC
+% durations =1
+% Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
+% 4 basic contrasts on 1st level (mod on second level) : 4*2mod + 2control*mod
+%-> used python scripts for that (10 covariateS)
+% last modified on MARCH 2019 by David Munoz
+
+%dbstop if error
 
 % does t-test and full_factorial
-do_ttest = 1;
+%do_ttest = 1;
 do_covariate = 1;
-remove = 1; %watcha
-removesub = { 'sub-24'}; %'sub-10';
+remove = 1;
+removesub = {'sub-24'}; %'sub-10';
 removedsub = '24'; 
-%removesub = 'sub-24'; % % which sub do we want to remove
+
 
 %% define path
 
@@ -17,10 +23,10 @@ removedsub = '24';
 homedir = '/home/cisa/CISA/REWOD';
 
 mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
-funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
+%funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
 covdir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic/GLM-04/group_covariates'); % director with the extracted second level covariates
 
-name_ana = 'GLM-04'; % output folder for this analysis
+name_ana = 'GLM-04'; 
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
@@ -39,22 +45,30 @@ spm_jobman('initcfg');
 if do_covariate
     
     % covariate of interest name become folder 
-    covariateNames = {'reward-neutral_lik' %1
-        'reward-control_lik' %2
-        'odor-noodor_lik' %3
-        'reward-neutral_int' %4
-        'reward-control_int' %5
-        'odor-noodor_int'}; %6
+    covariateNames = {'reward-neutral_lik_zscored' %1
+        'reward-control_lik_zscored' %2
+        'Odor-NoOdor_lik_zscored' %3
+        'Odor_presence_lik_zscored'%4
+        'reward_lik_zscored'%5
+        'reward-neutral_int_zscored' %6
+        'reward-control_int_zscored' %7
+        'Odor-NoOdor_int_zscored'%8
+        'Odor_presence_int_zscored'%9
+        'reward_int_zscored'}; %10
+         
 
-    % These contrast names become sub-folders
-    contrastNames = {'reward-control' %1
-        'Odor-NoOdor'% 2
-        'reward-neutral'}; %3
+
+    % These contrast names become folders
+    contrastNames = {'reward-control'%1
+        'reward-neutral'%2
+        'Odor-NoOdor'%3
+        'odor_presence'};%4
+   
     
-    conImages = {
-        'con-0001'
+    conImages = {'con-0001'
         'con-0002'
-        'con-0003'};
+        'con-0003'
+        'con-0004'};
     
     %% prepare batch for each contrasts
     

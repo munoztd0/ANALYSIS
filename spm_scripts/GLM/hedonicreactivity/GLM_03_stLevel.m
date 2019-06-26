@@ -2,11 +2,12 @@ function GLM_03_stLevel(subID) %whatcha
 
 % HEDONIC
 
-% get onsets for first control model (reward vs neutral)
-% Stick functions
-% Simplified model on ONSETs 7 (STARTTRIAL, 2*odor with modulator (liking
-% ratings) 3*questions 1 RINSE)
-% last modified on APRIL 2019 by David MUNOZ
+% HEDONIC
+
+% durations =1
+% Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
+% 4 basic contrasts + 4*2mod + 2mod*control on 1st level
+% last modified on MARCH 2019 by David Munoz
 
 %dbstop if error
 
@@ -39,7 +40,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       = {'01';'02';'03'; '04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       = subID; %{'01';'02';'03'; '04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'hedonic'}; 
 
 %% define experimental design parameters
@@ -58,9 +59,6 @@ for i = 1:length(param.task)
         'neutral',...%4
         'liking',...%5
         'intensity'}; %,...%6
-%         'reward_int',...%7
-%         'control_int',...%8
-%         'neutral_int'};%9
 
         
      param.onset{i} = {'ONS.onsets.trialstart',... %1
@@ -69,9 +67,6 @@ for i = 1:length(param.task)
         'ONS.onsets.odor.neutral',...%4
         'ONS.onsets.liking',...%5 
         'ONS.onsets.intensity'}; %,...%6
-%         'ONS.onsets.odor.reward_int',...%7
-%         'ONS.onsets.odor.control_int',...%8
-%         'ONS.onsets.odor.neutral_int'};%9
 
     
     % duration of the blocks (if events, put '0'). Specify it for each condition of each session
@@ -82,9 +77,6 @@ for i = 1:length(param.task)
         'ONS.durations.odor.neutral',... 
         'ONS.durations.liking',...
         'ONS.durations.intensity'};
-%         'ONS.durations.odor.reward_int',...
-%         'ONS.durations.odor.control_int',...
-%         'ONS.durations.odor.neutral_int'};
 
     
     % parametric modulationmodul of your events or blocks (ex: linear time, or emotional value, or pupillary size, ...)
@@ -95,9 +87,7 @@ for i = 1:length(param.task)
         'multiple',...%4 ?
         'none',...%5
         'none'};%6
-%         'intensity',...%7
-%         'intensity',...%8
-%         'intensity'}; %9
+
     
     param.modul{i} = {'none',...%1
         'ONS.modulators.odor.reward',... %2
@@ -105,9 +95,7 @@ for i = 1:length(param.task)
         'ONS.modulators.odor.neutral',... %4
         'none',... %5
         'none'}; %6
-%         'ONS.modulators.odor.reward.int',... %7
-%         'ONS.modulators.odor.control.int',... %8
-%         'ONS.modulators.odor.neutral.int'};%9
+
     
     % value of the modulators, If you have a parametric modulation
     param.time{i} = {'0',... %1
@@ -116,9 +104,7 @@ for i = 1:length(param.task)
         '1',... %4
         '0',... %5
         '0'}; %6
-%         '1',... %7
-%         '1',... %8
-%         '1'};%9
+
     
     
 end
@@ -172,27 +158,7 @@ for i = 1:length(subj)
         
         display('contrasts copied!');
     end
-        
-%         mkdir (groupdir); % make the group directory where contrasts will be copied
-%         
-%         cd (fullfile(subjoutdir,'output'))
-%         
-%         % copy images T
-% %         Timages = ['01'; '02'; '03'; '04'; '05'; '06'; '07'; '08'; '09']; % '05'];% constrasts of interest 
-% %         for y =1:size(Timages,1)
-% %             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
-% %         end
-%         copyfile('con_00*.nii',groupdir)
-%         % copy images F
-% %         Fimages = '10';% constrasts of interest
-% %         for y =1:size(Fimages,1)
-% %             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
-% %         end
-%         copyfile('ess_00*.nii',groupdir)
-%         
-%         display('contrasts copied!');
-%     end
-%     
+ 
 end
 
 %% function section
@@ -212,7 +178,7 @@ end
             
         taskX = char(param.task(ses));
         smoothfolder       = [subjfuncdir '/func'];
-       targetscan         = dir (fullfile(smoothfolder, [im_style '*' taskX '*' param.im_format]));
+        targetscan         = dir (fullfile(smoothfolder, [im_style '*' taskX '*' param.im_format]));
         tmp{ses}           = spm_select('List',smoothfolder,targetscan.name);
 
         % get the number of EPI for each session
@@ -420,76 +386,105 @@ end
         end
         conditionName{ncondition} = strcat(task,'constant'); %just for the last condition
         
-         Ct = []; Ctnames = []; ntask = size(param.task,1);
+        Ct = []; Ctnames = []; ntask = size(param.task,1);
         
         % | contrasts FOR T-TESTS
-        
+        %% 4 basic contrast
         % con1
         Ctnames{1} = 'reward-control';
-        weightPos  = ismember(conditionName, {'task-hed.reward'}) * -1; %
-        weightNeg  = ismember(conditionName, {'task-hed.control'})* 1;%
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1; %
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;%
         Ct(1,:)    = weightPos+weightNeg;
         
         % con2
-        Ctnames{2} = 'Odor-NoOdor';
-        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
-        Ct(2,:)    = weightPos+weightNeg;
-        
-        % con3
-        Ctnames{3} = 'reward-neutral';
+        Ctnames{2} = 'reward-neutral';
         weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
         weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
+        Ct(2,:)    = weightPos+weightNeg;  
+        
+        % con3
+        Ctnames{3} = 'Odor-NoOdor';
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; 
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
         Ct(3,:)    = weightPos+weightNeg;
         
-        % con4 //  check for no variance
-        Ctnames{4} = 'mod.reward_lik-mod.neutral_lik'; %??
+        
+        % con4 
+        Ctnames{4} = 'odor_presence';
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1;
+        Ct(4,:)    = weightPos;
+        
+        %% R-N * 2 mod
+        
+        % con5 
+        Ctnames{5} = 'reward_lik-neutral_lik'; 
         weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1; %
-        weightNeg  = ismember(conditionName, {'task-hed.neutral_likxlik^1'})* -1;
-        Ct(4,:)    = weightPos+weightNeg;
-        
-        % con5 // cant do control BC no variance
-        Ctnames{5} = 'mod.reward_int-mod.neutral_int'; %??
-        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1; %
-        weightNeg  = ismember(conditionName, {'task-hed.neutralxint^1'})* -1;
+        weightNeg  = ismember(conditionName, {'task-hed.neutralxlik^1'})* -1;
         Ct(5,:)    = weightPos+weightNeg;
-       
-
-    
-        if  length(conditionName) == 13
-            % con6
-            Ctnames{6} = 'mod.reward_lik-mod.control_lik'; %??
-            weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
-            weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;
-            Ct(6,:)    = weightPos+weightNeg;
-
-            % con7
-            Ctnames{7} = 'mod.reward_int-mod.control_int'; %??
-            weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
-            weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
-            Ct(7,:)    = weightPos+weightNeg;
-        end
-        
         
         % con6
-        %Ctnames{6} = 'reward-control+neutral';
-        %weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2; %
-        %weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;%
-        %weightNeg = ismember(conditionName, {'task-hed.control'})* -1;%
-       % Ct(6,:)    = weightPos+weightNeg+weightNeg1;
+        Ctnames{6} = 'reward_int-neutral_int'; 
+        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1; %
+        weightNeg  = ismember(conditionName, {'task-hed.neutralxint^1'})* -1;
+        Ct(6,:)    = weightPos+weightNeg;
         
-%         % con7
-%         Ctnames{5} = 'neutral-control';
-%         weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
-%         Ct(5,:)    = weightPos+weightNeg;
-%         
+        
+        %% O-No * 2 mod
+        
+        % con7
+        Ctnames{7} = 'Odor_lik-NoOdor';
+        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1; 
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
+        Ct(7,:)    = weightPos+weightNeg;
+        
         % con8
-        %Ctnames{8} = 'mod.reward-mod.neutral+control'; %??
-        %weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 0;
-        %weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* 0;
-        %weightNeg1  = ismember(conditionName, {'task-hed.controlxliking^1'})* 0;
-        %Ct(8,:)    = weightPos+weightNeg+weightNeg1;
+        Ctnames{8} = 'Odor_int-NoOdor';
+        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1; 
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
+        Ct(8,:)    = weightPos+weightNeg;
+        
+        %% Presence * 2 mod
+        
+        % con9 
+        Ctnames{9} = 'odor_lik_presence';
+        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1;
+        Ct(9,:)    = weightPos;
+        
+        % con10 
+        Ctnames{10} = 'odor_int_presence';
+        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1;
+        Ct(10,:)    = weightPos;
+       
+        
+        %% 4 Reward-Control
+        
+        % con11
+        Ctnames{11} = 'reward_lik-control'; 
+        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
+        Ct(11,:)    = weightPos+weightNeg;
+        
+        % con12
+        Ctnames{12} = 'reward_int-control';
+        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
+        Ct(12,:)    = weightPos+weightNeg;
+        
+        if  length(conditionName) == 13  %could do better
+            %con13
+            Ctnames{13} = 'reward_lik-control_lik'; 
+            weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
+            weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;
+            Ct(13,:)    = weightPos+weightNeg;
+            
+            %con14
+            Ctnames{14} = 'reward_int-control_int'; 
+            weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
+            weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
+            Ct(14,:)    = weightPos+weightNeg;
+        end
+        
+       
         
 
         % define F contrasts

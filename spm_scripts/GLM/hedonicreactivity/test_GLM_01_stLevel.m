@@ -225,6 +225,7 @@ end
                     SPM.Sess(ses).U(c).dur       = eval(param.duration{ses}{cc});
                     
                     SPM.Sess(ses).U(c).P(1).name = 'none';
+                    SPM.Sess(ses).U(c).orth = 0; %no ortho
                     
                     if isfield (param, 'modul') % this parameters are specified only if modulators are defined in the design
                         
@@ -388,8 +389,8 @@ end
         
         % con1
         Ctnames{1} = 'reward-control';
-        weightPos  = ismember(conditionName, {'task-hed.reward'}) * -1; %
-        weightNeg  = ismember(conditionName, {'task-hed.control'})* 1;%
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1; %
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;%
         Ct(1,:)    = weightPos+weightNeg;
         
         % con2
@@ -410,43 +411,7 @@ end
         weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1;
         Ct(4,:)    = weightPos;
         
-        % con3
-%         Ctnames{3} = 'mod.reward-mod.control'; %??
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1; %
-%         weightNeg  = ismember(conditionName, {'task-hed.controlxliking^1'})* -1;
-%         Ct(3,:)    = weightPos+weightNeg;
-%         
-        % con4 
-        %Ctnames{3} = 'question_presence'; %?? for motor cortex control but
-        %we dont have
-        %weightPos  = ismember(conditionName, {'task-hed.liking', 'task-hed.intensity'}) * 1;
-        %Ct(3,:)    = weightPos;
-        
-%         % con5
-%         Ctnames{4} = 'mod.reward-mod.neutral'; %??
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
-%         Ct(4,:)    = weightPos+weightNeg;
-%         
-        % con6
-        %Ctnames{6} = 'reward-control+neutral';
-        %weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2; %
-        %weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;%
-        %weightNeg1  = ismember(conditionName, {'task-hed.control'})* -1;%
-       % Ct(6,:)    = weightPos+weightNeg+weightNeg1;
-        
-%         % con7
-%         Ctnames{5} = 'neutral-control';
-%         weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
-%         Ct(5,:)    = weightPos+weightNeg;
-%         
-        % con8
-        %Ctnames{8} = 'mod.reward-mod.neutral+control'; %??
-        %weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 0;
-        %weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* 0;
-        %weightNeg1  = ismember(conditionName, {'task-hed.controlxliking^1'})* 0;
-        %Ct(8,:)    = weightPos+weightNeg+weightNeg1;
+
         
 
         % define F contrasts

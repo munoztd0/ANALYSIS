@@ -2,15 +2,13 @@ function GLM_02_stLevel(subID) %whatcha
 
 % HEDONIC
 
-% get onsets for first control model (reward vs neutral)
-% Stick functions
-% Simplified model on ONSETs 7 (STARTTRIAL, 2*odor with modulator (liking
-% ratings) 3*questions 1 RINSE)
-% last modified on APRIL 2019 by David MUNOZ
+% durations =1
+% Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
+% 4 basic contrasts Reward-Control, Reward-Neutral, Odor-NoOdor, odor_presence
+% last modified on MARCH 2019 by David Munoz
 
 %dbstop if error
-%to change the default stop pop-up fo existing file overwride 
-%-> go to spm_spm.m and comment out line 352-371
+
 
 %% What to do
 firstLevel    = 1;
@@ -32,7 +30,6 @@ groupdir = fullfile (mdldir,name_ana, 'group/');
 
 addpath /usr/local/external_toolboxes/spm12/ ;
 %addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
-
 %% specify fMRI parameters
 param.TR = 2.4;
 param.im_format = 'nii'; %'img' or 'nii';
@@ -41,7 +38,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  subID %{'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  subID; %{'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'hedonic'}; %check
 
 %% define experimental design parameters
@@ -228,6 +225,7 @@ end
                     SPM.Sess(ses).U(c).dur       = eval(param.duration{ses}{cc});
                     
                     SPM.Sess(ses).U(c).P(1).name = 'none';
+                    SPM.Sess(ses).U(c).orth = 0; %no ortho
                     
                     if isfield (param, 'modul') % this parameters are specified only if modulators are defined in the design
                         
@@ -391,14 +389,15 @@ end
         
         % con1
         Ctnames{1} = 'reward-control';
-        weightPos  = ismember(conditionName, {'task-hed.reward'}) * -1; %
-        weightNeg  = ismember(conditionName, {'task-hed.control'})* 1;%
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1; %
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;%
         Ct(1,:)    = weightPos+weightNeg;
         
         % con2
-        Ctnames{2} = 'overallOdor';
-        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-        Ct(2,:)    = weightPos;
+        Ctnames{2} = 'reward-neutral';
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
+        Ct(2,:)    = weightPos+weightNeg;  
         
         % con3
         Ctnames{3} = 'Odor-NoOdor';
@@ -406,50 +405,13 @@ end
         weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
         Ct(3,:)    = weightPos+weightNeg;
         
-        % con4
-        Ctnames{4} = 'reward-neutral';
-        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
-        weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
-        Ct(4,:)    = weightPos+weightNeg;
         
-        % con3
-%         Ctnames{3} = 'mod.reward-mod.control'; %??
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1; %
-%         weightNeg  = ismember(conditionName, {'task-hed.controlxliking^1'})* -1;
-%         Ct(3,:)    = weightPos+weightNeg;
-%         
         % con4 
-        %Ctnames{3} = 'question_presence'; %?? for motor cortex control but
-        %we dont have
-        %weightPos  = ismember(conditionName, {'task-hed.liking', 'task-hed.intensity'}) * 1;
-        %Ct(3,:)    = weightPos;
+        Ctnames{4} = 'odor_presence';
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1;
+        Ct(4,:)    = weightPos;
         
-%         % con5
-%         Ctnames{4} = 'mod.reward-mod.neutral'; %??
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* -1;
-%         Ct(4,:)    = weightPos+weightNeg;
-%         
-        % con6
-        %Ctnames{6} = 'reward-control+neutral';
-        %weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2; %
-        %weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;%
-        %weightNeg1  = ismember(conditionName, {'task-hed.control'})* -1;%
-       % Ct(6,:)    = weightPos+weightNeg+weightNeg1;
-        
-%         % con7
-%         Ctnames{5} = 'neutral-control';
-%         weightPos  = ismember(conditionName, {'task-hed.neutral'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
-%         Ct(5,:)    = weightPos+weightNeg;
-%         
-        % con8
-        %Ctnames{8} = 'mod.reward-mod.neutral+control'; %??
-        %weightPos  = ismember(conditionName, {'task-hed.rewardxliking^1'}) * 0;
-        %weightNeg  = ismember(conditionName, {'task-hed.neutralxliking^1'})* 0;
-        %weightNeg1  = ismember(conditionName, {'task-hed.controlxliking^1'})* 0;
-        %Ct(8,:)    = weightPos+weightNeg+weightNeg1;
-        
+ 
 
         % define F contrasts
         %------------------------------------------------------------------

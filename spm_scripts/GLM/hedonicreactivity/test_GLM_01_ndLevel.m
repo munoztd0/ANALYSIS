@@ -4,7 +4,7 @@
 
 %does t-test and full_factorial
 do_ttest = 1;
-remove = 1;
+remove = 0;
 removesub = {'sub-10';'sub-24'} ;
 removedsub = '10-24';
 
@@ -12,6 +12,7 @@ removedsub = '10-24';
 
 %homedir = '/home/REWOD';
 homedir = '/home/cisa/CISA/REWOD';
+%homedir = '/home/david/CISA/REWOD';
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
 name_ana = 'GLM-01'; % output folder for this analysis WAS GLM-MF-01
@@ -21,7 +22,11 @@ groupdir = fullfile (mdldir,name_ana, 'group/');
 %% specify spm param
 %addpath /usr/local/external_toolboxes/spm12/ ;
 addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
-addpath ([homedir '/ANALYSIS/spm_scripts/GLM/dependencies']);
+%addpath /usr/local/MATLAB/R2019a/spm12 ;
+addpath ([homedir '/ANALYSIS/spm_scripts/addpath /usr/local/MATLAB/R2018a/spm12 ;GLM/dependencies']);
+%addpath ([homedir '/ANALYSIS/spm_scripts/addpath /usr/local/MATLAB/R2019a/spm12 ;GLM/dependencies']);
+
+
 spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
@@ -34,9 +39,9 @@ if do_ttest
     
     % These contrast names become folders
     contrastNames = {'reward-control'%1
-        'overallOdor'%2
+        'reward-neutral'%2
         'Odor-NoOdor'%3
-        'reward-neutral'};%24
+        'odor_presence'};%4
    
     
     conImages = {'con-0001'

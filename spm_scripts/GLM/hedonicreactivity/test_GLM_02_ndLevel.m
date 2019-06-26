@@ -32,11 +32,12 @@ spm_jobman('initcfg');
 %% define constrasts and constrasts names
 if do_ttest
     
+
     % These contrast names become folders
     contrastNames = {'reward-control'%1
-        'overallOdor'%2
+        'reward-neutral'%2
         'Odor-NoOdor'%3
-        'reward-neutral'};%24
+        'odor_presence'};%4
    
     
     conImages = {'con-0001'

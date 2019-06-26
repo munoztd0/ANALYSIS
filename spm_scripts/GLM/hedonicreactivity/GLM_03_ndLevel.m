@@ -2,10 +2,11 @@ function GLM_03_ndLevel()
 
 %HEDONIC
 
+
 %does t-test and full_factorial
 do_ttest = 1;
 remove = 1; %watcha
-removesub = {'sub-10'; 'sub-24'} ; %'sub-10';
+removesub = {'sub-10'; 'sub-24'} ;
 removedsub = '10-24'; 
 
 %% define path
@@ -13,7 +14,7 @@ removedsub = '10-24';
 homedir = '/home/REWOD';
 %homedir = '/home/cisa/CISA/REWOD';
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
-funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
+%funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
 name_ana = 'GLM-03'; 
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
@@ -36,12 +37,19 @@ if do_ttest
     
     % These contrast names become folders
     contrastNames = {'reward-control'%1
-        'Odor-NoOdor'%2
-        'reward-neutral'%3
-        'mod.reward_lik-mod.neutral_lik'%4
-        'mod.reward_int-mod.neutral_int'%5
-        'mod.reward_lik-mod.control_lik'%6
-        'mod.reward_int-mod.control_int'};%7
+        'reward-neutral'%2
+        'Odor-NoOdor'%3
+        'odor_presence'%4
+        'reward_lik-neutral_lik'%5
+        'reward_int-neutral_int'%6
+        'Odor_lik-NoOdor'%7
+        'Odor_int-NoOdor'%8
+        'odor_lik_presence'%9
+        'odor_int_presence'%10
+        'reward_lik-control'%11
+        'reward_int-control'%12
+        'reward_lik-control_lik'%13
+        'reward_int-control_int'};%14
    
     
     conImages = {'con_0001'
@@ -50,7 +58,14 @@ if do_ttest
         'con_0004'
         'con_0005'
         'con_0006'
-        'con_0007'};
+        'con_0007'
+        'con_0008'
+        'con_0009'
+        'con_0010'
+        'con_0011'
+        'con_0012'
+        'con_0013'
+        'con_0014'};
     
     
     %% prepare batch for each contrasts

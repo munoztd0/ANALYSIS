@@ -100,7 +100,7 @@ for i = 1:length(param.task)
         'none'}; %8
     
     % value of the modulators, If you have a parametric modulation
-    param.time{i} = {'1',... %1
+    param.time{i} = {'0',... %1
         '0',... %2
         '0',... %3
         '0',... %4

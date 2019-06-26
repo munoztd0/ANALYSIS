@@ -2,14 +2,13 @@ function GLM_04_ndLevel
 % with covariate ZSCORED (before check for folder group covariate)
 % PIT
 
-% does t-test and full_factorial
-do_tte
-st = 1;
+% does full_factorial
+%do_ttest = 1;
 do_covariate = 1;
 remove = 1; %watcha
-removesub = {'sub-24'}; %'sub-10';
-removedsub = '24'; 
-%removesub = 'sub-24'; % % which sub do we want to remove
+removesub = {'sub-10';'sub-24'}; %'sub-10';
+removedsub = '10-24'; 
+
 
 %% define path
 
@@ -17,7 +16,7 @@ homedir = '/home/REWOD';
 %homedir = '/home/cisa/CISA/REWOD';
 
 mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
-funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
+%funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
 covdir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/PIT/GLM-04/group_covariates'); % director with the extracted second level covariates
 %%
 name_ana = 'GLM-04'; % output folder for this analysis
@@ -166,8 +165,6 @@ if do_covariate
         end
     end
 end
-
-%clear all
 
 
 end

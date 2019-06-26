@@ -1,4 +1,4 @@
-function GLM_04_ndLevel
+%function GLM_04_ndLevel
 % with covariate()
 % HEDONIC
 % durations =1
@@ -12,15 +12,15 @@ function GLM_04_ndLevel
 % does t-test and full_factorial
 %do_ttest = 1;
 do_covariate = 1;
-remove = 1;
-removesub = {'sub-10';'sub-24'}; %'sub-10';
-removedsub = '10-24'; 
+remove = 0;
+removesub = {'sub-24'}; %'sub-10';
+removedsub = '24'; 
 
 
 %% define path
 
-homedir = '/home/REWOD';
-%homedir = '/home/cisa/CISA/REWOD';
+%homedir = '/home/REWOD';
+homedir = '/home/cisa/CISA/REWOD';
 
 mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
 %funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
@@ -31,8 +31,8 @@ groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
 %% specify spm param
-addpath('/usr/local/external_toolboxes/spm12/');
-%addpath /usr/local/MATLAB/R2018a/spm12 ;
+%addpath('/usr/local/external_toolboxes/spm12/');
+addpath /usr/local/MATLAB/R2018a/spm12 ;
 addpath ([homedir '/ANALYSIS/spm_scripts/GLM/dependencies']);
 spm('Defaults','fMRI');
 spm_jobman('initcfg');
@@ -45,30 +45,32 @@ spm_jobman('initcfg');
 if do_covariate
     
     % covariate of interest name become folder 
-    covariateNames = {'reward-neutral_lik_zscored' %1
-        'reward-control_lik_zscored' %2
-        'Odor-NoOdor_lik_zscored' %3
-        'Odor_presence_lik_zscored'%4
-        'reward_lik_zscored'%5
-        'reward-neutral_int_zscored' %6
-        'reward-control_int_zscored' %7
-        'Odor-NoOdor_int_zscored'%8
-        'Odor_presence_int_zscored'%9
-        'reward_int_zscored'}; %10
-         
+    covariateNames = {'Odor_presence_int_zscored'};
+        %'reward-neutral_lik_zscored'}; %1
+        %'reward-control_lik_zscored' %2
+        %'Odor-NoOdor_lik_zscored' %3
+        %'Odor_presence_lik_zscored'%4
+        %'reward_lik_zscored'%5
+        %'reward-neutral_int_zscored' %6
+        %'reward-control_int_zscored' %7
+        %'Odor-NoOdor_int_zscored'%8
+        %'Odor_presence_int_zscored'%9
+        %'reward_int_zscored'}; %10
+
 
 
     % These contrast names become folders
-    contrastNames = {'reward-control'%1
-        'reward-neutral'%2
-        'Odor-NoOdor'%3
-        'odor_presence'};%4
+    contrastNames = {'odor_presence'};
+        %'reward-control'%1
+        %'reward-neutral'%2
+        %'Odor-NoOdor'%3
+        %'odor_presence'};%4
    
     
-    conImages = {'con-0001'
-        'con-0002'
-        'con-0003'
-        'con-0004'};
+    conImages = {'con-0004'};
+        %'con-0002'
+        %'con-0003'
+        %'con-0004'};
     
     %% prepare batch for each contrasts
     
@@ -179,7 +181,7 @@ if do_covariate
     end
 end
 
-%clear all
+clear all
 
 
-end
+%end

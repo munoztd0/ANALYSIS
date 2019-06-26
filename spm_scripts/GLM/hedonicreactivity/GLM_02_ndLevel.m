@@ -4,7 +4,7 @@ function GLM_02_ndLevel()
 
 %does t-test and full_factorial
 do_ttest = 1;
-remove = 0; %watcha
+remove = 1; %watcha
 removesub = {'sub-10';'sub-24'} ; 
 removedsub = '10-24'; 
 
@@ -13,7 +13,7 @@ removedsub = '10-24';
 homedir = '/home/REWOD';
 %homedir = '/home/cisa/CISA/REWOD';
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
-funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
+%funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
 name_ana = 'GLM-02'; % output folder for this analysis WAS GLM-MF-01
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
@@ -34,9 +34,9 @@ if do_ttest
     
     % These contrast names become folders
     contrastNames = {'reward-control'%1
-        'overallOdor'%2
+        'reward-neutral'%2
         'Odor-NoOdor'%3
-        'reward-neutral'};%4
+        'odor_presence'};%4
    
     
     conImages = {'con-0001'

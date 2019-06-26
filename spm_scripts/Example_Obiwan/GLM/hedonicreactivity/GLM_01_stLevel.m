@@ -28,9 +28,8 @@ funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
 name_ana = 'GLM-01'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
-%addpath /usr/local/external_toolboxes/spm12/ ;
-addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
-
+addpath /usr/local/external_toolboxes/spm12/ ;
+%addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
 %% specify fMRI parameters
 param.TR = 2.4;
 param.im_format = 'nii'; %'img' or 'nii';
@@ -39,7 +38,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  subID; %{'01'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
+subj       =  subID; %{'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; %subID;
 param.task = {'hedonic'}; 
 
 %% define experimental design parameters
@@ -380,7 +379,7 @@ end
             task  = ['task-hed.']; %taskN in the middle
             conditionName{j} = strcat(task,SPM.xX.name{j} (7:end-6)); %this cuts off the useless parts of the names
             
-            endGL
+        end
         conditionName{ncondition} = strcat(task,'constant'); %just for the last condition
         
          Ct = []; Ctnames = []; ntask = size(param.task,1);
@@ -389,8 +388,8 @@ end
         
         % con1
         Ctnames{1} = 'reward-control';
-        weightPos  = ismember(conditionName, {'task-hed.reward'}) * -1; %
-        weightNeg  = ismember(conditionName, {'task-hed.control'})* 1;%
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1; %
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;%
         Ct(1,:)    = weightPos+weightNeg;
         
         % con2
@@ -484,7 +483,5 @@ end
         disp ('contrasts created!')
     end
 
-
-    end
 
 end
