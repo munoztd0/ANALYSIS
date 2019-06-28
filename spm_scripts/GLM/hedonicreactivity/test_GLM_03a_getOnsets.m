@@ -1,12 +1,10 @@
-%function GLM_03_getOnsets()
-%watchout
-% intended for REWOD HEDONIC reactivity run
+%function GLM_03a_getOnsets()
+% intended for REWOD hedonic reactivity run
 
 % get onsets for first control model (reward vs neutral)
-% Stick functions
-% Simplified model on ONSETs 7 (STARTTRIAL, 2*odor with modulator (liking
-% ratings) 3*questions)
-% last modified on MAY 2019
+% Duration =1
+% Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
+% last modified on MARCH 2019 by David Munoz
 
 %% define paths
 
@@ -15,7 +13,7 @@ homedir = '/home/cisa/CISA/REWOD';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
-%addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
+addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
 ana_name      = 'GLM-03a';
 %session       = {'second'};
@@ -56,6 +54,7 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets and durations for odor valveopen?
+        %onsets.taste.reward      = ONSETS.liquid(strcmp ('MilkShake', CONDITIONS));
         onsets.odor.reward      = ONSETS.sniffSignalOnset(strcmp ('chocolate', CONDITIONS));
         onsets.odor.neutral     = ONSETS.sniffSignalOnset(strcmp ('neutral', CONDITIONS));
         onsets.odor.control     = ONSETS.sniffSignalOnset(strcmp ('empty', CONDITIONS));
@@ -65,32 +64,23 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
         durations.odor.reward   = DURATIONS.trialstart(strcmp ('chocolate', CONDITIONS));
         durations.odor.neutral   = DURATIONS.trialstart(strcmp ('neutral', CONDITIONS));
         durations.odor.control   = DURATIONS.trialstart(strcmp ('empty', CONDITIONS));
-       
+        %durations2.odor.reward   = ONSETS.ValveClose(strcmp ('chocolate', CONDITIONS))- ONSETS.ValveOpen(strcmp ('chocolate', CONDITIONS));
         
-        %for liking
-        modulators.odor.reward.lik  = BEHAVIOR.liking (strcmp ('chocolate', CONDITIONS));
-        modulators.odor.neutral.lik = BEHAVIOR.liking (strcmp ('neutral', CONDITIONS));
-        modulators.odor.control.lik = BEHAVIOR.liking (strcmp ('empty', CONDITIONS));
-
         
-        %for intensity
-        modulators.odor.reward.int  = BEHAVIOR.intensity (strcmp ('chocolate', CONDITIONS));
-        modulators.odor.neutral.int = BEHAVIOR.intensity (strcmp ('neutral', CONDITIONS));
-        modulators.odor.control.int = BEHAVIOR.intensity (strcmp ('empty', CONDITIONS));
-        
+        %why not for intensity?
+        modulators.odor.reward  = BEHAVIOR.liking (strcmp ('chocolate', CONDITIONS));
+        modulators.odor.neutral = BEHAVIOR.liking (strcmp ('neutral', CONDITIONS));
+        modulators.odor.control = BEHAVIOR.liking (strcmp ('empty', CONDITIONS));
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets and duration questions
         onsets.liking            = ONSETS.liking;
         durations.liking         = DURATIONS.liking;
         modulators.liking        = ones (length(onsets.liking),1);
-        
+
         onsets.intensity         = ONSETS.intensity;
         durations.intensity      = DURATIONS.intensity;
-        modulators.intensity     = ones (length(onsets.liking),1);
-        
-
-        
+        modulators.intensity     = ones (length(onsets.intensity),1);
 
 
         %% FOR FSL
@@ -109,32 +99,28 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
 
             if strcmp (nameX, 'odor')  % for structure that contains substuctures
                 substr = {'reward'; 'control'; 'neutral'};% specify the substructures names ?neutral?
-                subsubstr = {'lik'; 'int'};
+
                 for iii = 1:length(substr)
                     substrX = char(substr(iii));
-                    for iiii =  1:length(subsubstr)
-                        subsubstrX = char(subsubstr(iiii));
-                        nameXX  = [nameX '_' substrX '_' subsubstrX]; % name that combines the structure and the substructures
-                        % database with three rows of interest
-                        database.(nameXX) = [num2cell(onsets.(nameX).(substrX)), num2cell(durations.(nameX).(substrX)), num2cell(modulators.(nameX).(substrX).(subsubstrX))];
-                        % save the database in a txt file
-                        fid = fopen ([ana_name '_task-' taskX '_' nameX '_' substrX '_' subsubstrX '.txt'],'wt');
-                        formatSpec = '%f\t%f\t%f\n';
-                        [nrows,~] = size(database.(nameXX));
-                        for row = 1:nrows
-                            fprintf(fid,formatSpec,database.(nameXX){row,:});
-                        end
-                        fclose(fid);
+                    nameXX  = [nameX '_' substrX]; % name that combines the structure and the substructures
+                    % database with three rows of interest
+                    database.(nameXX) = [num2cell(onsets.(nameX).(substrX)), num2cell(durations.(nameX).(substrX)), num2cell(modulators.(nameX).(substrX))];
+                    % save the database in a txt file
+                    fid = fopen ([ana_name '_task-' taskX '_' nameX '_' substrX '.txt'],'wt');
+                    formatSpec = '%f\t%f\t%d\n';
+                    [nrows,~] = size(database.(nameXX));
+                    for row = 1:nrows
+                        fprintf(fid,formatSpec,database.(nameXX){row,:});
                     end
+                    fclose(fid);
                 end
-             
 
           else
                 % database with three rows of interest %%%% ADD MODULATORS
                 database.(nameX) = [num2cell(onsets.(nameX)), num2cell(durations.(nameX)), num2cell(modulators.(nameX))];
                 % save the database in a txt file
                 fid = fopen ([ana_name '_task-' taskX '_' nameX '.txt'],'wt');
-                formatSpec = '%f\t%f\t%f\n';
+                formatSpec = '%f\t%f\t%d\n';
                 [nrows,~] = size(database.(nameX));
                 for row = 1:nrows
                     fprintf(fid,formatSpec,database.(nameX){row,:});
@@ -142,15 +128,15 @@ mkdir (fullfile (mdldir, char(task), ana_name)); % this is only because we have 
                 fclose(fid);
             end
 
-              %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        end
+
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % save data
         mat_name = [ana_name '_task-' taskX '_onsets'];
         save (mat_name, 'onsets', 'durations', 'modulators')
-        end
-
-
 
     end
 
+%end
 
 %end

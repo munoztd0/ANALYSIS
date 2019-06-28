@@ -10,7 +10,7 @@
 %dbstop if error
 
 %% What to do
-firstLevel    = 1;
+firstLevel    = 0;
 constrasts    = 1;
 copycontrasts = 1;
 
@@ -18,8 +18,8 @@ copycontrasts = 1;
 %sessionX = 'second';
 task = 'PIT';
 %% define path
-
-homedir = '/home/cisa/CISA/REWOD';
+homedir = '/home/david/CISA/REWOD';
+%homedir = '/home/cisa/CISA/REWOD';
 %homedir = '/home/REWOD';
 
 mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/PIT');% mdl directory (timing and outputs of the analysis)
@@ -28,7 +28,8 @@ name_ana = 'GLM-02'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 %addpath('/usr/local/external_toolboxes/spm12/');
-addpath /usr/local/MATLAB/R2018a/spm12 ;
+%addpath /usr/local/MATLAB/R2018a/spm12 ;
+addpath /usr/local/MATLAB/R2019a/spm12 ;
 %% specify fMRI parameters
 param.TR = 2.4;
 param.im_format = 'nii'; %'img' or 'nii';

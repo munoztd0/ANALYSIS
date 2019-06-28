@@ -6,8 +6,8 @@ function GLM_03_ndLevel()
 %does t-test and full_factorial
 do_ttest = 1;
 remove = 1; %watcha
-removesub = {'sub-10'; 'sub-24'} ;
-removedsub = '10-24'; 
+removesub = {'sub-24'} ;
+removedsub = '24'; 
 
 %% define path
 

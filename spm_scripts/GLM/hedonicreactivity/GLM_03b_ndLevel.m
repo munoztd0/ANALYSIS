@@ -1,32 +1,30 @@
-%function GLM_03_ndLevel()
+function GLM_03b_ndLevel()
 
 %HEDONIC
-
+%intensity
 
 %does t-test and full_factorial
 do_ttest = 1;
-remove = 0; %watcha
-removesub = {'sub-10';'sub-24'} ; ;
-removedsub = '10-24'; 
+remove = 1; %watcha
+removesub = {'sub-24'} ; 
+removedsub = '24'; 
 
 %% define path
 
-%homedir = '/home/REWOD';
-homedir = '/home/cisa/CISA/REWOD';
-mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
-funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
-name_ana = 'GLM-05'; 
+homedir = '/home/REWOD';
+%homedir = '/home/cisa/CISA/REWOD';
+mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
+%funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
+name_ana = 'GLM-03b'; % output folder for this analysis WAS GLM-MF-01
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
 %% specify spm param
-%addpath /usr/local/external_toolboxes/spm12/ ;
-addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
+addpath /usr/local/external_toolboxes/spm12/ ;
+%addpath /usr/local/MATLAB/R2018a/spm12 ; %watcha
 addpath ([homedir '/ANALYSIS/spm_scripts/GLM/dependencies']);
 spm('Defaults','fMRI');
 spm_jobman('initcfg');
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DO TESTS
@@ -40,32 +38,20 @@ if do_ttest
         'reward-neutral'%2
         'Odor-NoOdor'%3
         'odor_presence'%4
-        'reward_lik-neutral_lik'%5
-        'reward_int-neutral_int'%6
-        'Odor_lik-NoOdor'%7
-        'Odor_int-NoOdor'%8
-        'odor_lik_presence'%9
-        'odor_int_presence'%10
-        'reward_lik-control'%11
-        'reward_int-control'%12
-        'reward_lik-control_lik'%13
-        'reward_int-control_int'};%14
+        'reward_int-neutral_int'%5
+        'Odor_int-NoOdor'%6
+        'odor_int_presence'%7
+        'reward_int-control'};%8
    
     
-    conImages = {'con_0001'
-        'con_0002'
-        'con_0003'
-        'con_0004'
-        'con_0005'
-        'con_0006'
-        'con_0007'
-        'con_0008'
-        'con_0009'
-        'con_0010'
-        'con_0011'
-        'con_0012'
-        'con_0013'
-        'con_0014'};
+    conImages = {'con-0001'
+        'con-0002'
+        'con-0003'
+        'con-0004'
+        'con-0005'
+        'con-0006'
+        'con-0007'
+        'con-0008'};
     
     
     %% prepare batch for each contrasts
@@ -96,13 +82,12 @@ if do_ttest
         end
         
         if remove % remove subject from analysis
-            disp(['removing subject: ' removedsub]);
             allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans; % let's put this in a smaller variable
             for i = 1:length(removesub)
-                idx = (regexp(allsub,removesub{i})); % find string containing the sub id
-                idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
-                matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
-                allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans;
+                    idx = (regexp(allsub,removesub{i})); % find string containing the sub id
+                    idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
+                    matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
+                    allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans;
             end
                
         end
@@ -134,5 +119,6 @@ if do_ttest
     end
 end
 
-%end
 
+
+   end
