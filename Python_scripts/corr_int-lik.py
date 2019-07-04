@@ -18,7 +18,7 @@ df = pd.DataFrame()
 for i in s:
     subj = 'sub-' + i
     # save filepath to variable for easier access
-    corrpath = '/home/cisa/CISA/REWOD/DATA/STUDY/CLEAN/' + subj + '/func/'
+    corrpath = '/home/cisa/REWOD/DATA/STUDY/CLEAN/' + subj + '/func/'
 
     # read the data and store data in DataFrame
     corr_data = pd.read_table(corrpath + 'corr_task-hedonic.txt',sep='\t', header=None)
@@ -27,4 +27,4 @@ for i in s:
 corr = df[0].corr(df[1])
 print('r=', corr)
 result = linregress(df[0], df[1])
-print('pvalue =', round(result.pvalue))
+print('pvalue =', round(result.pvalue, 10))

@@ -24,7 +24,7 @@ for i in s:
     for j in c:
         cond = j
         # save filepath to variable for easier access
-        modpath = '/home/cisa/CISA/REWOD/DATA/STUDY/MODELS/SPM/' + taskDIR + '/' + GLM + '/' + subj + '/timing/'
+        modpath = '/home/cisa/REWOD/DATA/STUDY/MODELS/SPM/' + taskDIR + '/' + GLM + '/' + subj + '/timing/'
 
         # read the data and store data in DataFrame
         mod_data = pd.read_table(modpath + GLM + '_' + task + '_odor_' + cond + '.txt',sep='\t', header=None)

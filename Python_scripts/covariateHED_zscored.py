@@ -16,7 +16,7 @@ import os
 #declare variables
 GLM = ("GLM-04")
 s = ("01", "02", "03", "04", "05", "06", "07", "09", "10", "11", "12", "13","14", "15", "16", "17","18", "20", "21", "22","23", "24","25", "26")
-cond = ("lik") #, "int")
+cond = ("int") #, "int")
 taskDIR = ("hedonic")
 
 df1 = []
@@ -36,7 +36,7 @@ df05 = pd.DataFrame()
 
 for i in s:
     subj = 'sub-' + i
-    covpath = '/home/cisa/CISA/REWOD/DATA/STUDY/MODELS/SPM/' + taskDIR + '/' + GLM + '/' + subj + '/timing/'
+    covpath = '/home/cisa/REWOD/DATA/STUDY/MODELS/SPM/' + taskDIR + '/' + GLM + '/' + subj + '/timing/'
     cov_control = pd.read_table(covpath + GLM + '_task-hedonic_odor_control_' + cond + '_zscored.txt',sep='\t', header=None)
     cov_neutral = pd.read_table(covpath + GLM + '_task-hedonic_odor_neutral_' + cond + '_zscored.txt',sep='\t', header=None)
     cov_reward = pd.read_table(covpath + GLM + '_task-hedonic_odor_reward_' + cond + '_zscored.txt',sep='\t', header=None)
@@ -77,7 +77,7 @@ df04.columns = ['subj', cond]
 df05.columns = ['subj', cond]
 
 
-os.chdir('/home/cisa/CISA/REWOD/DATA/STUDY/MODELS/SPM/hedonic/GLM-04/group_covariates')
+os.chdir('/home/cisa/REWOD/DATA/STUDY/MODELS/SPM/hedonic/GLM-04/group_covariates')
 df01.to_csv('reward-control_' + cond + '_zscored.txt',sep='\t', index=False)
 df02.to_csv('reward-neutral_' + cond + '_zscored.txt',sep='\t', index=False)
 df03.to_csv('Odor-NoOdor_' + cond + '_zscored.txt',sep='\t', index=False)

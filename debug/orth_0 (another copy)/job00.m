@@ -1,0 +1,608 @@
+%-----------------------------------------------------------------------
+% Job saved on 03-Jul-2019 19:58:59 by cfg_util (rev $Rev: 7345 $)
+% spm SPM - SPM12 (7487)
+% cfg_basicio BasicIO - Unknown
+%-----------------------------------------------------------------------
+matlabbatch{1}.spm.stats.fmri_spec.dir = {'/home/cisa/REWOD/ANALYSIS/debug/orth_0 (copy)'};
+matlabbatch{1}.spm.stats.fmri_spec.timing.units = 'secs';
+matlabbatch{1}.spm.stats.fmri_spec.timing.RT = 2.4;
+matlabbatch{1}.spm.stats.fmri_spec.timing.fmri_t = 16;
+matlabbatch{1}.spm.stats.fmri_spec.timing.fmri_t0 = 8;
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.scans = {
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,5'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,1'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,2'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,3'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,4'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,6'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,7'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,8'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,9'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,10'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,11'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,12'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,13'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,14'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,15'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,16'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,17'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,18'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,19'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,20'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,21'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,22'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,23'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,24'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,25'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,26'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,27'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,28'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,29'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,30'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,31'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,32'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,33'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,34'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,35'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,36'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,37'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,38'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,39'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,40'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,41'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,42'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,43'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,44'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,45'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,46'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,47'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,48'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,49'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,50'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,51'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,52'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,53'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,54'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,55'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,56'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,57'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,58'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,59'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,60'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,61'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,62'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,63'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,64'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,65'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,66'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,67'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,68'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,69'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,70'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,71'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,72'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,73'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,74'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,75'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,76'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,77'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,78'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,79'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,80'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,81'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,82'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,83'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,84'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,85'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,86'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,87'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,88'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,89'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,90'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,91'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,92'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,93'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,94'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,95'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,96'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,97'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,98'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,99'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,100'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,101'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,102'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,103'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,104'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,105'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,106'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,107'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,108'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,109'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,110'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,111'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,112'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,113'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,114'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,115'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,116'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,117'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,118'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,119'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,120'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,121'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,122'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,123'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,124'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,125'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,126'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,127'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,128'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,129'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,130'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,131'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,132'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,133'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,134'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,135'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,136'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,137'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,138'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,139'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,140'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,141'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,142'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,143'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,144'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,145'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,146'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,147'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,148'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,149'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,150'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,151'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,152'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,153'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,154'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,155'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,156'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,157'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,158'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,159'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,160'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,161'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,162'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,163'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,164'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,165'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,166'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,167'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,168'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,169'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,170'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,171'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,172'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,173'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,174'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,175'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,176'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,177'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,178'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,179'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,180'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,181'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,182'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,183'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,184'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,185'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,186'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,187'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,188'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,189'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,190'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,191'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,192'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,193'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,194'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,195'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,196'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,197'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,198'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,199'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,200'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,201'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,202'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,203'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,204'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,205'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,206'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,207'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,208'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,209'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,210'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,211'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,212'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,213'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,214'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,215'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,216'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,217'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,218'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,219'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,220'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,221'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,222'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,223'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,224'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,225'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,226'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,227'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,228'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,229'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,230'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,231'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,232'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,233'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,234'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,235'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,236'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,237'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,238'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,239'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,240'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,241'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,242'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,243'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,244'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,245'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,246'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,247'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,248'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,249'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,250'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,251'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,252'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,253'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,254'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,255'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,256'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,257'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,258'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,259'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,260'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,261'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,262'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,263'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,264'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,265'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,266'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,267'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,268'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,269'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,270'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,271'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,272'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,273'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,274'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,275'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,276'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,277'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,278'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,279'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,280'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,281'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,282'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,283'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,284'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,285'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,286'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,287'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,288'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,289'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,290'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,291'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,292'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,293'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,294'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,295'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,296'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,297'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,298'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,299'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,300'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,301'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,302'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,303'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,304'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,305'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,306'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,307'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,308'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,309'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,310'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,311'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,312'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,313'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,314'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,315'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,316'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,317'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,318'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,319'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,320'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,321'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,322'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,323'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,324'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,325'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,326'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,327'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,328'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,329'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,330'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,331'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,332'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,333'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,334'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,335'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,336'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,337'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,338'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,339'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,340'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,341'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,342'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,343'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,344'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,345'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,346'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,347'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,348'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,349'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,350'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,351'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,352'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,353'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,354'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,355'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,356'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,357'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,358'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,359'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,360'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,361'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,362'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,363'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,364'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,365'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,366'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,367'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,368'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,369'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,370'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,371'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,372'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,373'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,374'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,375'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,376'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,377'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,378'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,379'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,380'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,381'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,382'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,383'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,384'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,385'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,386'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,387'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,388'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,389'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,390'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,391'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,392'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,393'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,394'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,395'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,396'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,397'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,398'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,399'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,400'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,401'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,402'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,403'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,404'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,405'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,406'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,407'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,408'
+                                                 '/home/cisa/REWOD/DATA/STUDY/CLEAN/sub-01/func/sub-01_task-hedonic_run-01_smoothBold.nii,409'
+                                                 };
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).name = 'REWARD';
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).onset = [113.287513246385
+                                                         131.295392118627
+                                                         149.302366836957
+                                                         167.28937864516
+                                                         185.298090788729
+                                                         203.305970623176
+                                                         329.34199758037
+                                                         347.348846249573
+                                                         365.355724426459
+                                                         545.409425203154
+                                                         563.416297286061
+                                                         581.423192461942
+                                                         653.434756266535
+                                                         671.443530632823
+                                                         689.450389565569
+                                                         815.487569567573
+                                                         833.496380497731
+                                                         851.504208052262];
+%%
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).duration = [2.42871071949776
+                                                            2.42886499336964
+                                                            2.42892144284633
+                                                            2.4288669177804
+                                                            2.42890059502315
+                                                            2.42894870538294
+                                                            2.4288136756586
+                                                            2.42882939170522
+                                                            2.42881880742789
+                                                            2.42881335491984
+                                                            2.42881592080448
+                                                            2.42883548568716
+                                                            2.42894966758831
+                                                            2.42891470739778
+                                                            2.42883227832863
+                                                            2.42883356126913
+                                                            2.42886787998941
+                                                            2.42881720374862];
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).tmod = 1;
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).pmod(1).name = 'liking';
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).pmod(1).param = [83.8983050847458
+                                                                 80.5084745762712
+                                                                 81.3559322033898
+                                                                 77.1186440677966
+                                                                 73.728813559322
+                                                                 72.0338983050848
+                                                                 81.3559322033898
+                                                                 79.6610169491525
+                                                                 73.728813559322
+                                                                 84.7457627118644
+                                                                 79.6610169491525
+                                                                 55.0847457627119
+                                                                 73.728813559322
+                                                                 76.271186440678
+                                                                 77.9661016949153
+                                                                 77.1186440677966
+                                                                 79.6610169491525
+                                                                 77.1186440677966];
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).pmod(1).poly = 1;
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).pmod(2).name = 'intensity';
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).pmod(2).param = [68.6440677966102
+                                                                 64.4067796610169
+                                                                 55.9322033898305
+                                                                 51.6949152542373
+                                                                 50
+                                                                 44.9152542372881
+                                                                 60.1694915254237
+                                                                 50
+                                                                 44.9152542372881
+                                                                 67.7966101694915
+                                                                 50
+                                                                 21.1864406779661
+                                                                 50
+                                                                 45.7627118644068
+                                                                 54.2372881355932
+                                                                 50
+                                                                 57.6271186440678
+                                                                 46.6101694915254];
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).pmod(2).poly = 1;
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(1).orth = 0;
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).name = 'CONTROL';
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).onset = [59.2639696430088
+                                                         77.2707166389992
+                                                         95.2786198871509
+                                                         221.312908136166
+                                                         239.321649466681
+                                                         257.330680421524
+                                                         437.384356180832
+                                                         455.373219275447
+                                                         473.380022720918
+                                                         491.386938423879
+                                                         509.393709154308
+                                                         527.402572043651
+                                                         707.458326811709
+                                                         725.466219154849
+                                                         743.474951825498
+                                                         869.513160747596
+                                                         887.503715722978
+                                                         905.513812161786];
+%%
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).duration = [2.42882971244035
+                                                            2.42876396162683
+                                                            2.42883548568352
+                                                            2.42884959805087
+                                                            2.42873317099657
+                                                            2.4290199087045
+                                                            2.42879571445883
+                                                            2.42894934685319
+                                                            2.42882778802959
+                                                            2.42894100772537
+                                                            2.42873573688121
+                                                            2.42882169405129
+                                                            2.42887365323259
+                                                            2.42799323375948
+                                                            2.42867511783697
+                                                            2.42794544414573
+                                                            2.43050491495524
+                                                            2.4288425418672];
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).tmod = 1;
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).pmod(1).name = 'liking';
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).pmod(1).param = [67.7966101694915
+                                                                 50
+                                                                 50
+                                                                 50
+                                                                 50
+                                                                 50
+                                                                 56.7796610169492
+                                                                 50
+                                                                 46.6101694915254
+                                                                 50
+                                                                 50
+                                                                 50
+                                                                 50
+                                                                 54.2372881355932
+                                                                 54.2372881355932
+                                                                 53.3898305084746
+                                                                 50
+                                                                 50];
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).pmod(1).poly = 1;
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).pmod(2).name = 'intensity';
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).pmod(2).param = [52.5423728813559
+                                                                 12.7118644067797
+                                                                 12.7118644067797
+                                                                 42.3728813559322
+                                                                 18.6440677966102
+                                                                 16.1016949152542
+                                                                 19.4915254237288
+                                                                 15.2542372881356
+                                                                 15.2542372881356
+                                                                 12.7118644067797
+                                                                 13.5593220338983
+                                                                 15.2542372881356
+                                                                 19.4915254237288
+                                                                 20.3389830508475
+                                                                 16.1016949152542
+                                                                 24.5762711864407
+                                                                 14.4067796610169
+                                                                 12.7118644067797];
+%%
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).pmod(2).poly = 1;
+matlabbatch{1}.spm.stats.fmri_spec.sess.cond(2).orth = 0;
+matlabbatch{1}.spm.stats.fmri_spec.sess.multi = {''};
+matlabbatch{1}.spm.stats.fmri_spec.sess.regress = struct('name', {}, 'val', {});
+matlabbatch{1}.spm.stats.fmri_spec.sess.multi_reg = {''};
+matlabbatch{1}.spm.stats.fmri_spec.sess.hpf = 128;
+matlabbatch{1}.spm.stats.fmri_spec.fact = struct('name', {}, 'levels', {});
+matlabbatch{1}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0];
+matlabbatch{1}.spm.stats.fmri_spec.volt = 1;
+matlabbatch{1}.spm.stats.fmri_spec.global = 'None';
+matlabbatch{1}.spm.stats.fmri_spec.mthresh = -Inf;
+matlabbatch{1}.spm.stats.fmri_spec.mask = {''};
+matlabbatch{1}.spm.stats.fmri_spec.cvi = 'AR(1)';
