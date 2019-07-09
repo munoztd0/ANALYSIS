@@ -1,4 +1,4 @@
-function GLM_03_ndLevel()
+%function GLM_03_ndLevel()
 
 %HEDONIC
 
@@ -10,16 +10,15 @@ removedsub = '24';
 
 %% define path
 
-homedir = '/home/REWOD';
-%homedir = '/home/cisa/REWOD';
-%homedir = '/Users/davidmunoz/REWOD';
+%homedir = '/home/REWOD';
+homedir = '/home/cisa/REWOD';
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
 name_ana = 'GLM-03'; 
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 %% specify spm param
-addpath /usr/local/external_toolboxes/spm12/ ;
-%%addpath /usr/local/MATLAB/R2018a/spm12 ;
+%addpath /usr/local/external_toolboxes/spm12/ ;
+addpath /usr/local/MATLAB/R2018a/spm12 ;
 addpath ([homedir '/ANALYSIS/spm_scripts/GLM/dependencies']);
 
 spm('Defaults','fMRI');
@@ -128,4 +127,4 @@ if do_ttest
     end
 end
 
-end
+%end

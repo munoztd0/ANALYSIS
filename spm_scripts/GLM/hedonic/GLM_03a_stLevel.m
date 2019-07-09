@@ -1,10 +1,11 @@
-function GLM_01bis_stLevel(subID) 
+function GLM_03a_stLevel(subID) 
 
 % HEDONIC
-% 1st control model
-% Stick functions + No modulators
+% 2nd control model
+% Duration=1 + Modulator Liking
 % 4 basic contrasts Reward-Control, Reward-Neutral, Odor-NoOdor, odor_presence
 % last modified on July 2019 by David Munoz
+% for liking
 
 
 
@@ -23,7 +24,7 @@ homedir = '/home/REWOD';
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
-name_ana = 'GLM-01bis'; % output folder for this analysis
+name_ana = 'GLM-03a'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 addpath /usr/local/external_toolboxes/spm12/ ;
@@ -62,7 +63,7 @@ for i = 1:length(param.task)
         'ONS.onsets.odor.reward',...%2
         'ONS.onsets.odor.control',...%3
         'ONS.onsets.odor.neutral',...%4
-        'ONS.onsets.liking',...%5
+        'ONS.onsets.liking',...%5 
         'ONS.onsets.intensity'};%6
 
     
@@ -71,7 +72,7 @@ for i = 1:length(param.task)
     param.duration{i} = {'ONS.durations.trialstart',...
         'ONS.durations.odor.reward',...
         'ONS.durations.odor.control',...
-        'ONS.durations.odor.neutral',...  
+        'ONS.durations.odor.neutral',... 
         'ONS.durations.liking',...
         'ONS.durations.intensity'};
 
@@ -79,24 +80,24 @@ for i = 1:length(param.task)
     % parametric modulation of your events or blocks (ex: linear time, or emotional value, or pupillary size, ...)
     % If you have a parametric modulation
     param.modulName{i} = {'none',...%1
-        'none',...%2
-        'none',...%3
-        'none',...%4 
+        'liking',...%2
+        'liking',...%3
+        'liking',...%4 
         'none',...%5
         'none'}; %6
     
     param.modul{i} = {'none',...%1
-        'none',... %2
-        'none',... %3
-        'none',... %4
+        'ONS.modulators.odor.reward',... %2
+        'ONS.modulators.odor.control',... %3
+        'ONS.modulators.odor.neutral',... %4
         'none',... %5
         'none'}; %6
     
     % value of the modulators, If you have a parametric modulation
     param.time{i} = {'0',... %1
-        '0',... %2
-        '0',... %3
-        '0',... %4
+        '1',... %2
+        '1',... %3
+        '1',... %4
         '0',... %5
         '0'};%6
     
@@ -222,16 +223,15 @@ end
                     SPM.Sess(ses).U(c).dur       = eval(param.duration{ses}{cc});
                     
                     SPM.Sess(ses).U(c).P(1).name = 'none';
-                    SPM.Sess(ses).U(c).orth = 1; %ortho YES
+                    SPM.Sess(ses).U(c).orth = 0; %!! no ortho BUT be careful
                     
                     if isfield (param, 'modul') % this parameters are specified only if modulators are defined in the design
                         
                         if ~ strcmp(param.modul{ses}{cc}, 'none')
                             
                             if isstruct (eval(param.modul{ses}{cc}))
-                                
-                                SPM.Sess(ses).U(c).orth = 1; %!! no ortho BUT be careful
                                 mod_names = fieldnames (eval(param.modul{ses}{cc}));
+                                SPM.Sess(ses).U(c).orth = 1;
                                 nc = 0; % intialize the modulators count
                                 
                                 for nmod = 1:length(mod_names)

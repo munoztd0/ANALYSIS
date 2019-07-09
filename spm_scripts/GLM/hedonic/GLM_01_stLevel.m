@@ -222,7 +222,7 @@ end
                     SPM.Sess(ses).U(c).dur       = eval(param.duration{ses}{cc});
                     
                     SPM.Sess(ses).U(c).P(1).name = 'none';
-                    SPM.Sess(ses).U(c).orth = 1; %ortho YES
+                    SPM.Sess(ses).U(c).orth = 0; %ortho no
                     
                     if isfield (param, 'modul') % this parameters are specified only if modulators are defined in the design
                         

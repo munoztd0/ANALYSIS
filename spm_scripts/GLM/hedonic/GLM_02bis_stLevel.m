@@ -5,8 +5,7 @@ function GLM_02bis_stLevel(subID)
 % Duration=1 + No modulators
 % 4 basic contrasts Reward-Control, Reward-Neutral, Odor-NoOdor, odor_presence
 % last modified on July 2019 by David Munoz
-% check ortho =1
-
+% check ortho =0
 
 %% What to do
 firstLevel    = 1;

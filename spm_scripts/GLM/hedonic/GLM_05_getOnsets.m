@@ -1,21 +1,22 @@
-%function GLM_03_getOnsets()
+%function GLM_05_getOnsets()
 % intended for REWOD hedonic reactivity
 
 % get onsets for 3rd model (1st level modulators)
 % Duration =1 + modulators
 % Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
 % last modified on July 2019 by David Munoz
+% ! mean centers!
 
 %% define paths
 
-homedir = '/home/cisa/REWOD/';
-%homedir = '/Users/davidmunoz/REWOD/';
+%homedir = '/home/cisa/REWOD/';
+homedir = '/Users/davidmunoz/REWOD/';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
 addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
-ana_name      = 'GLM-03';
+ana_name      = 'GLM-05';
 %session       = {'second'};
 task          = {'hedonic'};
 subj          = {'01';'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26'}; %doing it with 19 & 01?
@@ -65,17 +66,38 @@ mkdir (fullfile (mdldir, char(task), ana_name));
         durations.odor.control   = DURATIONS.trialstart(strcmp ('empty', CONDITIONS));
        
         
-        %mod for liking
+        %mod for liking 
+        
+
         modulators.odor.reward.lik  = BEHAVIOR.liking (strcmp ('chocolate', CONDITIONS));
         modulators.odor.neutral.lik = BEHAVIOR.liking (strcmp ('neutral', CONDITIONS));
         modulators.odor.control.lik = BEHAVIOR.liking (strcmp ('empty', CONDITIONS));
-
         
+        %mean_centering mod
+        cent_reward  = mean(modulators.odor.reward.lik);
+        cent_neutral = mean(modulators.odor.neutral.lik);
+        cent_control = mean(modulators.odor.control.lik);
+        
+        for j = 1:length(modulators.odor.reward.lik)
+             modulators.odor.reward.lik(j)  = modulators.odor.reward.lik(j) - cent_reward;
+             modulators.odor.neutral.lik(j) = modulators.odor.neutral.lik(j) - cent_neutral;
+             modulators.odor.control.lik(j) = modulators.odor.control.lik(j) - cent_control;
+        end
         %mod for intensity
         modulators.odor.reward.int  = BEHAVIOR.intensity (strcmp ('chocolate', CONDITIONS));
         modulators.odor.neutral.int = BEHAVIOR.intensity (strcmp ('neutral', CONDITIONS));
         modulators.odor.control.int = BEHAVIOR.intensity (strcmp ('empty', CONDITIONS));
         
+        %mean_centering mod
+        cent_reward  = mean(modulators.odor.reward.int);
+        cent_neutral = mean(modulators.odor.neutral.int);
+        cent_control = mean(modulators.odor.control.int);
+        
+        for j = 1:length(modulators.odor.reward.int)
+             modulators.odor.reward.int(j)  = modulators.odor.reward.int(j) - cent_reward;
+             modulators.odor.neutral.int(j) = modulators.odor.neutral.int(j) - cent_neutral;
+             modulators.odor.control.int(j) = modulators.odor.control.int(j) - cent_control;
+        end
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets and duration questions

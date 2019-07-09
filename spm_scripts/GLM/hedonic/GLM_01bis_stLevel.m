@@ -6,7 +6,7 @@ function GLM_01bis_stLevel(subID)
 % 4 basic contrasts Reward-Control, Reward-Neutral, Odor-NoOdor, odor_presence
 % last modified on July 2019 by David Munoz
 
-%check ORTHO =1
+%check ORTHO =0
 
 %% What to do
 firstLevel    = 1;

@@ -231,7 +231,7 @@ end
                         if ~ strcmp(param.modul{ses}{cc}, 'none')
                             
                             if isstruct (eval(param.modul{ses}{cc}))
-                                SPM.Sess(ses).U(c).orth = 1; %!! no ortho BUT be careful
+                                SPM.Sess(ses).U(c).orth = 1; %!! ortho yes
                                 mod_names = fieldnames (eval(param.modul{ses}{cc}));
                                 nc = 0; % intialize the modulators count
                                 

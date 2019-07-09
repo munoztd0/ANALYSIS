@@ -13,7 +13,7 @@ removedsub = '24';
 %homedir = '/home/REWOD';
 homedir = '/home/cisa/REWOD';
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-02bis'; 
+name_ana = 'GLM-02'; 
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 %% specify spm param
