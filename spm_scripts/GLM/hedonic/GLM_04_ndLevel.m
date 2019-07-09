@@ -1,6 +1,8 @@
 %function GLM_04_ndLevel()
 
-%HEDONIC
+% HEDONIC
+% covariate demeaned by conditions / Implemented right ? Mumford says by group
+% check covariateHED_meancent.py for more info
 
 %does t-test and full_factorial
 do_covariate = 1;
@@ -33,16 +35,16 @@ spm_jobman('initcfg');
 %% define constrasts and constrasts names
 if do_covariate % covariate of interest name become folder
 
-   covariateNames = {'reward-neutral_lik_zscored' %1
-  'reward-control_lik_zscored' %2
-  'Odor-NoOdor_lik_zscored' %3
-  'Odor_presence_lik_zscored'%4
-  'reward_lik_zscored'%5
-  'reward-neutral_int_zscored' %6
-  'reward-control_int_zscored' %7
-  'Odor-NoOdor_int_zscored'%8
-  'Odor_presence_int_zscored'%9
-  'reward_int_zscored'}; %10
+   covariateNames = {'reward-neutral_lik_meancent' %1
+  'reward-control_lik_meancent' %2
+  'Odor-NoOdor_lik_meancent' %3
+  'Odor_presence_lik_meancent'%4
+  'reward_lik_meancent'%5
+  'reward-neutral_int_meancent' %6
+  'reward-control_int_meancent' %7
+  'Odor-NoOdor_int_meancent'%8
+  'Odor_presence_int_meancent'%9
+  'reward_int_meancent'}; %10
 
 
     % These contrast names become folders

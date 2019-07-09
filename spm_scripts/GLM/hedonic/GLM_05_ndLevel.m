@@ -36,12 +36,12 @@ if do_ttest
         'reward-neutral'%2
         'Odor-NoOdor'%3
         'odor_presence'%4
-        'reward_lik-control'%5
-        'reward_int-control'%6
+        'reward_lik-control_lik'%5
+        'reward_int-control_int'%6
         'reward_lik-neutral_lik'%7
         'reward_int-neutral_int'%8
-        'Odor_lik-NoOdor'%9
-        'Odor_int-NoOdor'%10
+        'Odor_lik-NoOdor_lik'%9
+        'Odor_int-NoOdor_int'%10
         'odor_lik_presence'%11
         'odor_int_presence'}; %12
 

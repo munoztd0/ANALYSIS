@@ -1,15 +1,15 @@
 %function GLM_04_getOnsets()
 % intended for REWOD hedonic reactivity
 
-% get onsets for 4th model (2nd level covariates)
+% get onsets for 3rd model (1st level modulators)
 % Duration =1 + modulators
 % Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
 % last modified on July 2019 by David Munoz
-% NEED TO RUN PYTHON covariate_HED.py
 
 %% define paths
 
 homedir = '/home/cisa/REWOD/';
+%homedir = '/Users/davidmunoz/REWOD/';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');

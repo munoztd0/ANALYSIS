@@ -5,6 +5,7 @@ function GLM_04_stLevel(subID)
 % Duration=1 + modulators (2nd level)
 % 4 basic contrasts Reward-Control, Reward-Neutral, Odor-NoOdor, odor_presence
 % last modified on July 2019 by David Munoz
+% same that for GLM-02 at this point, No ortho, No mod , No mean cent
 
 
 
@@ -222,7 +223,7 @@ end
                     SPM.Sess(ses).U(c).dur       = eval(param.duration{ses}{cc});
                     
                     SPM.Sess(ses).U(c).P(1).name = 'none';
-                    SPM.Sess(ses).U(c).P(1).orth = 0; %!! no ortho BUT be careful
+                    SPM.Sess(ses).U(c).orth = 0; %!! no ortho BUT be careful
                     
                     if isfield (param, 'modul') % this parameters are specified only if modulators are defined in the design
                         
@@ -230,6 +231,7 @@ end
                             
                             if isstruct (eval(param.modul{ses}{cc}))
                                 mod_names = fieldnames (eval(param.modul{ses}{cc}));
+                                SPM.Sess(ses).U(c).orth = 0;
                                 nc = 0; % intialize the modulators count
                                 
                                 for nmod = 1:length(mod_names)
