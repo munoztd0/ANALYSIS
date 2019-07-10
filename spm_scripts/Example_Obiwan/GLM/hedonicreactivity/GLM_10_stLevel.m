@@ -1,9 +1,9 @@
-function GLM_02_stLevel(subID)
+function GLM_10_stLevel(subID)
 
 % get onsets for first control model (reward vs neutral)
 % Stick functions
 % Simplified model on ONSETs 6 (2*TASTE 3*questions 1 RINSE)
-% last modified on MARCH 2018
+% last modified on APRIL 2018
 
 %dbstop if error
 
@@ -21,9 +21,8 @@ homedir = '/home/OBIWAN/';
 %homedir = '/Users/evapool/mountpoint/';
 
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
-%funcdir  = fullfile(homedir, '/DATA/STUDY/DERIVED/PIT_HEDONIC');% directory with  post processed functional scans
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/', task);% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-02_control_ICA-ANTs_smth8'; % output folder for this analysis
+name_ana = 'GLM-10-control'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 addpath('/usr/local/external_toolboxes/spm12/');
@@ -47,45 +46,51 @@ for i = 1:length(param.runs)
     % Specify each conditions of your desing matrix separately for each session. The sessions
     % represent a line in Cnam, and the conditions correspond to a item in the line
     % these names must correspond identically to the names from your ONS*mat.
-    param.Cnam{i} = {'ONS.onsets.taste.reward',...%1
-        'ONS.onsets.taste.control',...%2
-        'ONS.onsets.liking',...%3
-        'ONS.onsets.intensity',...%4
-        'ONS.onsets.familiarity',...%5
-        'ONS.onsets.rinse'};%6
+    param.Cnam{i} = {'ONS.onsets.trialstart',...
+        'ONS.onsets.swallow',...
+        'ONS.onsets.taste',...%1
+        'ONS.onsets.liking',...%2
+        'ONS.onsets.intensity',...%3
+        'ONS.onsets.familiarity',...%4
+        'ONS.onsets.rinse'};%5
     
     % duration of the blocks (if events, put '0'). Specify it for each condition of each session
     % the values must be included in your onsets in seconds
-    param.duration{i} = {'ONS.durations.taste.reward',...
-        'ONS.durations.taste.control',...
-        'ONS.durations.liking',...
-        'ONS.durations.intensity',...
-        'ONS.durations.familiarity',...
-        'ONS.durations.rinse'};
+    param.duration{i} = {'ONS.durations.trialstart',...%1
+        'ONS.durations.swallow',...
+        'ONS.durations.taste',...%2
+        'ONS.durations.liking',...%3
+        'ONS.onsets.intensity',...%4
+        'ONS.onsets.familiarity',...%5
+        'ONS.durations.rinse'};%6
     
     % parametric modulation of your events or blocks (ex: linear time, or emotional value, or pupillary size, ...)
     % If you have a parametric modulation
     param.modulName{i} = {'none',...%1
-        'none',...%2
+        'none',...
+        'multiple',...%2
         'none',...%3
         'none',...%4
         'none',...%5
-        'none'};
+        'none'};%6
     
     param.modul{i} = {'none',...%1
-        'none',... %2
+        'none',...
+        'ONS.modulators.taste',...%2
         'none',... %3
         'none',... %4
         'none',... %5
-        'none'};
+        'none'};%6
+    
     
     % value of the modulators, If you have a parametric modulation
     param.time{i} = {'0',... %1
-        '0',... %2
+        '0',...
+        '1',... %2
         '0',... %3
         '0',... %4
         '0',... %5
-        '0'};
+        '0'};%6
     
     
 end
@@ -97,8 +102,8 @@ for i = 1:length(subj)
     % participant's specifics
     subjX = char(subj(i));
     subjoutdir =fullfile(mdldir,name_ana, [ 'sub-' subjX]); % subj{i,1}
-    subjfuncdir=fullfile(funcdir, [ 'sub-' subjX], ['ses-' sessionX]); % subj{i,1}
     subjanatdir=fullfile(funcdir, [ 'sub-' subjX], 'ses-first/anat/');
+    subjfuncdir=fullfile(funcdir, [ 'sub-' subjX], ['ses-' sessionX]); % subj{i,1}
     fprintf('participant number: %s \n', subj{i});
     cd (subjoutdir)
     
@@ -127,13 +132,13 @@ for i = 1:length(subj)
         cd (fullfile(subjoutdir,'output'))
         
         % copy images T
-        Timages = ['01'; '02'; '03'; '04'];% constrasts of interest
+        Timages = ['01'; '02'];% constrasts of interest
         for y =1:size(Timages,1)
             copyfile(['con_00' (Timages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_con-00' (Timages(y,:)) '.nii'])
         end
         
         % copy images F
-        Fimages = '05';% constrasts of interest
+        Fimages = '03';% constrasts of interest
         for y =1:size(Fimages,1)
             copyfile(['ess_00' (Fimages(y,:)) '.nii'],[groupdir, 'sub-' subjX '_ess-00' (Timages(y,:)) '.nii'])
         end
@@ -148,7 +153,7 @@ end
         
         % variable initialization
         nruns = size(param.runs,1);
-        im_style = 'swar';
+        im_style = 'swar'; % this is only for the old pipeline
         nscans = [];
         scanID = [];
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -161,6 +166,7 @@ end
             smoothfolder       = [subjfuncdir '/func'];
             %targetscan         = dir (fullfile(smoothfolder, [im_style '*' runX '*' param.im_format]));
             targetscan         = dir (fullfile(smoothfolder, ['*' runX '*' param.im_format]));
+
             tmp{ses}           = spm_select('List',smoothfolder,targetscan.name);
 
             % get the number of EPI for each session
@@ -341,6 +347,7 @@ end
         % set threshold of mask
         %==========================================================================
         SPM.xM.gMT = -Inf;% set -inf if we want to use explicit masking 0.8 is the spm default
+
         
         % Configure design matrix
         %==========================================================================
@@ -349,7 +356,7 @@ end
         % *After* configuration but before *estimation* we need to specify the explicit mask
         %--------------------------------------------------------------------------
         SPM.xM.VM  = spm_vol(char({[subjanatdir '/sub-' subjX '_ses-first_acq-ANTnorm_T2.nii']})); % here enter the mask based on the subject anatomical
-%        SPM.xM.VM  = spm_vol(char({[subjanatdir '/wsub-' subjX '_ses-first_run-01_T1.nii']})); % here enter the mask based on the subject anatomical
+
         
         % Estimate parameters
         %==========================================================================
@@ -387,38 +394,29 @@ end
         % | CONSTRASTS FOR T-TESTS
         
         % con1
-        Ctnames{1} = 'reward-control';
-        weightPos  = ismember(conditionName, {'run1.taste.reward'}) * 1;
-        weightNeg  = ismember(conditionName, {'run1.taste.control'})* -1;
-        Ct(1,:)    = weightPos+weightNeg;
+        Ctnames{1} = 'liquid';
+        weightPos  = ismember(conditionName, {'run1.taste'}) * 1;
+        Ct(1,:)    = weightPos;
+        
         
         % con2
-        Ctnames{2} = 'overaLiquid';
-        weightPos  = ismember(conditionName, {'run1.taste.reward', 'run1.taste.control', 'run1.rinse'}) * 1;
+        Ctnames{2} = 'liking';
+        weightPos  = ismember(conditionName, {'run1.tastexreward^1'}) * 1;
         Ct(2,:)    = weightPos;
-        
-        % con3
-        Ctnames{3} = 'reward';
-        weightPos  = ismember(conditionName, {'run1.taste.reward'}) * 1;
-        Ct(3,:)    = weightPos;
-        
-        % con4 
-        Ctnames{4} = 'question_presence';
-        weightPos  = ismember(conditionName, {'run1.liking', 'run1.intensity', 'run1.familiarity'}) * 1;
-        Ct(4,:)    = weightPos;
+
         
         % define F constrasts
         %------------------------------------------------------------------
         Cf = []; Cfnames = [];
         
         Cfnames{end+1} = 'F_RUN1';
-        Frun1 = [1 0 0 0 0 0 0 0 0 0 0 0     %1 CS.plus
-            0 1 0 0 0 0 0 0 0 0 0 0     %2 CS.minus
-            0 0 1 0 0 0 0 0 0 0 0 0     %3 ANT.plus
-            0 0 0 1 0 0 0 0 0 0 0 0     %4 ANT.minus
-            0 0 0 0 1 0 0 0 0 0 0 0   %5 US
-            0 0 0 0 0 1 0 0 0 0 0 0];   %6 right modulator
-        
+        Frun1 = [1 0 0 0 0 0    %1
+                 0 1 0 0 0 0    %2 
+                 0 0 1 0 0 0    %3
+                 0 0 0 1 0 0    %4
+                 0 0 0 0 1 0    %5
+                0 0 0 0 0 1];   %6 right modulator
+         
         
         
         Cf = repmat(Frun1,1,nrun);

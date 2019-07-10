@@ -20,9 +20,9 @@ task = 'hedonicreactivity';
 homedir = '/home/OBIWAN/';
 %homedir = '/Users/evapool/mountpoint/';
 
-funcdir  = fullfile(homedir, '/DATA/STUDY/DERIVED/PIT_HEDONIC');% directory with  post processed functional scans
+funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');% directory with  post processed functional scans
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/', task);% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-03'; % output folder for this analysis
+name_ana = 'GLM-03-control'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 addpath('/usr/local/external_toolboxes/spm12/');
@@ -91,6 +91,7 @@ for i = 1:length(subj)
     % participant's specifics
     subjX = char(subj(i));
     subjoutdir =fullfile(mdldir,name_ana, [ 'sub-' subjX]); % subj{i,1}
+    subjanatdir=fullfile(funcdir, [ 'sub-' subjX], 'ses-first/anat/');
     subjfuncdir=fullfile(funcdir, [ 'sub-' subjX], ['ses-' sessionX]); % subj{i,1}
     fprintf('participant number: %s \n', subj{i});
     cd (subjoutdir)
@@ -101,7 +102,7 @@ for i = 1:length(subj)
     
     %%%%%%%%%%%%%%%%%%%%% DO FIRST LEVEL ANALYSIS %%%%%%%%%%%%%%%%%%%%%%%%%
     if firstLevel == 1
-        [SPM] = doFirstLevel(subjoutdir,subjfuncdir,name_ana,param,subjX);
+        [SPM] = doFirstLevel(subjoutdir,subjfuncdir,subjanatdir,name_ana,param,subjX);
     else
         cd (fullfile(subjoutdir,'output'));
         load SPM
@@ -137,11 +138,11 @@ for i = 1:length(subj)
 end
 
 %% function section
-    function [SPM] = doFirstLevel(subjoutdir,subjfuncdir, name_ana, param, subjX)
+    function [SPM] = doFirstLevel(subjoutdir,subjfuncdir,subjanatdir, name_ana, param, subjX)
         
         % variable initialization
         nruns = size(param.runs,1);
-        im_style = 'swar';
+        im_style = 'swar'; % this is only for the old pipeline
         nscans = [];
         scanID = [];
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -152,7 +153,9 @@ end
             
             runX = char(param.runs(ses));
             smoothfolder       = [subjfuncdir '/func'];
-            targetscan         = dir (fullfile(smoothfolder, [im_style '*' runX '*' param.im_format]));
+            %targetscan         = dir (fullfile(smoothfolder, [im_style '*' runX '*' param.im_format]));
+            targetscan         = dir (fullfile(smoothfolder, ['*' runX '*' param.im_format]));
+
             tmp{ses}           = spm_select('List',smoothfolder,targetscan.name);
 
             % get the number of EPI for each session
@@ -330,9 +333,19 @@ end
         %==========================================================================
         SPM.swd = pwd;
         
+        % set threshold of mask
+        %==========================================================================
+        SPM.xM.gMT = -Inf;% set -inf if we want to use explicit masking 0.8 is the spm default
+
+        
         % Configure design matrix
         %==========================================================================
         SPM = spm_fmri_spm_ui(SPM);
+        
+        % *After* configuration but before *estimation* we need to specify the explicit mask
+        %--------------------------------------------------------------------------
+        SPM.xM.VM  = spm_vol(char({[subjanatdir '/sub-' subjX '_ses-first_acq-ANTnorm_T2.nii']})); % here enter the mask based on the subject anatomical
+
         
         % Estimate parameters
         %==========================================================================

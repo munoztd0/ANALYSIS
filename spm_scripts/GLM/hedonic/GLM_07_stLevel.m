@@ -1,4 +1,4 @@
-function GLM_03_stLevel(subID) 
+function GLM_07_stLevel(subID) 
 
 % HEDONIC
 % 3rd model
@@ -24,7 +24,7 @@ homedir = '/home/REWOD';
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
-name_ana = 'GLM-03'; % output folder for this analysis
+name_ana = 'GLM-07'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 addpath /usr/local/external_toolboxes/spm12/ ;
@@ -81,14 +81,14 @@ for i = 1:length(param.task)
     % If you have a parametric modulation
     param.modulName{i} = {'none',...%1
         'multiple',...%2
-        'multiple',...%3
+        'none',...%3
         'multiple',...%4 
         'none',...%5
         'none'}; %6
     
     param.modul{i} = {'none',...%1
         'ONS.modulators.odor.reward',... %2
-        'ONS.modulators.odor.control',... %3
+        'none',... %3
         'ONS.modulators.odor.neutral',... %4
         'none',... %5
         'none'}; %6
@@ -96,7 +96,7 @@ for i = 1:length(param.task)
     % value of the modulators, If you have a parametric modulation
     param.time{i} = {'0',... %1
         '1',... %2
-        '1',... %3
+        '0',... %3
         '1',... %4
         '0',... %5
         '0'};%6

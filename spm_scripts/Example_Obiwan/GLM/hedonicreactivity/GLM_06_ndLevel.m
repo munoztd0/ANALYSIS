@@ -1,4 +1,4 @@
-function GLM_02_ndLevel()
+function GLM_06_ndLevel()
 
 %does t-test and full_factorial
 do_ttest = 1;
@@ -10,7 +10,7 @@ homedir = '/home/OBIWAN/';
 %homedir = '/Users/evapool/mountpoint/';
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonicreactivity');% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-02_control_ICA-ANTs_smth8'; % output folder for this analysis
+name_ana = 'GLM-06-control'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
@@ -28,10 +28,10 @@ spm_jobman('initcfg');
 if do_ttest
     
     % These contrast names become folders
-    contrastNames = {'reward-control'%1
-        'overallLiquid'%2
-        'reward'%3
-        'question_presence'};%24
+    contrastNames = {'taste_all'%1
+        'intesity'%2
+        'liking'%3
+        'familiarity'};%24
    
     
     conImages = {'con-0001'

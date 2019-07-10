@@ -10,7 +10,7 @@ homedir = '/home/OBIWAN/';
 %homedir = '/Users/evapool/mountpoint/';
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonicreactivity');% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-03'; % output folder for this analysis
+name_ana = 'GLM-03-control'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 

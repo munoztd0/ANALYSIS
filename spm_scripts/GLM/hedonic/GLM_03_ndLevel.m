@@ -5,8 +5,8 @@ function GLM_03_ndLevel()
 %does t-test and full_factorial
 do_ttest = 1;
 remove = 1;
-removesub = {'sub-24'} ;
-removedsub = '24';
+removesub = {'sub-23'} ;
+removedsub = '23';
 
 %% define path
 
@@ -14,7 +14,7 @@ homedir = '/home/REWOD';
 %homedir = '/home/cisa/REWOD';
 %homedir = '/Users/davidmunoz/REWOD';
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-03'; 
+name_ana = 'GLM-07'; 
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 %% specify spm param

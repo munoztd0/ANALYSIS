@@ -1,4 +1,4 @@
-%function GLM_06_stLevel(subID) 
+%function GLM_03_stLevel(subID) 
 
 % HEDONIC
 % 3rd model
@@ -7,14 +7,14 @@
 % AND 4*2mod -> 12 contrasts
 % last modified on July 2019 by David Munoz
 
-%test with no "normal param", only paramXmod
+% test with the 4 + 8 contrasts
 
 
 
 %% What to do
 firstLevel    = 1;
 contrasts    = 1;
-copycontrasts = 0;
+copycontrasts = 1;
 
 %% define task variable
 %sessionX = 'second';
@@ -40,9 +40,9 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'01'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; 
-param.task = {'hedonic'}; %
-% no variance 03 - 04 - 13 - 20 - 23
+subj       =  {'03'}; %subID; % %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; 
+param.task = {'hedonic'}; 
+
 %% define experimental design parameters
 param.Cnam     = cell (length(param.task), 1);
 param.duration = cell (length(param.task), 1);
@@ -57,17 +57,11 @@ for i = 1:length(param.task)
         'reward',...%2
         'control',...%3
         'neutral',...%4
-        'reward',...%2
-        'control',...%3
-        'neutral',...%4
         'liking',...%5 
         'intensity'};%6
 
         
      param.onset{i} = {'ONS.onsets.trialstart',... %1
-        'ONS.onsets.odor.reward',...%2
-        'ONS.onsets.odor.control',...%3
-        'ONS.onsets.odor.neutral',...%4
         'ONS.onsets.odor.reward',...%2
         'ONS.onsets.odor.control',...%3
         'ONS.onsets.odor.neutral',...%4
@@ -81,9 +75,6 @@ for i = 1:length(param.task)
         'ONS.durations.odor.reward',...
         'ONS.durations.odor.control',...
         'ONS.durations.odor.neutral',... 
-        'ONS.durations.odor.reward',...
-        'ONS.durations.odor.control',...
-        'ONS.durations.odor.neutral',... 
         'ONS.durations.liking',...
         'ONS.durations.intensity'};
 
@@ -91,30 +82,21 @@ for i = 1:length(param.task)
     % parametric modulation of your events or blocks (ex: linear time, or emotional value, or pupillary size, ...)
     % If you have a parametric modulation
     param.modulName{i} = {'none',...%1
-        'lik',...%2
-        'lik',...%3
-        'lik',...%4 
-        'int',...%2
-        'int',...%3
-        'int',...%4 
+        'multiple',...%2
+        'multiple',...%3
+        'multiple',...%4 
         'none',...%5
         'none'}; %6
     
     param.modul{i} = {'none',...%1
-        'ONS.modulators.odor.reward.lik',... %2
-        'ONS.modulators.odor.control.lik',... %3
-        'ONS.modulators.odor.neutral.lik',... %4
-        'ONS.modulators.odor.reward.int',... %2
-        'ONS.modulators.odor.control.int',... %3
-        'ONS.modulators.odor.neutral.int',... %4
+        'ONS.modulators.odor.reward',... %2
+        'ONS.modulators.odor.control',... %3
+        'ONS.modulators.odor.neutral',... %4
         'none',... %5
         'none'}; %6
     
     % value of the modulators, If you have a parametric modulation
     param.time{i} = {'0',... %1
-        '1',... %2
-        '1',... %3
-        '1',... %4
         '1',... %2
         '1',... %3
         '1',... %4
@@ -147,32 +129,18 @@ for i = 1:length(subj)
         load SPM
     end
     
-    %%%%%%%%%%%%%%%%%%%%%%%  DO CONTRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    if contrasts == 1
-        doContrasts(subjoutdir,param, SPM);
-    end
-    
-    %%%%%%%%%%%%%%%%%%%%% COPY CONTRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         %%%%%%%%%%%%%%%%%%%%% COPY CONTRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if copycontrasts == 1
         
         mkdir (groupdir); % make the group directory where contrasts will be copied
-        cd (fullfile(subjoutdir,'output'))
-        
-        list_dir = dir(fullfile(subjoutdir,'output', 'con*'));
-        list_files = '';
-        for ii = 1:length(list_dir)
-            copyfile(list_dir(ii).name, [groupdir, 'sub-' subjX '_' list_dir(ii).name])
-        end
-        
-        
-        list_dir = dir(fullfile(subjoutdir,'output', 'ess*'));
-        list_files = '';
-        for iii = 1:length(list_dir)
-            copyfile(list_dir(iii).name, [groupdir, 'sub-' subjX '_' list_dir(iii).name])
-        end
-        
-        display('contrasts copied!');
+    end 
+    
+    %%%%%%%%%%%%%%%%%%%%%%%  DO CONTRASTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    if contrasts == 1
+        doContrasts(subjoutdir,param, SPM, groupdir, subjX);
     end
+    
+ 
     
 end
 
@@ -261,12 +229,12 @@ end
                                     mod_name = char(mod_names(nmod));
                                     
                                     %if  ~ round(std(eval([param.modul{ses}{cc} '.' mod_name])),10)== 0  %verify that there is variance in mod
-
-
+                                      
+                                    
                                     SPM.Sess(ses).U(c).P(nc).name  = mod_name;
                                     SPM.Sess(ses).U(c).P(nc).P     = eval([param.modul{ses}{cc} '.' mod_name]);
                                     SPM.Sess(ses).U(c).P(nc).h     = 1;
-%                                         
+                                        
 %                                     else
 % 
 %                                        SPM.Sess(ses).U(c).P(nc).name  = [];
@@ -375,24 +343,16 @@ end
         %==========================================================================
         SPM = spm_fmri_spm_ui(SPM);
         
-        %if we want to only keep modulated parameters
-        for iii= (2:7)
-            SPM.Sess.U(iii).name(1) = [];
-        end
-        SPM.xX.X(:,2) = [];
-        
         % Estimate parameters
         %==========================================================================
         disp ('estimating model')
         SPM = spm_spm(SPM);
         
         disp ('first level done');
-        
-
     end
 
  
-    function [] = doContrasts(subjoutdir, param, SPM)
+    function [] = doContrasts(subjoutdir, param, SPM, groupdir, subjX)
         
         % define the SPM.mat that contains the design of the first level analysis
         %------------------------------------------------------------------
@@ -419,137 +379,105 @@ end
         
         % | contrasts FOR T-TESTS
         
-        %LIKING
         % con1
-        Ctnames{1} = 'reward-control_lik';
+        Ctnames{1} = 'reward-control';
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1; %
+        weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;%
+        Ct(1,:)    = weightPos+weightNeg;
+        
+        % con2
+        Ctnames{2} = 'reward-neutral';
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.neutral'})* -1;
+        Ct(2,:)    = weightPos+weightNeg;  
+        
+        % con3
+        Ctnames{3} = 'Odor-NoOdor';
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
+        Ct(3,:)    = weightPos+weightNeg;
+        
+        
+        % con4 
+        Ctnames{4} = 'odor_presence';
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1;
+        Ct(4,:)    = weightPos;
+        
+        %% R-N * 2 mod
+        
+        % con5 
+        Ctnames{5} = 'reward_lik-neutral_lik'; 
         weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1; %
-        weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;%
-        Ct(1,:)    = weightPos+weightNeg;
-        
-        % con2
-        Ctnames{2} = 'reward-neutral_lik';
-        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
         weightNeg  = ismember(conditionName, {'task-hed.neutralxlik^1'})* -1;
-        Ct(2,:)    = weightPos+weightNeg;  
+        Ct(5,:)    = weightPos+weightNeg;
         
-        % con3
-        Ctnames{3} = 'Odor-NoOdor_lik';
-        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1; %here it was rinse
-        weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'}) * -2;
-        Ct(3,:)    = weightPos+weightNeg;
-        
-        
-        % con4 
-        Ctnames{4} = 'odor_presence_lik';
-        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1;
-        Ct(4,:)    = weightPos;
-        
-        %% INTENISTY
-        
-        % con1
-        Ctnames{1} = 'reward-control_int';
+        % con6
+        Ctnames{6} = 'reward_int-neutral_int'; 
         weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1; %
-        weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;%
-        Ct(1,:)    = weightPos+weightNeg;
-        
-        % con2
-        Ctnames{2} = 'reward-neutral_int';
-        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
         weightNeg  = ismember(conditionName, {'task-hed.neutralxint^1'})* -1;
-        Ct(2,:)    = weightPos+weightNeg;  
+        Ct(6,:)    = weightPos+weightNeg;
         
-        % con3
-        Ctnames{3} = 'Odor-NoOdor_int';
-        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1; %here it was rinse
-        weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'}) * -2;
-        Ct(3,:)    = weightPos+weightNeg;
+        %% Presence * 2 mod
         
+        % con7 
+        Ctnames{7} = 'odor_lik_presence';
+        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1;
+        Ct(7,:)    = weightPos;
         
-        % con4 
-        Ctnames{4} = 'odor_presence_int';
+        % con8 
+        Ctnames{8} = 'odor_int_presence';
         weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1;
-        Ct(4,:)    = weightPos;
+        Ct(8,:)    = weightPos;
         
-%         %% R * 2 mod -C
-%         
-%         % con5
-%         Ctnames{5} = 'reward_lik-control'; 
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
-%         Ct(5,:)    = weightPos+weightNeg;
-%         
-%         % con6
-%         Ctnames{6} = 'reward_int-control';
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
-%         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
-%         Ct(6,:)    = weightPos+weightNeg;
-%         
-%         %% R-N * 2 mod
-%         
-%         % con7 
-%         Ctnames{7} = 'reward_lik-neutral_lik'; 
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1; %
-%         weightNeg  = ismember(conditionName, {'task-hed.neutralxlik^1'})* -1;
-%         Ct(7,:)    = weightPos+weightNeg;
-%         
-%         % con8
-%         Ctnames{8} = 'reward_int-neutral_int'; 
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1; %
-%         weightNeg  = ismember(conditionName, {'task-hed.neutralxint^1'})* -1;
-%         Ct(8,:)    = weightPos+weightNeg;
-%         
-%         
-%         %% O-No * 2 mod
-%         
-%         % con9
-%         Ctnames{9} = 'Odor_lik-NoOdor';
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1; 
-%         weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
-%         Ct(9,:)    = weightPos+weightNeg;
-%         
-%         % con10
-%         Ctnames{10} = 'Odor_int-NoOdor';
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1; 
-%         weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
-%         Ct(10,:)    = weightPos+weightNeg;
-%         
-%         %% Presence * 2 mod
-%         
-%         % con11 
-%         Ctnames{11} = 'odor_lik_presence';
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1;
-%         Ct(11,:)    = weightPos;
-%         
-%         % con12 
-%         Ctnames{12} = 'odor_int_presence';
-%         weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1;
-%         Ct(12,:)    = weightPos;
-%            
+         
+        
+        %if control condition exist then do contrast  
 
-        
-%          if  strcmp(conditionName(6), 'task-hed.controlxlik^1')  %can do better
-%                 %con13
-%                 Ctnames{13} = 'reward_lik-control_lik'; 
-%                 weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
-%                 weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;
-%                 Ct(13,:)    = weightPos+weightNeg;
-%         end
-%         if  strcmp(conditionName(7), 'task-hed.controlxint^1')  %can do better
-%                 %con14
-%                 Ctnames{14} = 'reward_int-control_int'; 
+        %if  any(strcmp(conditionName, 'task-hed.controlxlik^1'))
+                
+        % con9
+        Ctnames{9} = 'Odor_lik-NoOdor_lik';
+        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1; 
+        weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'}) * -2;
+        Ct(9,:)    = weightPos+weightNeg;
+
+        %con10
+        Ctnames{10} = 'reward_lik-control_lik'; 
+        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;
+        Ct(10,:)    = weightPos+weightNeg;
+
+            %if any(strcmp(conditionName, 'task-hed.controlxint^1'))
+
+        % con11
+        Ctnames{11} = 'Odor_int-NoOdor_int';
+        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1; 
+        weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'}) * -2;
+        Ct(11,:)    = weightPos+weightNeg;
+
+        %con12
+        Ctnames{12} = 'reward_int-control_int'; 
+        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
+        weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
+        Ct(12,:)    = weightPos+weightNeg;
+                
+%                 end
+%                 
+%        elseif  any(strcmp(conditionName, 'task-hed.controlxint^1'))
+%             
+%                 % con9
+%                 Ctnames{9} = 'Odor_int-NoOdor_int';
+%                 weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1; 
+%                 weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'}) * -2;
+%                 Ct(9,:)    = weightPos+weightNeg;
+%                 
+%                 %con10
+%                 Ctnames{10} = 'reward_int-control_int'; 
 %                 weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
 %                 weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
-%                 Ct(14,:)    = weightPos+weightNeg;
-%         elseif strcmp(conditionName(6), 'task-hed.controlxint^1')  %can do better
-%                 %con14
-%                 Ctnames{14} = 'reward_int-control_int'; 
-%                 weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
-%                 weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
-%                 Ct(14,:)    = weightPos+weightNeg;       
+%                 Ct(10,:)    = weightPos+weightNeg;
 %         end
-        
-
-        
+   
 
         % define F contrasts
         %------------------------------------------------------------------
@@ -568,7 +496,7 @@ end
         
         % t contrasts
         for icon = 1:size(Ct,1)
-            jobs{1}.stats{1}.con.consess{icon}.tcon.name = Ctnames{icon};
+           jobs{1}.stats{1}.con.consess{icon}.tcon.name = Ctnames{icon};
             jobs{1}.stats{1}.con.consess{icon}.tcon.convec = Ct(icon,:);
         end
         
@@ -583,6 +511,53 @@ end
         spm_jobman('run',jobs)
         
         disp ('contrasts created!')
+        
+                       
+        
+       if any(strcmp(Ctnames{9}, 'Odor_int-NoOdor_int'))
+
+            cd (fullfile(subjoutdir,'output'))
+            
+            %changning contrast name for ndlevel (need to implement it without hardcoding!)
+            movefile('con_0009.nii', 'con_0011.nii');
+            movefile('con_0010.nii', 'con_0012.nii');
+            movefile('ess_0011.nii', 'con_0013.nii');
+
+            list_dir = dir(fullfile(subjoutdir,'output', 'con*'));
+            list_files = '';
+            for ii = 1:length(list_dir)
+                copyfile(list_dir(ii).name, [groupdir, 'sub-' subjX '_' list_dir(ii).name])
+            end
+
+
+            list_dir = dir(fullfile(subjoutdir,'output', 'ess*'));
+            list_files = '';
+            for iii = 1:length(list_dir)
+                copyfile(list_dir(iii).name, [groupdir, 'sub-' subjX '_' list_dir(iii).name])
+            end
+
+            disp('contrasts copied!'); 
+           
+             
+           
+       else
+            cd (fullfile(subjoutdir,'output'))
+
+            list_dir = dir(fullfile(subjoutdir,'output', 'con*'));
+            list_files = '';
+            for ii = 1:length(list_dir)
+                copyfile(list_dir(ii).name, [groupdir, 'sub-' subjX '_' list_dir(ii).name])
+            end
+
+
+            list_dir = dir(fullfile(subjoutdir,'output', 'ess*'));
+            list_files = '';
+            for iii = 1:length(list_dir)
+                copyfile(list_dir(iii).name, [groupdir, 'sub-' subjX '_' list_dir(iii).name])
+            end
+
+            display('contrasts copied!');
+        end
     end
 
 

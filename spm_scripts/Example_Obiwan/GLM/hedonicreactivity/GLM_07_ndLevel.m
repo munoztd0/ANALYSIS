@@ -1,8 +1,8 @@
-function GLM_02_ndLevel()
+function GLM_07_ndLevel()
 
 %does t-test and full_factorial
 do_ttest = 1;
-removesub = 0; %'sub-14'; % which sub do we want to remove
+removesub = 'control114'; %'sub-14'; % which sub do we want to remove
 
 %% define path
 
@@ -10,7 +10,7 @@ homedir = '/home/OBIWAN/';
 %homedir = '/Users/evapool/mountpoint/';
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonicreactivity');% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-02_control_ICA-ANTs_smth8'; % output folder for this analysis
+name_ana = 'GLM-07-control'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 
@@ -28,16 +28,12 @@ spm_jobman('initcfg');
 if do_ttest
     
     % These contrast names become folders
-    contrastNames = {'reward-control'%1
-        'overallLiquid'%2
-        'reward'%3
-        'question_presence'};%24
+    contrastNames = {'taste_all'%1
+        'reward'};%24
    
     
     conImages = {'con-0001'
-        'con-0002'
-        'con-0003'
-        'con-0004'};
+        'con-0002'};
     
     
     %% prepare batch for each contrasts

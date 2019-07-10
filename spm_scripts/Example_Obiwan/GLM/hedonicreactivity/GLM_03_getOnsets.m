@@ -9,19 +9,19 @@ function GLM_03_getOnsets()
 
 %% define paths
 
-%homedir = '/home/OBIWAN/';
-homedir = '/Users/evapool/mountpoint/';
+homedir = '/home/OBIWAN/';
+%homedir = '/Users/evapool/mountpoint2/';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/DERIVED/PIT_HEDONIC');
 addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
-ana_name      = 'GLM-03';
+ana_name      = 'GLM-03-control';
 session       = {'second'};
 runs          = {'hedonicreactivity'};
 
-subj          = {'100'    ; '105'   ; '106'    ;'107'    ;'108'    ;'109'    ;'110'     ;'112'    ;'113'    ;'114'    ;'200'  ;'201'  };     % subject ID
-group         = {'control';'control'; 'control';'control';'control';'control'; 'control';'control';'control';'control';'obese';'obese'}; % control or obsese
+subj          = {'100'    ;'102'    ;'105'    ;'106'    ;'107'    ;'108'    ;'109'    ;'110'    ;'112'    ;'113'    ;'114'    ;'115'    ;'116'    ;'118'    ;'119'    ;'120'    ;'121'    ;'122'    ;'124'    ;'125'    ;'126'    ;'127'    ;'128'    ;'129'    ;'130'    ;'131'    ;'132'    ;'133'    };     % subject ID
+group         = {'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control';'control'}; % control or obsese
 
 %% create folder  
 mkdir (fullfile (mdldir, char(runs), ana_name)); % this is only because we have one run per task

@@ -1,22 +1,27 @@
-function GLM_02_ndLevel()
+function GLM_06_ndLevel()
+
+%HEDONIC
 
 %does t-test and full_factorial
 do_ttest = 1;
-removesub = 0; %'sub-14'; % which sub do we want to remove
+remove = 1;
+removesub = {'sub-24'} ;
+removedsub = '24';
 
 %% define path
 
-homedir = '/home/OBIWAN/';
-%homedir = '/Users/evapool/mountpoint/';
-
-mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonicreactivity');% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-02_control_ICA-ANTs_smth8'; % output folder for this analysis
+homedir = '/home/REWOD';
+%homedir = '/home/cisa/REWOD';
+%homedir = '/Users/davidmunoz/REWOD';
+mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
+name_ana = 'GLM-03'; 
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
-
 %% specify spm param
-%addpath('/usr/local/matlab/R2014a/toolbox/spm12b');
+addpath /usr/local/external_toolboxes/spm12/ ;
+%%addpath /usr/local/MATLAB/R2018a/spm12 ;
 addpath ([homedir '/ANALYSIS/spm_scripts/GLM/dependencies']);
+
 spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
@@ -29,18 +34,40 @@ if do_ttest
     
     % These contrast names become folders
     contrastNames = {'reward-control'%1
-        'overallLiquid'%2
-        'reward'%3
-        'question_presence'};%24
+        'reward-neutral'%2
+        'Odor-NoOdor'%3
+        'odor_presence'%4
+        'reward_lik-neutral_lik'%5
+        'reward_int-neutral_int'%6
+        'odor_lik_presence'%7
+        'odor_int_presence'%8
+        'Odor_lik-NoOdor_lik'%9
+        'reward_lik-control_lik'%10
+        'Odor_int-NoOdor_int'%11
+        'reward_int-control_int'};%12
+
+
+        
+
+
+
    
     
-    conImages = {'con-0001'
-        'con-0002'
-        'con-0003'
-        'con-0004'};
+    conImages = {'con_0001'
+        'con_0002'
+        'con_0003'
+        'con_0004'
+        'con_0005'
+        'con_0006'
+        'con_0007'
+        'con_0008'
+        'con_0009'
+        'con_0010'
+        'con_0011'
+        'con_0012'};
     
     
-    %% prepare batch for each contrasts
+      %% prepare batch for each contrasts
     
     for n = 1:length(contrastNames)
         
@@ -49,8 +76,8 @@ if do_ttest
         conImageX = conImages{n};
         contrastX = contrastNames{n};
         
-        if removesub
-            contrastFolder = fullfile (groupdir, 'ttests', removesub, contrastX);
+        if remove
+            contrastFolder = fullfile (groupdir, 'ttests', ['removing-' removedsub], contrastX);
         else
             contrastFolder = fullfile (groupdir, 'ttests', 'all', contrastX);
         end
@@ -60,19 +87,23 @@ if do_ttest
         % create the group level spm file
         matlabbatch{1}.spm.stats.factorial_design.dir = {contrastFolder}; % directory
         
-        conAll     = spm_select('List',groupdir,['^'  '.*' conImageX '.nii']); % select constrasts
-        for j =1:size(conAll,1)
-            matlabbatch{1}.spm.stats.factorial_design.des.t1.scans{j,1} = [deblank([groupdir conAll(j,:)]) ',1'];
+        %  FORMAT [dirs] = spm_select('List',direc,'dir',filt)
+        conAll     = spm_select('List',groupdir,['^'  '.*' conImageX '.nii']); % select constrasts 
+     
+        for j =1:length(conAll)
+            matlabbatch{1}.spm.stats.factorial_design.des.t1.scans{j,1} = [groupdir conAll(j,:) ',1'];
         end
         
-        if removesub % remove subject from analysis
-            
-            disp(['removing subject' removesub]);
+        if remove % remove subject from analysis
+            disp(['removing subject: ' removedsub]);
             allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans; % let's put this in a smaller variable
-            idx = (regexp(allsub,removesub)); % find string containing the sub id
-            idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
-            matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
-            
+            for i = 1:length(removesub)
+                idx = (regexp(allsub,removesub{i})); % find string containing the sub id
+                idxtoRemove = find(~cellfun(@isempty,idx)); % get the index of that string
+                matlabbatch{1}.spm.stats.factorial_design.des.t1.scans(idxtoRemove) = []; % remove the string from the scans selected for the analysis
+                allsub = matlabbatch{1}.spm.stats.factorial_design.des.t1.scans;
+            end
+               
         end
         
         matlabbatch{1}.spm.stats.factorial_design.cov = struct('c', {}, 'cname', {}, 'iCFI', {}, 'iCC', {});
@@ -102,6 +133,4 @@ if do_ttest
     end
 end
 
-
-
-   end
+end
