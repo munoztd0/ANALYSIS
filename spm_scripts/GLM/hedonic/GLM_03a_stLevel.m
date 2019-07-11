@@ -1,17 +1,17 @@
-%function GLM_03a_stLevel(subID) 
+function GLM_03a_stLevel(subID) 
 
 % HEDONIC
 % 3rd model
 % Duration=1 + Modulator Liking & Intensity
 % 4 basic contrasts Reward-Control, Reward-Neutral, Odor-NoOdor, odor_presence
-% AND 4*2mod -> 12 contrasts
+% AND 4*1mod -> 8 contrasts
 % last modified on July 2019 by David Munoz
-%for liking!
+%JUST FOR LIKING
 
 
 %% What to do
 firstLevel    = 1;
-contrasts    = 0;
+contrasts    = 1;
 copycontrasts = 1;
 
 %% define task variable
@@ -19,16 +19,16 @@ copycontrasts = 1;
 task = 'hedonic';
 %% define path
 
-%homedir = '/home/REWOD';
-homedir = '/home/cisa/REWOD';
+homedir = '/home/REWOD';
+%homedir = '/home/cisa/REWOD';
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
 name_ana = 'GLM-03a'; % output folder for this analysis
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
-%addpath /usr/local/external_toolboxes/spm12/ ;
-addpath /usr/local/MATLAB/R2018a/spm12 ; 
+addpath /usr/local/external_toolboxes/spm12/ ;
+%addpath /usr/local/MATLAB/R2018a/spm12 ; 
 
 %% specify fMRI parameters
 param.TR = 2.4;
@@ -38,7 +38,7 @@ spm('Defaults','fMRI');
 spm_jobman('initcfg');
 
 %% define experiment setting parameters
-subj       =  {'03'}; %subID; %{'03'}; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; 
+subj       =  subID; %; %'02';'03';'04';'05';'06';'07';'09';'10';'11';'12';'13';'14';'15';'16';'17';'18';'20';'21';'22';'23';'24';'25';'26';}; 
 param.task = {'hedonic'}; 
 
 %% define experimental design parameters
@@ -80,16 +80,16 @@ for i = 1:length(param.task)
     % parametric modulation of your events or blocks (ex: linear time, or emotional value, or pupillary size, ...)
     % If you have a parametric modulation
     param.modulName{i} = {'none',...%1
-        'liking',...%2
-        'liking',...%3
-        'liking',...%4 
+        'lik',...%2
+        'lik',...%3
+        'lik',...%4 
         'none',...%5
         'none'}; %6
     
     param.modul{i} = {'none',...%1
-        'ONS.modulators.odor.reward.lik',... %2
-        'ONS.modulators.odor.control.lik',... %3
-        'ONS.modulators.odor.neutral.lik',... %4
+        'ONS.modulators.odor.reward',... %2
+        'ONS.modulators.odor.control',... %3
+        'ONS.modulators.odor.neutral',... %4
         'none',... %5
         'none'}; %6
     
@@ -209,30 +209,29 @@ end
             
             %%%%%%%%%%%%%%%%%%%%%% !!!!!!!!!!!!!!!! %%%%%%%%%%%%%%%%%%%%%%%
             % ATTENTION HERE WE NEED TO INITALIZE c for every new session 
-          %%%%%%%%%%%%%%%%%%%%%% !!!!!!!!!!!!!!!! %%%%%%%%%%%%%%%%%%%%%%%
-            % ATTENTION HERE WE NEED TO INITALIZE c for every new session 
-
-            
-      c = 0; % we need a counter because we include only condition that are non empty
+         
+            c = 0; % we need a counter because we include only condition that are non empty
             
             for cc=1:nconds
                 
-                if ~ isempty(eval(param.Cnam{ses}{cc})) % only if the onsets are not all 0
+                if ~ std(eval(param.onset{ses}{cc}))== 0 % only if the onsets are not all 0
                
                     c = c+1; % update counter
                     
                     SPM.Sess(ses).U(c).name      = {param.Cnam{ses}{cc}};
-                    SPM.Sess(ses).U(c).ons       = eval(param.Cnam{ses}{cc});
+                    SPM.Sess(ses).U(c).ons       = eval(param.onset{ses}{cc});
                     SPM.Sess(ses).U(c).dur       = eval(param.duration{ses}{cc});
                     
                     SPM.Sess(ses).U(c).P(1).name = 'none';
+                    SPM.Sess(ses).U(c).orth = 0;
+                    
                     
                     if isfield (param, 'modul') % this parameters are specified only if modulators are defined in the design
                         
-                        if ~ strcmp (param.modul{ses}{cc}, 'none')
+                        if ~ strcmp(param.modul{ses}{cc}, 'none')
                             
                             if isstruct (eval(param.modul{ses}{cc}))
-                                
+                                SPM.Sess(ses).U(c).orth = 0; %!! no ortho BUT be careful
                                 mod_names = fieldnames (eval(param.modul{ses}{cc}));
                                 nc = 0; % intialize the modulators count
                                 
@@ -241,42 +240,56 @@ end
                                     nc = nc+1;
                                     mod_name = char(mod_names(nmod));
                                     
-                                    SPM.Sess(ses).U(c).P(nc).name  = mod_name;
-                                    SPM.Sess(ses).U(c).P(nc).P     = eval([param.modul{ses}{cc} '.' mod_name]);
-                                    SPM.Sess(ses).U(c).P(nc).h     = 1;
+                                    if  ~ round(std(eval([param.modul{ses}{cc} '.' mod_name])),10)== 0  %verify that there is variance in mod
+                                      
                                     
-                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).name       = {param.Cnam{ses}{cc}};
-                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).onset      = eval(param.Cnam{ses}{cc});
-                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).duration   = eval(param.duration{ses}{cc});
-                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).tmod       = 0;
-                                    
-                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).name  = mod_name;
-                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).param = eval([param.modul{ses}{cc} '.' mod_name]);
-                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod(nc).poly  = 1;
-                                    matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).orth = 0;
+                                        SPM.Sess(ses).U(c).P(nc).name  = mod_name;
+                                        SPM.Sess(ses).U(c).P(nc).P     = eval([param.modul{ses}{cc} '.' mod_name]);
+                                        SPM.Sess(ses).U(c).P(nc).h     = 1;
+                                        
+                                    else
+
+                                       SPM.Sess(ses).U(c).P(nc).name  = [];
+                                       SPM.Sess(ses).U(c).P(nc).P     = [];
+                                       SPM.Sess(ses).U(c).P(nc).h     = []; 
+                                    end
+
                                 end
                                 
-                                
+
                             else
+                                
                                 SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});
                                 SPM.Sess(ses).U(c).P(1).P     = eval(param.modul{ses}{cc});
                                 SPM.Sess(ses).U(c).P(1).h     = 1;
-                                
-                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).name       = {param.Cnam{ses}{cc}};
-                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).onset      = eval(param.Cnam{ses}{cc});
-                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).duration   = eval(param.duration{ses}{cc});
-                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).tmod       = 0;
-                                
-                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.name  = char(param.modulName{ses}{cc});
-                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.param = eval(param.modul{ses}{cc});
-                                matlabbatch{1}.spm.stats.fmri_spec.sess(ses).cond(c).pmod.poly  = 1;
-                                
+
+
+                           
                             end
                         end
                     end
                 end
             end
         end
+        
+        %-----------------------------
+        %multiple regressors for mvts parameters ( no movement regressor after ICA)
+        
+        %rnam = {'X','Y','Z','x','y','z'};
+        for ses=1:ntask
+            
+            SPM.Sess(ses).C.C = [];
+            SPM.Sess(ses).C.name = {};
+            
+            %movement
+                        %targetfile         = dir (fullfile(smoothfolder, ['rp_*' taskX '*.txt']));
+
+                        %fn = spm_select('List',smoothfolder,targetfile.name);% path
+                        %[r1,r2,r3,r4,r5,r6] = textread([smoothfolder '/' fn(1,:)],'%f%f%f%f%f%f'); % path
+                        %SPM.Sess(ses).C.C = [r1 r2 r3 r4 r5 r6];
+                        %SPM.Sess(ses).C.name = rnam;
+        end
+        
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % basis functions and timing parameters
@@ -402,7 +415,7 @@ end
         weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1;
         Ct(4,:)    = weightPos;
         
-        %% R * 2 mod -C
+        %% R * lik -C
         
         % con5
         Ctnames{5} = 'reward_lik-control'; 
@@ -410,8 +423,10 @@ end
         weightNeg  = ismember(conditionName, {'task-hed.control'})* -1;
         Ct(5,:)    = weightPos+weightNeg;
         
+        % con6
 
-        %% R-N * 2 mod
+        
+        %% R-N * lik
         
         % con6 
         Ctnames{6} = 'reward_lik-neutral_lik'; 
@@ -421,7 +436,8 @@ end
         
 
         
-        %% O-No * 2 mod
+        
+        %% O-No * lik
         
         % con7
         Ctnames{7} = 'Odor_lik-NoOdor';
@@ -431,14 +447,15 @@ end
         
 
         
-        %% Presence * 2 mod
+        %% Presence * lik
         
         % con8 
-        Ctnames{11} = 'odor_lik_presence';
+        Ctnames{8} = 'odor_lik_presence';
         weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1;
         Ct(8,:)    = weightPos;
         
 
+           
 % 
 %         
 %          if  strcmp(conditionName(6), 'task-hed.controlxlik^1')  %can do better
@@ -500,4 +517,4 @@ end
     end
 
 
-%end
+end

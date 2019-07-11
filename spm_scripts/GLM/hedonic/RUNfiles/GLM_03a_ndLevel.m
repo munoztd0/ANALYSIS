@@ -1,4 +1,4 @@
-%function GLM_03a_ndLevel()
+function GLM_03a_ndLevel()
 
 %HEDONIC
 %only 4 contrast TEST
@@ -11,15 +11,15 @@ removedsub = '24';
 
 %% define path
 
-%homedir = '/home/REWOD';
-homedir = '/home/cisa/REWOD';
+homedir = '/home/REWOD';
+%homedir = '/Users/davidmunoz/REWOD';
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
 name_ana = 'GLM-03a'; 
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 %% specify spm param
-%addpath /usr/local/external_toolboxes/spm12/ ;
-addpath /usr/local/MATLAB/R2018a/spm12 ;
+addpath /usr/local/external_toolboxes/spm12/ ;
+%addpath /usr/local/MATLAB/R2018a/spm12 ;
 addpath ([homedir '/ANALYSIS/spm_scripts/GLM/dependencies']);
 
 spm('Defaults','fMRI');
@@ -111,4 +111,4 @@ if do_ttest
     end
 end
 
-%end
+end

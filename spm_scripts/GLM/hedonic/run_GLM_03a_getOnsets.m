@@ -5,7 +5,7 @@
 % Duration =1 + no modulators
 % Simplified model on ONSETs (start, 3*odor + 2*questions liking&intensity)
 % last modified on MARCH 2019 by David Munoz
-
+% FOR LIKING mean cent!
 %% define paths
 
 %homedir = '/home/REWOD/';
@@ -65,9 +65,23 @@ mkdir (fullfile (mdldir, char(task), ana_name));
         durations.odor.control   = DURATIONS.trialstart(strcmp ('empty', CONDITIONS));
        
         
-        modulators.odor.reward  = ones (length(onsets.odor.reward),1);
-        modulators.odor.neutral = ones (length(onsets.odor.neutral),1);
-        modulators.odor.control = ones (length(onsets.odor.control),1);
+        %mod for liking 
+        
+
+        modulators.odor.reward  = BEHAVIOR.liking (strcmp ('chocolate', CONDITIONS));
+        modulators.odor.neutral = BEHAVIOR.liking (strcmp ('neutral', CONDITIONS));
+        modulators.odor.control = BEHAVIOR.liking (strcmp ('empty', CONDITIONS));
+        
+        %mean_centering mod
+        cent_reward  = mean(modulators.odor.reward);
+        cent_neutral = mean(modulators.odor.neutral);
+        cent_control = mean(modulators.odor.control);
+        
+        for j = 1:length(modulators.odor.reward)
+             modulators.odor.reward(j)  = modulators.odor.reward(j) - cent_reward;
+             modulators.odor.neutral(j) = modulators.odor.neutral(j) - cent_neutral;
+             modulators.odor.control(j) = modulators.odor.control(j) - cent_control;
+        end
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % Get onsets and duration questions

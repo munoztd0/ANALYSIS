@@ -1,25 +1,25 @@
-function GLM_03_ndLevel()
+%function GLM_03_ndLevel()
 
 %HEDONIC
 
 %does t-test and full_factorial
 do_ttest = 1;
 remove = 1;
-removesub = {'sub-23'} ;
+removesub = {'sub-23'} ; %because 23 neutral_int zero var
 removedsub = '23';
 
 %% define path
 
-homedir = '/home/REWOD';
-%homedir = '/home/cisa/REWOD';
+%homedir = '/home/REWOD';
+homedir = '/home/cisa/REWOD';
 %homedir = '/Users/davidmunoz/REWOD';
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
-name_ana = 'GLM-07'; 
+name_ana = 'GLM-03c'; 
 groupdir = fullfile (mdldir,name_ana, 'group/');
 
 %% specify spm param
-addpath /usr/local/external_toolboxes/spm12/ ;
-%%addpath /usr/local/MATLAB/R2018a/spm12 ;
+%addpath /usr/local/external_toolboxes/spm12/ ;
+addpath /usr/local/MATLAB/R2018a/spm12 ;
 addpath ([homedir '/ANALYSIS/spm_scripts/GLM/dependencies']);
 
 spm('Defaults','fMRI');
@@ -44,7 +44,9 @@ if do_ttest
         'Odor_lik-NoOdor'%9
         'Odor_int-NoOdor'%10
         'odor_lik_presence'%11
-        'odor_int_presence'}; %12
+        'odor_int_presence' %12
+        'reward_lik-control_lik'%13
+        'reward_int-control_int'}; %14
 
    
     
@@ -59,7 +61,9 @@ if do_ttest
         'con_0009'
         'con_0010'
         'con_0011'
-        'con_0012'};
+        'con_0012'
+        'con_0013'
+        'con_0014'};
     
     
       %% prepare batch for each contrasts
@@ -127,5 +131,4 @@ if do_ttest
         
     end
 end
-
-end
+%end

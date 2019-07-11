@@ -4,7 +4,7 @@ function GLM_03_stLevel(subID)
 % 3rd model
 % Duration=1 + Modulator Liking & Intensity
 % 4 basic contrasts Reward-Control, Reward-Neutral, Odor-NoOdor, odor_presence
-% AND 4*2mod -> 12 contrasts
+% AND 4*2mod +2 -> 14 contrasts
 % last modified on July 2019 by David Munoz
 
 
@@ -405,8 +405,8 @@ end
         
         % con3
         Ctnames{3} = 'Odor-NoOdor';
-        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1; %here it was rinse
-        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
+        weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 0.5; %here it was rinse
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -1;
         Ct(3,:)    = weightPos+weightNeg;
         
         
@@ -448,14 +448,14 @@ end
         
         % con9
         Ctnames{9} = 'Odor_lik-NoOdor';
-        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1; 
-        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
+        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 0.5; 
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -1;
         Ct(9,:)    = weightPos+weightNeg;
         
         % con10
         Ctnames{10} = 'Odor_int-NoOdor';
-        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1; 
-        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
+        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 0.5; 
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -1;
         Ct(10,:)    = weightPos+weightNeg;
         
         %% Presence * 2 mod
@@ -470,28 +470,27 @@ end
         weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1;
         Ct(12,:)    = weightPos;
            
-% 
-%         
-%          if  strcmp(conditionName(6), 'task-hed.controlxlik^1')  %can do better
-%                 %con13
-%                 Ctnames{13} = 'reward_lik-control_lik'; 
-%                 weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
-%                 weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;
-%                 Ct(13,:)    = weightPos+weightNeg;
-%         end
-%         if  strcmp(conditionName(7), 'task-hed.controlxint^1')  %can do better
-%                 %con14
-%                 Ctnames{14} = 'reward_int-control_int'; 
-%                 weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
-%                 weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
-%                 Ct(14,:)    = weightPos+weightNeg;
-%         elseif strcmp(conditionName(6), 'task-hed.controlxint^1')  %can do better
-%                 %con14
-%                 Ctnames{14} = 'reward_int-control_int'; 
-%                 weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
-%                 weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
-%                 Ct(14,:)    = weightPos+weightNeg;       
-%         end
+
+       %still have ton solve for sub 23 neutralxint^1 
+   
+        
+        %if control condition exist then do contrast  
+
+        if  any(strcmp(conditionName, 'task-hed.controlxlik^1'))
+                %con13
+                Ctnames{13} = 'reward_lik-control_lik'; 
+                weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1'}) * 1;
+                weightNeg  = ismember(conditionName, {'task-hed.controlxlik^1'})* -1;
+                Ct(13,:)    = weightPos+weightNeg;
+  
+            if any(strcmp(conditionName, 'task-hed.controlxint^1'))
+                %con14
+                Ctnames{14} = 'reward_int-control_int'; 
+                weightPos  = ismember(conditionName, {'task-hed.rewardxint^1'}) * 1;
+                weightNeg  = ismember(conditionName, {'task-hed.controlxint^1'})* -1;
+                Ct(14,:)    = weightPos+weightNeg;
+            end
+        end
         
 
         
