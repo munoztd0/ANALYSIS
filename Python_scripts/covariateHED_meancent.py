@@ -4,6 +4,7 @@
 """
 Created on Mon Jun 10 14:13:20 2019
 @author: David Munoz
+takes the condition name as input (e.g. lik or int)
 """
 
 
@@ -14,14 +15,12 @@ def covariate (cond):
     import numpy as np
     import os
     
-    # be sure that there is a group_covariates folder
-    
-        
+    # be sure that there is a group_covariates folder!
+           
     
     #declare variables
     GLM = ("GLM-04")
     s = ("01", "02", "03", "04", "05", "06", "07", "09", "10", "11", "12", "13","14", "15", "16", "17","18", "20", "21", "22","23", "24","25", "26")
-    #cond = ("int") #, "int") # DO BOTH!!
     taskDIR = ("hedonic")
     
     df1 = []
