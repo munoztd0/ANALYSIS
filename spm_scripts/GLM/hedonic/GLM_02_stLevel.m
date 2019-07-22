@@ -17,9 +17,10 @@ copycontrasts = 1;
 %sessionX = 'second';
 task = 'hedonic';
 %% define path
-
+% cd ~
+% home = pwd;
+% homedir = [home '/REWOD/'];
 homedir = '/home/REWOD';
-%homedir = '~/REWOD';
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');

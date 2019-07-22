@@ -9,12 +9,14 @@
 
 %% define paths
 
+user = char(java.lang.System.getProperty('user.name'));
 %homedir = '/home/REWOD/';
-homedir = '~/REWOD/';
+homedir = ['home/' user '/REWOD/'];
 
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
+
 addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
 ana_name      = 'GLM-01';

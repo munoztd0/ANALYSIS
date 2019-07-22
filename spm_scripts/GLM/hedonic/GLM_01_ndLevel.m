@@ -4,14 +4,17 @@
 
 %does t-test and full_factorial
 do_ttest = 1;
-remove = 1;
+remove = 0;
 removesub = {'sub-24'} ;
 removedsub = '24';
 
 %% define path
 
+cd ~
+home = pwd;
+homedir = [home '/REWOD/'];
 %homedir = '/home/REWOD';
-homedir = '/home/cisa/REWOD';
+
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
 name_ana = 'GLM-01'; 
 groupdir = fullfile (mdldir,name_ana, 'group/');

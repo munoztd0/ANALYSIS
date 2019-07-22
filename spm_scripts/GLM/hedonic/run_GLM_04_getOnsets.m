@@ -1,15 +1,18 @@
 %function GLM_04_getOnsets()
+
 % intended for REWOD hedonic reactivity
 
-% get onsets for 3rd model (1st level modulators)
+% get onsets for 4th model 
 % Duration =1 + modulators
 % Simplified model on ONSETs (STARTTRIAL, 3*odor + 2*questions liking&intensity)
 % last modified on July 2019 by David Munoz
 
 %% define paths
 
-homedir = '/home/cisa/REWOD/';
-%homedir = '/Users/davidmunoz/REWOD/';
+%homedir = '/home/cisa/REWOD/';
+cd ~
+home = pwd;
+homedir = [home '/REWOD/'];
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
@@ -145,7 +148,9 @@ mkdir (fullfile (mdldir, char(task), ana_name));
         mat_name = [ana_name '_task-' taskX '_onsets'];
         save (mat_name, 'onsets', 'durations', 'modulators')
         end
-
+        
+    %create folder for group covariate
+    mkdir (fullfile (mdldir, char(task), ana_name, 'group_covariates'));
 
 
     end

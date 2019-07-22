@@ -1,7 +1,7 @@
 %function GLM_04_ndLevel()
 
 % HEDONIC
-% covariate demeaned by conditions / Implemented right ? Mumford says by group
+% covariate demeaned by conditions
 % check covariateHED_meancent.py for more info
 
 %does t-test and full_factorial
@@ -13,7 +13,10 @@ removedsub = '24';
 %% define path
 
 %homedir = '/home/REWOD';
-homedir = '/home/cisa/REWOD';
+cd ~
+home = pwd;
+homedir = [home '/REWOD/'];
+
 mdldir   = fullfile(homedir, '/DATA/STUDY/MODELS/SPM/hedonic');% mdl directory (timing and outputs of the analysis)
 covdir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic/GLM-04/group_covariates'); % director with the extracted second level covariates
 

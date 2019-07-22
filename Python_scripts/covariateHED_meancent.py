@@ -14,8 +14,11 @@ def covariate (cond):
     import pandas as pd
     import numpy as np
     import os
+    from pathlib import Path
     
-    # be sure that there is a group_covariates folder!
+    
+    #addpath
+    home = str(Path.home())
            
     
     #declare variables
@@ -40,7 +43,7 @@ def covariate (cond):
 
     for i in s:
         subj = 'sub-' + i
-        covpath = '/home/cisa/REWOD/DATA/STUDY/MODELS/SPM/' + taskDIR + '/' + GLM + '/' + subj + '/timing/'
+        covpath = home + '/REWOD/DATA/STUDY/MODELS/SPM/' + taskDIR + '/' + GLM + '/' + subj + '/timing/'
         cov_control = pd.read_table(covpath + GLM + '_task-hedonic_odor_control_' + cond + '.txt',sep='\t', header=None)
         cov_neutral = pd.read_table(covpath + GLM + '_task-hedonic_odor_neutral_' + cond + '.txt',sep='\t', header=None)
         cov_reward = pd.read_table(covpath + GLM + '_task-hedonic_odor_reward_' + cond + '.txt',sep='\t', header=None)
@@ -62,7 +65,6 @@ def covariate (cond):
         Reward = cov_reward[2]
         df5 = np.append(df5, Reward.mean())
         
-
     df01[0] = dfsubj
     df02[0] = dfsubj
     df03[0] = dfsubj
@@ -83,7 +85,7 @@ def covariate (cond):
     df05.columns = ['subj', cond]
     
 
-    os.chdir('/home/cisa/REWOD/DATA/STUDY/MODELS/SPM/hedonic/GLM-04/group_covariates')
+    os.chdir(home + '/REWOD/DATA/STUDY/MODELS/SPM/hedonic/GLM-04/group_covariates')
     df01.to_csv('reward-control_' + cond + '_meancent.txt',sep='\t', index=False)
     df02.to_csv('reward-neutral_' + cond + '_meancent.txt',sep='\t', index=False)
     df03.to_csv('Odor-NoOdor_' + cond + '_meancent.txt',sep='\t', index=False)

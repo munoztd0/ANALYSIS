@@ -20,7 +20,9 @@ task = 'hedonic';
 %% define path
 
 homedir = '/home/REWOD';
-%homedir = '/home/cisa/REWOD';
+% cd ~
+% home = pwd;
+% homedir = [home '/REWOD/'];
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');

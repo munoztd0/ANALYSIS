@@ -20,7 +20,9 @@ task = 'hedonic';
 %% define path
 
 homedir = '/home/REWOD';
-%homedir = '~/REWOD';
+% cd ~
+% home = pwd;
+% homedir = [home '/REWOD/'];
 
 mdldir   = fullfile (homedir, '/DATA/STUDY/MODELS/SPM/hedonic');
 funcdir  = fullfile(homedir, '/DATA/STUDY/CLEAN');
@@ -187,8 +189,7 @@ end
             scanID    = [scanID; {[smoothfolder,'/', V.name, ',', num2str(j)]}];
         end
             
-        %end
-        
+
         SPM.xY.P    = char(scanID);
         SPM.nscan   = nscans;
         
@@ -249,9 +250,9 @@ end
                                 
                             else
                                 if std(eval(param.modul{ses}{cc}))== 0  %if std deviation = 0 no variability so we have to take ou P or else it will ruin contrasts
-                                    SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});
+                                    SPM.Sess(ses).U(c).P(1).name  = [];
                                     SPM.Sess(ses).U(c).P(1).P     = [];
-                                    SPM.Sess(ses).U(c).P(1).h     = 1;   
+                                    SPM.Sess(ses).U(c).P(1).h     = [];   
                                     
                                 else    
                                     SPM.Sess(ses).U(c).P(1).name  = char(param.modulName{ses}{cc});

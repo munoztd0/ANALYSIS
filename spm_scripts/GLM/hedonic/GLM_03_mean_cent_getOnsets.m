@@ -67,8 +67,6 @@ mkdir (fullfile (mdldir, char(task), ana_name));
        
         
         %mod for liking 
-        
-
         modulators.odor.reward.lik  = BEHAVIOR.liking (strcmp ('chocolate', CONDITIONS));
         modulators.odor.neutral.lik = BEHAVIOR.liking (strcmp ('neutral', CONDITIONS));
         modulators.odor.control.lik = BEHAVIOR.liking (strcmp ('empty', CONDITIONS));

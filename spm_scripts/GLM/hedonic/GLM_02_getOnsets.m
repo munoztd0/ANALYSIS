@@ -4,7 +4,7 @@ function GLM_02_getOnsets()
 % get onsets for second control model
 % Duration =1 + no modulators
 % Simplified model on ONSETs (start, 3*odor + 2*questions liking&intensity)
-% last modified on MARCH 2019 by David Munoz
+% last modified on july 2019 by David Munoz
 
 %% define paths
 
@@ -12,7 +12,6 @@ homedir = '/home/REWOD/';
 
 mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
-addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
 ana_name      = 'GLM-02';
 %session       = {'second'};
@@ -24,8 +23,8 @@ subj          = subID;
 mkdir (fullfile (mdldir, char(task), ana_name)); 
 
 %% extract and save data
-%for j = 1:length(task) % this is only because we have one run per task
-
+for j = 1:length(task) 
+    
     taskX      = char(task(1));
     %sessionX  = char(session(j));
 
