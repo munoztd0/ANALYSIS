@@ -18,7 +18,7 @@ save_Rdatabase = 1; % leave 1 when saving all subjects
 %% DEFINE PATH
 
 home = '/home/cisa/rewod';
-out = '/home/cisa/CISA/REWOD';
+out = '/home/cisa/REWOD';
 %home = 'home/david/mountpoint';
 %home = '/Users/davidmunoz/mountpoint';
 
@@ -224,48 +224,48 @@ end
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %% SAVE RESULTS IN TXT for analysis in R
-% 
-% % random
-% R.id      = db.id(:);
-% R.trial   = num2cell(db.trial(:));
-% 
-% %fixe
-% %R.group      = db.group(:);
-% R.session    = db.session(:);
-% R.task       = db.task(:);
-% R.condition  = db.condition(:);
-% 
-% % mixed
-% R.itemxc     = num2cell(db.itemxc(:));
-% 
-% % dependent variable
-% R.liking      = num2cell(db.liking(:));
-% R.intensity   = num2cell(db.intensity(:));
-% %R.familiarity = num2cell(db.familiarity(:));
-% 
-% %% print the database
-% cd (R_dir)
-% 
-% % concatenate
-% Rdatabase = [R.task, R.id, R.session, R.trial, R.condition, R.itemxc, R.liking, R.intensity];
-% 
-% % open database
-% fid = fopen([analysis_name '.txt'], 'wt');
-% 
-% % print heater
-% fprintf(fid,'%s %s %s %s %s %s %s %s\n',...
-%     'task','id', 'session','trial', 'condition','trialxcondition','perceived_liking', 'perceived_intensity');
-% 
-% % print data
-% formatSpec ='%s %s %s %d %s %d %f %f\n';
-% [nrows,~] = size(Rdatabase);
-% for row = 1:nrows
-%     fprintf(fid,formatSpec,Rdatabase{row,:});
-% end
-% 
-% fclose(fid);
-% 
-% 
+
+% random
+R.id      = db.id(:);
+R.trial   = num2cell(db.trial(:));
+
+%fixe
+%R.group      = db.group(:);
+R.session    = db.session(:);
+R.task       = db.task(:);
+R.condition  = db.condition(:);
+
+% mixed
+R.itemxc     = num2cell(db.itemxc(:));
+
+% dependent variable
+R.liking      = num2cell(db.liking(:));
+R.intensity   = num2cell(db.intensity(:));
+%R.familiarity = num2cell(db.familiarity(:));
+
+%% print the database
+cd (R_dir)
+
+% concatenate
+Rdatabase = [R.task, R.id, R.session, R.trial, R.condition, R.itemxc, R.liking, R.intensity];
+
+% open database
+fid = fopen([analysis_name '.txt'], 'wt');
+
+% print heater
+fprintf(fid,'%s %s %s %s %s %s %s %s\n',...
+    'task','id', 'session','trial', 'condition','trialxcondition','perceived_liking', 'perceived_intensity');
+
+% print data
+formatSpec ='%s %s %s %d %s %d %f %f\n';
+[nrows,~] = size(Rdatabase);
+for row = 1:nrows
+    fprintf(fid,formatSpec,Rdatabase{row,:});
+end
+
+fclose(fid);
+
+
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %% CREATE FIGURE
 % 

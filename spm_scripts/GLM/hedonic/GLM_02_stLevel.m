@@ -412,6 +412,12 @@ end
         weightPos  = ismember(conditionName, {'task-hed.reward', 'task-hed.neutral'}) * 1;
         Ct(4,:)    = weightPos;
         
+        % con5
+        Ctnames{5} = 'Reward-others';
+        weightPos  = ismember(conditionName, {'task-hed.reward'}) * 2; %here it was rinse
+        weightNeg  = ismember(conditionName, {'task-hed.control', 'task-hed.neutral'}) * -1;
+        Ct(5,:)    = weightPos+weightNeg;
+        
 
         
 

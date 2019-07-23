@@ -450,14 +450,14 @@ end
         
         % con9
         Ctnames{9} = 'Odor_lik-NoOdor';
-        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 0.5; 
-        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -1;
+        weightPos  = ismember(conditionName, {'task-hed.rewardxlik^1', 'task-hed.neutralxlik^1'}) * 1; 
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
         Ct(9,:)    = weightPos+weightNeg;
         
         % con10
         Ctnames{10} = 'Odor_int-NoOdor';
-        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 0.5; 
-        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -1;
+        weightPos  = ismember(conditionName, {'task-hed.rewardxint^1', 'task-hed.neutralxint^1'}) * 1; 
+        weightNeg  = ismember(conditionName, {'task-hed.control'}) * -2;
         Ct(10,:)    = weightPos+weightNeg;
         
         %% Presence * 2 mod
