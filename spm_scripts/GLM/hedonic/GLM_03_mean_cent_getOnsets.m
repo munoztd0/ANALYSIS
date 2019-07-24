@@ -12,7 +12,7 @@
 homedir = '/home/cisa/REWOD/';
 %homedir = '/Users/davidmunoz/REWOD/';
 
-mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/SPM');
+mdldir        = fullfile (homedir, '/DATA/STUDY/MODELS/FSL');
 sourcefiles   = fullfile(homedir, '/DATA/STUDY/CLEAN');
 addpath (genpath(fullfile(homedir,'/ANALYSIS/my_tools')));
 
